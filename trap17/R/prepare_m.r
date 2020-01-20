@@ -1,7 +1,8 @@
 #' Prepare the Hmsc model object
 #'
 #' Prepare the Hmsc model object for model fitting
-#' @param param Descr
+#' @param vars Variables, created with set_vars
+#' @param dat Data, i.e. trapdata
 
 prepare_m <- function(vars,
                       dat) {

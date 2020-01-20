@@ -7,7 +7,7 @@
 #' @return List of directories needed for the modelling pipeline 
 #' @export
 
-set_dirs <- function(working_dir = working_dir,
+set_dirs <- function(working_dir,
                      fit_fold = "fits",
                      raw_data = FALSE)
 {

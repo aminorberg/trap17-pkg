@@ -1,24 +1,40 @@
 rm(list = ls(all = TRUE)) 
 gc()
 #install.packages("devtools")
-library("devtools")
 #install_github("klutometis/roxygen")
+
+library("devtools")
 library("roxygen2")
-#setwd("/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg")
-#create("trap17")
+
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
-setwd("/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17")
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
+
+### create the package
+?create 
+#setwd(root_dir)
+#create("trap17")
+
+
+### document the package
+?document
+setwd(pkg_dir)
 document()
-setwd("..")
+
+### install and load
+setwd(working_dir)
 install("trap17")
+
 library("trap17")
-dirs <- set_dirs(working_dir = working_dir)
-#data
-trapdata <- process_data(filename = "TRAP17.csv",
-                         dirs = dirs,
-                         return_data = TRUE)
-setwd("/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17")
+
+### add data
+"#4C4C4C"#trapdata <- process_data(filename = "TRAP17.csv",
+#                         dirs = dirs,
+#                         return_data = TRUE)
+#
+#setwd(pkg_dir)
 #use_data(trapdata) 
-document()
-setwd("..")
-install("trap17")
+#document()
+#setwd(working_dir)
+#install("trap17")
+

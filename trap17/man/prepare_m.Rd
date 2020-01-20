@@ -7,7 +7,9 @@
 prepare_m(vars, dat)
 }
 \arguments{
-\item{param}{Descr}
+\item{vars}{Variables, created with set_vars}
+
+\item{dat}{Data, i.e. trapdata}
 }
 \description{
 Prepare the Hmsc model object for model fitting

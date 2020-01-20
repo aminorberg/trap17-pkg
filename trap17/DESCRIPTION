@@ -1,5 +1,5 @@
 Package: trap17
-Title: Modelling Trap17 Pathosystem
+Title: Modelling the Trap17 Pathosystem
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Anna",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "norberg.ami@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Tools for modelling the trap17 virus data and post-processing the results.
+Description: Toolbox for JSDM modelling the trap17 virus data with HMSC and post-processing the results.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

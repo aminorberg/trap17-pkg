@@ -1,0 +1,403 @@
+?graph_from_data_frame
+str(nmds_m)
+for (e in 2:length(ENS)) {#
+	for (p in 1:length(PRV)) {#
+		opts<-list(modelEnsemble=ENS[[e]],prevaleceThreshold=PRV[[p]])		#
+		for (sz in 1:2) {#
+			# modify predictions to probs, sp richness, beta indices	#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"sp_occ_probs.r",sep="/"))#
+			}#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"sp_rich_site.r",sep="/"))#
+			}#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"beta_inds.r",sep="/"))#
+			}#
+		}#
+	}#
+}
+require(doParallel)
+require(doMC)
+?doParallel
+filebody<-paste(RDfinal,dataN[sz],"/meta_analysis/PMS",sep="")
+?axis
+load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/RESULTS2/birds/sp_occ_probs_150.RData")
+ls()
+str(sp_occ_probs)
+50*15
+0.7*0.3
+sqrt(0.7*0.3)
+30/75
+5/12
+require(gjam)
+?gjam
+.\Localadmin_anorberg
+(1000/30)*9
+}
+library('MASS')
+a <- 5
+require(Hmsc)
+Hmsc::Hmsc
+?structure
+structure(1:6, dim = 2:3)
+?class
+?Hmsc
+Hmsc::Hmsc
+Hmsc::Hmsc::Hmsc
+Hmsc:::Hmsc
+c <- structure(list("a"=1, "b"=2), class="myclass")
+c
+library(Hmsc)
+?Hmsc
+Hmsc::computeDataParameters
+rLs
+library("sdmCom")
+?sdmCom
+?get_os
+get_os <- function() {#
+  if (.Platform$OS.type == "windows") { #
+    "win"#
+  } else if (Sys.info()["sysname"] == "Darwin") {#
+    "osx" #
+  } else if (.Platform$OS.type == "unix") { #
+    "unix"#
+  } else {#
+    stop("Unknown OS")#
+  }#
+}
+get_os()
+os <- get_os()
+os
+library("sdmCom")
+?get_os
+?sdmCom
+library("sdmCom")
+?sdmCom
+?get_os
+library("sdmCom")
+?get_os
+?sdmCom
+#' Identify your operating system#
+#'#
+#' @return Your operating system, either OSX, Unix or Windows#
+#' @examples#
+#' os <- get_os()#
+#' os#
+#
+get_os <- function() {#
+  if (.Platform$OS.type == "windows") { #
+    "win"#
+  } else if (Sys.info()["sysname"] == "Darwin") {#
+    "osx" #
+  } else if (.Platform$OS.type == "unix") { #
+    "unix"#
+  } else {#
+    stop("Unknown OS")#
+  }#
+}#
+#
+roxygen2::roxygenise()
+?roxygenise
+roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
+?sdmCom
+library("sdmCom")
+?sdmCom
+os <- get_os()#
+os
+?sample
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y
+y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
+common_sp <- function(y, prevalence_threshold = 0.1) {#
+    com_sp <- which((colSums(y)/nrow(y)) >= prevalence_threshold)#
+    return(com_sp)#
+#
+}
+y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
+y_subset <- y[,y_subset_inds]
+y_subset
+set.seed(7)
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.6)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.4)
+y_subset <- y[,y_subset_inds]
+y_subset
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
+library("sdmCom")
+?sdmCom
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/pkg/sdmCom")
+q()
+library('caret')
+?train
+library(mlbench)#
+data(BostonHousing)
+library(mlbench)
+install.packages("mlbench")
+library(mlbench)#
+data(BostonHousing)
+lmFit <- train(medv ~ . + rm:lstat,#
+               data = BostonHousing,#
+               method = "lm")
+library(rpart)
+rpartFit <- train(medv ~ .,#
+                  data = BostonHousing,#
+                  method = "rpart",#
+                  tuneLength = 9)
+setwd(".")
+getwd()
+file.exists(".")
+str(fits)
+str(preds$predictions$bcs$bc1)
+??caret
+citation(caret)
+library('SSDM')#
+library('zoon')#
+library('sdm')#
+library('caret')
+citation(caret)
+library('caret')
+citation(caret)
+citation("caret"")
+citation("caret")
+citation('SSDM')
+??cssdm
+??SSDM
+??sdm
+??caret
+??zoon
+install.packages('biomod2')
+citation('biomod2')
+citation('sdm')
+citation('zoon')
+library('sdmCom')
+??sdmCom
+??caret
+?train
+names(getModelInfo())
+trellis.par.set(caretTheme())
+sdm::sdm
+sdm:::sdm
+showMethods("sdm")
+??SSDM
+??zoon
+library('zoon')
+?workflow
+zoon::workflow
+zoon:::workflow
+GetModuleList()
+?BayesComm
+library(BayesComm)
+?BayesComm
+library(gbm)
+?gbm
+library(mgcv)
+?mgcv
+200/3
+830/5
+3*(830/5)
+500/6
+850/6
+171+187
+citation(mvpart)
+citation("mvpart")
+citation("dismo")
+citation("boral")
+citation()
+install.packages(c("Hmsc"))
+library(Hmsc)
+m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2)
+rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))
+rL
+rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))#
+#
+studyDesign = data.frame(sample = as.factor(1:50), plot = as.factor(sample(1:20,50,replace=TRUE)))#
+rL1 = HmscRandomLevel(units=TD$studyDesign$plot)#
+rL2 = HmscRandomLevel(units=TD$studyDesign$sample)#
+#
+m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2,studyDesign=studyDesign,ranLevels=list("sample"=rL,"plot"=rL2))
+M
+m
+tmp <- sampleMcmc(m, samples=100)
+library(devtools)
+install_github("hmsc-r/HMSC", #
+                 build_opts = c("--no-resave-data", #
+                                "--no-manual"))
+library(Hmsc)#
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+install.packages("Hmsc")
+library(Hmsc)
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))#
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+library(devtools)
+install_github("hmsc-r/HMSC", #
+                build_opts = c("--no-resave-data", #
+                               "--no-manual"))
+library(Hmsc)
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))#
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+ps <- sampleMcmc(m, samples = 100, alignPost=FALSE)
+m
+sampling_settings <- list(totsamp = 100000, #
+                          trans = 50000, #
+                          thn = 10, #
+                          nFolds = 5)
+m
+m$rL
+m$rL$sample
+str(m$rL$sample)
+vars$samps
+rm(list = ls(all = TRUE)) ; gc()#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+setwd(working_dir)#
+library("trap17")#
+dirs <- set_dirs(working_dir = working_dir)
+?trapdata
+dat <- trapdata
+sampling <- sampling_settings(totsamp = 100000,#
+                              trans = 50000,#
+                              thn = 10,#
+                              nfolds = 5)#
+foldname <- create_name(study = "trap17",#
+                        totsamp = sampling$totsamp,#
+                        nfolds = sampling$nfolds, #
+                        type = "fold")#
+create_directories(foldname = foldname, dirs = dirs)#
+saveRDS(sampling, #
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+?roxygen2
+library("roxygen2")
+?roxygen2
+?install
+library("devtools")
+?install
+?create
+rm(list = ls(all = TRUE)) #
+gc()
+library("devtools")#
+library("roxygen2")
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
+?create
+setwd(pkg_dir)
+?document
+?model_and_cv
+?sample_Hmsc
+?create_directories
+rm(list = ls(all = TRUE)) ; gc()#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+setwd(working_dir)#
+library("trap17")#
+dirs <- set_dirs(working_dir = working_dir)
+?trapdata
+dat <- trapdata
+sampling <- sampling_settings(totsamp = 1000,#
+                              trans = 500,#
+                              thn = 10,#
+                              nfolds = 5)
+foldname <- create_name(study = "trap17",#
+                        totsamp = sampling$totsamp,#
+                        nfolds = sampling$nfolds, #
+                        type = "fold")
+create_directories(foldname = foldname, dirs = dirs)
+file.path(dirs$fits, foldname, "sampling.rds")
+saveRDS(sampling, #
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+evals <- model_and_cv(dat = dat,#
+                      dirs = dirs,#
+                      variants = 1:5,#
+                      sampling = sampling,#
+                      returnCVs = TRUE,#
+                      saveCVs = TRUE)
+evals
+str(evals)
+file.path(dirs$fits, foldname, "evals.rds")
+library(wesanderson)
+wesandcols <- wes_palette("Cavalcanti1")[5:1]
+dirs$fits
+pss <- load_objects_from_dir(path = dirs$fits, #
+                             study = "trap17_totsamp1000",#
+                             obj_type = "ps")
+names(pss)
+whichPs <- 4
+ps <- pss[[whichPs]]
+mpost <- Hmsc:::convertToCodaObject(ps)
+names(mpost)
+plot(mpost$Beta)
+plot(mpost$Beta)
+plot(mpost$Beta)
+plot(mpost$Beta)
+warnings()
+?prepare_m
+rm(list = ls(all = TRUE)) #
+gc()
+library("devtools")#
+library("roxygen2")
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
+?document#
+setwd(pkg_dir)#
+document()
+### install and load#
+setwd(working_dir)#
+install("trap17")
+library("trap17")
+rm(list = ls(all = TRUE)) ; gc()#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+setwd(working_dir)#
+library("trap17")
+?trap17
+??trap17
+library("trap17")

@@ -4,7 +4,7 @@
 \alias{set_dirs}
 \title{Defining directories}
 \usage{
-set_dirs(working_dir = working_dir, fit_fold = "fits", raw_data = FALSE)
+set_dirs(working_dir, fit_fold = "fits", raw_data = FALSE)
 }
 \arguments{
 \item{working_dir}{Full path to the working directory, under which everything else will be created.}

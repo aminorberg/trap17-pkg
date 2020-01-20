@@ -1,7 +1,6 @@
-# Analysing trap17 data
+# TRAP17 ANALYSIS 2020
 
-# 1 DATA IMPORTATION AND PREPARATION
-
+# 1 DATA IMPORTATION
 rm(list = ls(all = TRUE)) ; gc()
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
 setwd(working_dir)
@@ -17,12 +16,13 @@ saveRDS(dirs, file = file.path(working_dir, "dirs.rds"))
 # 1.1b ...or load the processed data
 ?trapdata
 dat <- trapdata
+str(dat)
 
 # 2 MODEL FITTING
 
 # 2.1 sampling settings
-sampling <- sampling_settings(totsamp = 100000,
-                              trans = 50000,
+sampling <- sampling_settings(totsamp = 1000,
+                              trans = 500,
                               thn = 10,
                               nfolds = 5)
 foldname <- create_name(study = "trap17",
@@ -40,7 +40,7 @@ evals <- model_and_cv(dat = dat,
                       sampling = sampling,
                       returnCVs = TRUE,
                       saveCVs = TRUE) 
-
+str(evals)
 saveRDS(evals, 
         file = file.path(dirs$fits, foldname, "evals.rds"))
 
@@ -48,7 +48,7 @@ saveRDS(evals,
 #rm(list = setdiff(ls(), c("working_dir", "dirs", "foldname", "sampling", "dat"))); gc()
 #setwd(working_dir)
 #library("trap17")
-#evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
 
 # 3.1 cv-based R2s
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
@@ -162,7 +162,7 @@ library(wesanderson)
 wesandcols <- wes_palette("Cavalcanti1")[5:1]
 
 pss <- load_objects_from_dir(path = dirs$fits, 
-                             study = "trap17_totsamp200",
+                             study = "trap17_totsamp1000",
                              obj_type = "ps")
 names(pss)
 whichPs <- 4
