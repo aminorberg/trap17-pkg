@@ -12,20 +12,17 @@ sampling_settings <- function (totsamp = 100,
                                trans = 50,
                                thn = 1,
                                nfolds = 2,
-                               nchains = 2,
-                               nparallel = 2)
+                               nchains = 2)
 {
     res <- structure(list(totsamp = NULL, 
                           trans = NULL, 
                           thn = NULL, 
                           nchains = NULL, 
-                          nparallel = NULL, 
                           nfolds = NULL), 
                      class = "mcmcsettings")
     res$totsamp <- totsamp
     res$trans <- trans
     res$thn <- thn
-    res$nparallel <- nparallel
     res$nchains <- nchains
     res$nfolds <- nfolds
     return(res)

@@ -30,6 +30,7 @@ set_vars <- function(study = "trap17",
                            trans = NA,
                            thn = NA,
                            samps = NA,
+                           nchains = NA,
                            nfolds = NA), 
                       class = "varlist")            
 
@@ -39,6 +40,7 @@ set_vars <- function(study = "trap17",
     vars$trans <- sampling$trans
     vars$thn <- sampling$thn
     vars$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
+    vars$nchains <- sampling$nchains
     vars$nfolds <- sampling$nfolds
 
     vars$yvars <- c("Clo",
@@ -48,8 +50,8 @@ set_vars <- function(study = "trap17",
                     "Ca")
 
     vars$xvars <- switch(fit, 
-                         "1" = NA, 
-                         "2" = NA, 
+                         "1" = "(Intercept)", 
+                         "2" = "(Intercept)", 
                          "3" = c("Population", 
                                  "Genotype",
                                  "Herbivory",
@@ -62,6 +64,9 @@ set_vars <- function(study = "trap17",
                                  "Herbivory",
                                  "Plant.area"),
                          "6" = c("Population", 
+                                 "Herbivory",
+                                 "Plant.area"),
+                         "7" = c("Population",
                                  "Genotype",
                                  "Herbivory",
                                  "Plant.area"))
@@ -80,18 +85,18 @@ set_vars <- function(study = "trap17",
                            "4" = c("Population", 
                                    "Genotype"),
                            "5" = "Population",
-                           "6" = c("Population", 
+                           "6" = "Population",
+                           "7" = c("Population", 
                                    "Genotype"))
-                                   
-    vars$studyDesign <- c("Plant", "Population")
-    
+                                       
     vars$pivars <- switch(fit, 
                           "1" = "Plant", 
                           "2" = "Plant", 
                           "3" = "Plant", 
                           "4" = "Plant", 
                           "5" = "Plant",
-                          "6" = "Plant")
+                          "6" = c("Plant", "Genotype"),
+                          "7" = "Plant")
                           
     vars$partition <- "Plant"
     
@@ -101,14 +106,14 @@ set_vars <- function(study = "trap17",
                           "3" = FALSE, 
                           "4" = TRUE,
                           "5" = TRUE,
-                          "6" = TRUE)
+                          "6" = TRUE,
+                          "7" = TRUE)
 
     vars$covDepXvars <- NULL
-    if (fit == "6") {    
-        vars$covDepXvars <- c("Genotype")
+    if (fit == "7") {    
+        vars$covDepXvars <- "Genotype"
         vars$covDepLevel <- 1
     }
     
     return(vars)
 }
-

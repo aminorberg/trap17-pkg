@@ -44,8 +44,8 @@ sample_Hmsc <- function(dat = dat,
                             samples = vars$samps,
                             transient = vars$trans,
                             thin = vars$thn,
-                            nChains = 2,
-                            nParallel = 2,
+                            nChains = vars$nchains,
+                            nParallel = vars$nchains,
                             alignPost = post_align)
 
     filename <- paste("ps", vars$fit, sep = "_")

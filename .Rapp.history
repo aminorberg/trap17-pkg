@@ -1,3 +1,66 @@
+data("comm.Rdata")
+load("comm.Rdata")
+?load
+load("comm")
+install.packages("rJava", type = "source")
+install.packages("rJava")
+library("rJava")
+remove.packages(rJava)
+install.packages("rJava", dependencies=TRUE, type="source")
+install.packages("clang")
+library(gbm)
+citation(gbm)
+citation("gbm")
+citation("dismo")
+?glm
+require("e1071")
+citation("e1071")
+require("mvabund")
+citation("mvabund")
+citation("yaImpute")
+paste(FD,set_no,"/gjam_",j,".RData",sep="")
+r
+rm(list = ls())#
+install.packages(c("tidyr","dplyr"))
+system("defaults write org.R-project.R force.LANG en_US.UTF-8")
+sum(is.na(sp_occ_probs[[1]]))
+newIDs
+load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/PREDICTIONS/birds/bc2_PAs_1_150.RData")
+m<-2
+j<-1
+require(BayesComm)
+bc<-bc2
+?predict.bc
+?predict.BC
+?predict
+require(nlme)#
+require(MASS)
+?glmmPQL
+FD2 <- paste(WD,"FITS2/",sep="")
+require(e1071)
+?svm
+library(sppairs)#
+# then import a site by species matrix for example purposes#
+library(cooccur)#
+data(beetles)#
+# remove rare species (<10% sites)#
+dataset <-clean.dataset(beetles, cutoff.min=0.1)
+or.symmetric(dataset[, 1:2]) # Symmetric odds ratio = 28.89#
+or.asymmetric(dataset[, 1:2]) # Asymmetric odds ratio = 11.45#
+mutual.information(dataset[, 1:2]) # MI = 0.235#
+cor(dataset[, 1], dataset[, 2]) # Pearson's correlation (from base R) = 0.62
+# default is to calculate the symmetric odds ratio#
+result <-spaa(dataset)
+# create grouping variable for example purposes ONLY#
+groups <-as.factor(rep(c(1:10), length.out=dim(beetles)[1])) #
+# alternatively, return some raw coefficients from mixed models, rather than odds ratios#
+result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)
+result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)[, 1:3]
+plot.spaa(result)
+graph.data <- graph_from_data_frame(result)
+plot(graph.data) # see ?igraph.plotting for more options
+result
+graph.data
 ?graph_from_data_frame
 str(nmds_m)
 for (e in 2:length(ENS)) {#
@@ -297,107 +360,50 @@ m$rL
 m$rL$sample
 str(m$rL$sample)
 vars$samps
+# 1 DATA: importation and raw data figures#
 rm(list = ls(all = TRUE)) ; gc()#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
 setwd(working_dir)#
 library("trap17")#
-dirs <- set_dirs(working_dir = working_dir)
-?trapdata
-dat <- trapdata
+dirs <- set_dirs(working_dir = working_dir, raw_data = TRUE)#
+#saveRDS(dirs, file = file.path(working_dir, "dirs.rds"))#
+#
+# 1.1a process...#
+dat <- process_data(filename = "TRAP17.csv",#
+                  dirs = dirs,#
+                  save_data = TRUE,#
+                  return_data = TRUE)#
+#
+# 1.1b ...or load the processed data#
+#?trapdata#
+#dat <- trapdata#
+str(dat)#
+#
+# 2 MODEL FITTING#
+#
+# 2.1 sampling settings#
 sampling <- sampling_settings(totsamp = 100000,#
                               trans = 50000,#
                               thn = 10,#
-                              nfolds = 5)#
+                              nchains = 2,#
+                              nfolds = 10)#
 foldname <- create_name(study = "trap17",#
                         totsamp = sampling$totsamp,#
                         nfolds = sampling$nfolds, #
                         type = "fold")#
-create_directories(foldname = foldname, dirs = dirs)#
-saveRDS(sampling, #
-        file = file.path(dirs$fits, foldname, "sampling.rds"))
-?roxygen2
-library("roxygen2")
-?roxygen2
-?install
-library("devtools")
-?install
-?create
-rm(list = ls(all = TRUE)) #
-gc()
-library("devtools")#
-library("roxygen2")
-root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
-?create
-setwd(pkg_dir)
-?document
-?model_and_cv
-?sample_Hmsc
-?create_directories
-rm(list = ls(all = TRUE)) ; gc()#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)#
-library("trap17")#
-dirs <- set_dirs(working_dir = working_dir)
-?trapdata
-dat <- trapdata
-sampling <- sampling_settings(totsamp = 1000,#
-                              trans = 500,#
-                              thn = 10,#
-                              nfolds = 5)
-foldname <- create_name(study = "trap17",#
-                        totsamp = sampling$totsamp,#
-                        nfolds = sampling$nfolds, #
-                        type = "fold")
-create_directories(foldname = foldname, dirs = dirs)
-file.path(dirs$fits, foldname, "sampling.rds")
+#create_directories(foldname = foldname, dirs = dirs) # muokkaa yleisemmäksi#
 saveRDS(sampling, #
         file = file.path(dirs$fits, foldname, "sampling.rds"))
 evals <- model_and_cv(dat = dat,#
                       dirs = dirs,#
-                      variants = 1:5,#
+                      variants = 1:7,#
                       sampling = sampling,#
                       returnCVs = TRUE,#
                       saveCVs = TRUE)
-evals
-str(evals)
-file.path(dirs$fits, foldname, "evals.rds")
-library(wesanderson)
-wesandcols <- wes_palette("Cavalcanti1")[5:1]
-dirs$fits
-pss <- load_objects_from_dir(path = dirs$fits, #
-                             study = "trap17_totsamp1000",#
-                             obj_type = "ps")
-names(pss)
-whichPs <- 4
-ps <- pss[[whichPs]]
-mpost <- Hmsc:::convertToCodaObject(ps)
-names(mpost)
-plot(mpost$Beta)
-plot(mpost$Beta)
-plot(mpost$Beta)
-plot(mpost$Beta)
-warnings()
-?prepare_m
-rm(list = ls(all = TRUE)) #
-gc()
-library("devtools")#
-library("roxygen2")
-root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
-?document#
-setwd(pkg_dir)#
-document()
-### install and load#
-setwd(working_dir)#
-install("trap17")
+saveRDS(evals, #
+        file = file.path(dirs$fits, foldname, "evals.rds"))
+co_occ_combs2
+co_occ_combs
 library("trap17")
-rm(list = ls(all = TRUE)) ; gc()#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)#
-library("trap17")
-?trap17
-??trap17
-library("trap17")
+co_occ_combs
+foldname

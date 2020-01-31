@@ -3,6 +3,7 @@
 export(co_occ_combs)
 export(create_directories)
 export(create_name)
+export(just_cv)
 export(load_colour_palette)
 export(load_objects_from_dir)
 export(model_and_cv)

@@ -9,23 +9,21 @@ model_and_cv(
   dirs,
   variants = "ALL",
   sampling,
-  returnCVs = FALSE,
+  do_cv = TRUE,
   saveCVs = TRUE
 )
 }
 \arguments{
-\item{dat}{Descr}
+\item{dat}{Data}
 
-\item{dirs}{Descr}
+\item{dirs}{Directories}
 
-\item{variants}{Descr}
+\item{variants}{Selection of model variants}
 
-\item{sampling}{Descr}
-
-\item{returnCVs}{default FALSE}
+\item{sampling}{Sampling settings}
 
 \item{saveCVs}{default TRUE}
 }
 \description{
-Fit models and do cross-validation
+Fit models and optionally does cross-validation. If do_cv = TRUE, returns the performance measures.
 }

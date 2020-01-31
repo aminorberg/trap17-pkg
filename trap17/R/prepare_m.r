@@ -5,54 +5,58 @@
 #' @param dat Data, i.e. trapdata
 
 prepare_m <- function(vars,
-                      dat) {
+                      dat) 
+{
     Y <- dat$Y_pooled
-    PI <- dat$PI_pooled
-    X <- dat$X_pooled
-    Xorig <- X
+    Xorig <- dat$X_pooled
+    if (vars$xvars == "(Intercept)") {
+        X <- matrix(1, ncol = 1, nrow = nrow(dat$X_pooled))
+    } else {
+        X <- dat$X_pooled[,vars$xvars]
+        Xorig_sel <- X
 
-    if (any(!is.na(vars$dumvars))) {
-        dums <- trap17:::dummify(dat = X,
-                                 dumvars = vars$dumvars)    
-        Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$dumvars)])
-        colnames(Xtmp) <- setdiff(colnames(X), vars$dumvars)
-        X <- data.frame(Xtmp, dums)
-    }
-    if (any(!is.na(vars$boolvars))) {
-        bools <- trap17:::boolify(dat = Xorig,
-                        boolvars = vars$boolvars)    
-        Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$boolvars)])
-        colnames(Xtmp) <- setdiff(colnames(X), vars$boolvars)
-        X <- data.frame(Xtmp, bools)
-    }
-    if (!is.null(dim(X)) & any(is.na(X))) {
-        for (i in 1:ncol(X)) {
-            X[which(is.na(X[, i])), i] <- mean(X[, i], na.rm = TRUE)    
+        if (any(!is.na(vars$dumvars))) {
+            dums <- trap17:::dummify(dat = X,
+                                     dumvars = vars$dumvars)    
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$dumvars)])
+            colnames(Xtmp) <- setdiff(colnames(X), vars$dumvars)
+            X <- data.frame(Xtmp, dums)
+        }
+        if (any(!is.na(vars$boolvars))) {
+            bools <- trap17:::boolify(dat = Xorig_sel,
+                            boolvars = vars$boolvars)    
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$boolvars)])
+            colnames(Xtmp) <- setdiff(colnames(X), vars$boolvars)
+            X <- data.frame(Xtmp, bools)
+        }
+        if (!is.null(dim(X)) & any(is.na(X))) {
+            for (i in 1:ncol(X)) {
+                X[which(is.na(X[, i])), i] <- mean(X[, i], na.rm = TRUE)    
+            }
+        }
+        if (is.null(dim(X)) & all(is.na(X))) {
+            X <- data.frame(matrix(0, ncol = 1, nrow = nrow(Y)))
+            names(X) <- "foo"
         }
     }
-    if (is.null(dim(X)) & all(is.na(X))) {
-        X <- data.frame(matrix(0, ncol = 1, nrow = nrow(Y)))
-        names(X) <- "foo"
-    }
-
     xForm <- switch(vars$fit, 
                     "1" = formula(~1), 
                     "2" = formula(~1),
                     "3" = formula(~.),
                     "4" = formula(~.),
                     "5" = formula(~.),
-                    "6" = formula(~.))
+                    "6" = formula(~.),
+                    "7" = formula(~.))
 
     rLs <- NULL
-    if (all(is.na(PI))) {
+    if (all(is.na(vars$pivars))) {
         studyDesign <- NULL
     } else {
-        studyDesign <- data.frame(PI)
+        studyDesign <- data.frame(Xorig[, vars$pivars])
         for (i in 1:ncol(studyDesign)) {
             studyDesign[, i] <- as.factor(studyDesign[, i])
         }
-        names(studyDesign) <- dat$pivars_pooled
-    
+        names(studyDesign) <- vars$pivars
         if (vars$random) {
             rLs <- list()
             for (i in 1:ncol(studyDesign)) {

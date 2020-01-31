@@ -9,41 +9,42 @@ co_occ_combs <- function(partition,
                          Y_arr) 
 {
 
-    X <- as.data.frame(partition)
-    for (i in 1:ncol(X)) {
-        X[,i] <- paste0(colnames(X)[i], X[,i])    
+    Xpartition <- as.data.frame(partition)
+    for (i in 1:ncol(Xpartition)) {
+        Xpartition[,i] <- paste0(colnames(Xpartition)[i], Xpartition[,i])    
     }
+
+    calc_combs <- function (Y, Xpart) {        
+        combpaste <- function(y, sp_names) {
+             tmp1 <- paste(sp_names[as.logical(y)], 
+                           collapse = "+")
+            return(tmp1)           
+        }
+        y_df <- as.data.frame(Y)           
+        tmp11 <- apply(y_df, MARGIN = 1, FUN = combpaste, sp_names = dimnames(y_df)[[2]])
+        Combinations <- matrix(tmp11, ncol = 1)
+
+        res_iter <- switch(ncol(Xpart), 
+                           "1" = cbind(Combinations, Xpart[,1]), 
+                           "2" = cbind(Combinations, Xpart[,1], Xpart[,2]), 
+                           "3" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3]),
+                           "4" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,4]),
+                           "5" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3], Xpart[,4], Xpart[,5]))
+        return(res_iter)
+    }
+
+    tmp_res <- apply(Y_arr, MARGIN = 3, FUN = calc_combs, Xpart = Xpartition)
 
     res_iters <- NA
-    for (j in 1:dim(Y_arr)[3]) {
-        Y <- as.data.frame(Y_arr[,,j])   
-
-        Combinations <- paste(dimnames(Y)[2][[1]][as.logical(Y[1,])], 
-                        collapse = "+")
-        for (k in 2:dim(Y)[1]) {
-             tmp1 <- paste(dimnames(Y)[2][[1]][as.logical(Y[k,])], 
-                           collapse = "+")
-             Combinations <- rbind(Combinations, tmp1)
-        }
-
-#        res_iter <- switch(ncol(X), 
-#                         "1" = table(Combinations, X[,1]), 
-#                         "2" = table(Combinations, X[,1], X[,2]), 
-#                         "3" = table(Combinations, X[,1], X[,2], X[,3]),
-#                         "4" = table(Combinations, X[,1], X[,2], X[,4]),
-#                         "5" = table(Combinations, X[,1], X[,2], X[,3], X[,4], X[,5]))
-        tmp2 <- switch(ncol(X), 
-                         "1" = cbind(Combinations, X[,1]), 
-                         "2" = cbind(Combinations, X[,1], X[,2]), 
-                         "3" = cbind(Combinations, X[,1], X[,2], X[,3]),
-                         "4" = cbind(Combinations, X[,1], X[,2], X[,4]),
-                         "5" = cbind(Combinations, X[,1], X[,2], X[,3], X[,4], X[,5]))
-        res_iters <- rbind(res_iters, tmp2)
+    for (i in 1:ncol(tmp_res)) {
+        tmp1 <- matrix(tmp_res[,i], ncol = (ncol(Xpartition)+1), nrow = (length(tmp_res[,i])/3))
+        res_iters <- rbind(res_iters, tmp1)
     }
+
     res_iters <- res_iters[-1,]
     res_iters[which(res_iters == "")] <- "Empty"
 
-    res <- switch(ncol(X), 
+    res <- switch(ncol(Xpartition), 
                      "1" = table(res_iters[,1], 
                                  res_iters[,2]), 
                      "2" = table(res_iters[,1], 

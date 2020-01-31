@@ -4,7 +4,7 @@
 \alias{data_prep}
 \title{Data preparation}
 \usage{
-data_prep(filename = "TRAP17.csv", dirs = dirs)
+data_prep(filename = "TRAP17.csv", dirs, save_data = FALSE)
 }
 \arguments{
 \item{filename}{Original data file}

@@ -4,14 +4,7 @@
 \alias{sampling_settings}
 \title{Sampling settings}
 \usage{
-sampling_settings(
-  totsamp = 100,
-  trans = 50,
-  thn = 1,
-  nfolds = 2,
-  nchains = 2,
-  nparallel = 2
-)
+sampling_settings(totsamp = 100, trans = 50, thn = 1, nfolds = 2, nchains = 2)
 }
 \arguments{
 \item{totsamp}{Number of MCMC samples}

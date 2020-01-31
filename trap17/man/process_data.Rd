@@ -4,16 +4,16 @@
 \alias{process_data}
 \title{Process trap17 data}
 \usage{
-process_data(filename, dirs, return_data = TRUE)
+process_data(filename, dirs, save_data = TRUE, return_data = TRUE)
 }
 \arguments{
 \item{filename}{Original data file}
 
 \item{dirs}{A trap17 class "dirlist" object}
 
-\item{return_data}{Return the pooled data}
+\item{save_data}{Save the modified data}
 
-\item{save_data}{Save the pooled data}
+\item{return_data}{Return the pooled data}
 }
 \description{
 Modify variable names and pool the data

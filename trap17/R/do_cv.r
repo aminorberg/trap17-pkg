@@ -14,13 +14,22 @@ do_cv <- function(ps,
 
     res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),
                      class = "cvresults")
-
+  
     cv_partition <- Hmsc:::createPartition(hM = ps, 
                                            nfolds = vars$nfolds, 
                                            column = vars$partition)
-    cv_preds <- Hmsc:::computePredictedValues(hM = ps, 
-                                              partition = cv_partition, 
-                                              expected = expected)
+
+    if (!is.null(vars$covDepXvars)) {
+        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
+                                                             partition = cv_partition, 
+                                                             expected = expected,
+                                                             alignPost = FALSE)
+    } else {
+        cv_preds <- Hmsc:::computePredictedValues(hM = ps, 
+                                                  partition = cv_partition, 
+                                                  expected = expected,
+                                                  alignPost = TRUE)
+    }
 
     if (save_cv) {
     

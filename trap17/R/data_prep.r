@@ -5,21 +5,19 @@
 #' @param dirs A trap17 class "dirlist" object
 
 data_prep <- function(filename = "TRAP17.csv",
-                      dirs = dirs) {
+                      dirs,
+                      save_data = FALSE) {
 
     dat <- structure(list(Y = NULL,
                           Y_pooled = NULL,
                           X = NULL,
                           X_pooled = NULL,
-                          PI = NULL, 
-                          PI_pooled = NULL, 
                           yvars = NULL, 
                           xvars = NULL,
-                          pivars = NULL,
                           pool_sum_formula = NULL,
                           pool_min_formula = NULL,
                           pool_max_formula = NULL,
-                          grouping_var = NULL), 
+                          poolvar = NULL), 
                      class = "trapdata")
 
     datapath <- filename
@@ -37,9 +35,14 @@ data_prep <- function(filename = "TRAP17.csv",
 
     
     dat$yvars <- c("Clo","En", "Be", "Pl", "Ca")
-    dat$xvars <- c("Genotype", "Population", "Plant.area", "Herbivory")
-    dat$pivars <- c("sampleID", "Timepoint", "Plant")
-    dat$pivars_pooled <- "Plant"
+    dat$xvars <- c("sampleID", 
+                   "Timepoint", 
+                   "Plant", 
+                   "Genotype", 
+                   "Population", 
+                   "Plant.area", 
+                   "Herbivory")
+    dat$poolvar <- "Plant"
     dat$pool_sum_formula <- formula(cbind(Clo, 
                                           En, 
                                           Be, 
@@ -49,7 +52,6 @@ data_prep <- function(filename = "TRAP17.csv",
                                           Timepoint) ~ Plant)
     dat$pool_min_formula <- formula(cbind(Genotype, Population) ~ Plant)
     dat$pool_max_formula <- formula(Plant.area ~ Plant)
-    dat$grouping_var <- "Plant"
 
     Ydat <- dat_tmp[, dat$yvars]
     Ydat <- apply(Ydat, 2, as.numeric)
@@ -58,29 +60,23 @@ data_prep <- function(filename = "TRAP17.csv",
     }
 
     Xdat <- dat_tmp[, dat$xvars]
+    if  ( any(unlist(strsplit(as.character(Xdat[1, "Plant"]), split = "")) == "S") ) {
+        Xdat[, "Plant"] <- sub(pattern = "S", 
+                                replacement = "", 
+                                x = Xdat[, "Plant"])
+    }
     Xdat <- apply(Xdat, 2, as.numeric)
     Xdat <- data.frame(Xdat)
     if (!all(apply(Xdat, 2, is.numeric))) {
         stop("X is not numeric")
     }
-    PIdat <- dat_tmp[, dat$pivars]
-    if  ( any(unlist(strsplit(as.character(PIdat[1, "Plant"]), split = "")) == "S") ) {
-        PIdat[, "Plant"] <- sub(pattern = "S", 
-                                replacement = "", 
-                                x = PIdat[, "Plant"])
-    }
-    PIdat <- apply(PIdat, 2, as.numeric)
-    if (!all(apply(PIdat, 2, is.numeric))) {
-        stop("PI is not numeric")
-    }
 
-    saveRDS(Ydat, file = file.path(dirs$mod_dat, "Y.rds"))
-    saveRDS(Xdat, file = file.path(dirs$mod_dat, "X.rds"))
-    saveRDS(PIdat, file = file.path(dirs$mod_dat, "PI.rds"))
-
+    if (save_data) {
+        saveRDS(Ydat, file = file.path(dirs$mod_dat, "Y.rds"))
+        saveRDS(Xdat, file = file.path(dirs$mod_dat, "X.rds"))
+    }
     dat$Y <- Ydat
     dat$X <- Xdat
-    dat$PI <- PIdat
     
     return(dat)
 

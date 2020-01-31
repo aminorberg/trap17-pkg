@@ -4,7 +4,7 @@
 \alias{pool}
 \title{Pool trap17 sata}
 \usage{
-pool(dat, dirs)
+pool(dat, dirs, save_data = FALSE)
 }
 \arguments{
 \item{dirs}{Directories}
