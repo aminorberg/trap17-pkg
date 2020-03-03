@@ -16,7 +16,7 @@ just_cv <- function(dat,
 {
 
     if (any(variants == "ALL")) {
-        fitss <- as.character(1:7)
+        fitss <- as.character(1:6)
     } else {
         fitss <- as.character(variants)
     }

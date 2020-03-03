@@ -73,6 +73,9 @@ load_colour_palette <- function() {
                 "#ffab4b",
                 "#7c92d9")
 
+    res[[3]] <- cbind(c("Clo", "Be", "Cap", "Cau", "En"),
+                      c("#7c92d9", "#ffab4b", "#ff9ec3", "#0160a6", "#00b262"))
+
     return(res)
             
 }

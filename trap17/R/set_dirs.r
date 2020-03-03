@@ -9,12 +9,14 @@
 
 set_dirs <- function(working_dir,
                      fit_fold = "fits",
+                     rw_figs_fold = "raw_data_figs",
                      raw_data = FALSE)
 {
     res <- structure(list(), class = "dirlist")
 
     res$wd <- working_dir
     res$fits <- file.path(working_dir, fit_fold)
+    res$raw_data_figs <- file.path(working_dir, rw_figs_fold)
     if (raw_data) {
         res$dat <- file.path(working_dir, "data")
         res$mod_dat <- file.path(working_dir, "mod_data")

@@ -28,9 +28,9 @@ library("trap17")
 ### add data
 #dirs <- set_dirs(working_dir = working_dir, raw_data = TRUE)
 #trapdata <- process_data(filename = "TRAP17.csv",
-#                  dirs = dirs,
-#                  save_data = TRUE,
-#                  return_data = TRUE)
+#                 dirs = dirs,
+#                 save_data = TRUE,
+#                 return_data = TRUE)
 #setwd(pkg_dir)
 #use_data(trapdata, overwrite = TRUE) 
 #document()

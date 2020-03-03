@@ -46,8 +46,8 @@ set_vars <- function(study = "trap17",
     vars$yvars <- c("Clo",
                     "En", 
                     "Be", 
-                    "Pl", 
-                    "Ca")
+                    "Cap", 
+                    "Cau")
 
     vars$xvars <- switch(fit, 
                          "1" = "(Intercept)", 
@@ -63,10 +63,7 @@ set_vars <- function(study = "trap17",
                          "5" = c("Population",
                                  "Herbivory",
                                  "Plant.area"),
-                         "6" = c("Population", 
-                                 "Herbivory",
-                                 "Plant.area"),
-                         "7" = c("Population",
+                         "6" = c("Population",
                                  "Genotype",
                                  "Herbivory",
                                  "Plant.area"))
@@ -85,8 +82,7 @@ set_vars <- function(study = "trap17",
                            "4" = c("Population", 
                                    "Genotype"),
                            "5" = "Population",
-                           "6" = "Population",
-                           "7" = c("Population", 
+                           "6" = c("Population", 
                                    "Genotype"))
                                        
     vars$pivars <- switch(fit, 
@@ -95,8 +91,7 @@ set_vars <- function(study = "trap17",
                           "3" = "Plant", 
                           "4" = "Plant", 
                           "5" = "Plant",
-                          "6" = c("Plant", "Genotype"),
-                          "7" = "Plant")
+                          "6" = "Plant")
                           
     vars$partition <- "Plant"
     
@@ -106,11 +101,10 @@ set_vars <- function(study = "trap17",
                           "3" = FALSE, 
                           "4" = TRUE,
                           "5" = TRUE,
-                          "6" = TRUE,
-                          "7" = TRUE)
+                          "6" = TRUE)
 
     vars$covDepXvars <- NULL
-    if (fit == "7") {    
+    if (fit == "6") {    
         vars$covDepXvars <- "Genotype"
         vars$covDepLevel <- 1
     }

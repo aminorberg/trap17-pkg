@@ -45,8 +45,7 @@ prepare_m <- function(vars,
                     "3" = formula(~.),
                     "4" = formula(~.),
                     "5" = formula(~.),
-                    "6" = formula(~.),
-                    "7" = formula(~.))
+                    "6" = formula(~.))
 
     rLs <- NULL
     if (all(is.na(vars$pivars))) {

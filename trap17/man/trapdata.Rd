@@ -7,17 +7,13 @@
 \format{A list of data frames, character vectors and formulas.
 \describe{
   \item{Y}{Virus occurrences.}
-  \item{Y_pooled}{Virus occurrences, pooled over the two sampling time points.}
-  \item{X}{Explanatory variables.}
-  \item{X_pooled}{Explanatory variables, pooled over the two sampling time points.}
-  \item{PI}{Sampling design.}
-  \item{PI_pooled}{Sampling design after pooling over the time points, i.e. running number of sampling units.}
+  \item{Y_pooled}{Virus occurrences, pooled over the two sampling time points during summer 2017.}
+  \item{X}{All independent variables.}
+  \item{X_pooled}{All independent variables, pooled over the two sampling time points during summer 2017.}
   \item{yvars}{Names of viruses.}
-  \item{xvars}{Names of explanatory variables.}
-  \item{pivars}{sampling design variables.}
-  \item{pool_}{Formulas for pooling.}
-  \item{gropuping_pooled}{The unit over which variables were grouped.}
-  \item{pivars_pooled}{The unit over which variables were pooled.}
+  \item{xvars}{Names of the independent variables.}
+  \item{pool_}{Formulas for pooling the independent variables.}
+  \item{poolvar}{The unit over which variables were grouped.}
 }}
 \usage{
 trapdata

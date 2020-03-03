@@ -30,11 +30,22 @@ data_prep <- function(filename = "TRAP17.csv",
     names(dat_tmp)[which(names(dat_tmp) == "Clostero")] <- "Clo"
     names(dat_tmp)[which(names(dat_tmp) == "Polero")] <- "En"
     names(dat_tmp)[which(names(dat_tmp) == "Partiti")] <- "Be"
-    names(dat_tmp)[which(names(dat_tmp) == "PILV")] <- "Pl"
-    names(dat_tmp)[which(names(dat_tmp) == "CAMV")] <- "Ca"
+    names(dat_tmp)[which(names(dat_tmp) == "PILV")] <- "Cap"
+    names(dat_tmp)[which(names(dat_tmp) == "CAMV")] <- "Cau"
 
+
+    sp_ind <- sort(c(which(colnames(dat_tmp) == "Clo"), 
+                     which(colnames(dat_tmp) == "En"),
+                     which(colnames(dat_tmp) == "Be"),
+                     which(colnames(dat_tmp) == "Cap"),
+                     which(colnames(dat_tmp) == "Cau")))
+
+    sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")
+
+    dat_tmp[, sp_ind] <- dat_tmp[, sp_ord]
+    colnames(dat_tmp)[sp_ind] <- sp_ord
     
-    dat$yvars <- c("Clo","En", "Be", "Pl", "Ca")
+    dat$yvars <- sp_ord
     dat$xvars <- c("sampleID", 
                    "Timepoint", 
                    "Plant", 
@@ -44,10 +55,10 @@ data_prep <- function(filename = "TRAP17.csv",
                    "Herbivory")
     dat$poolvar <- "Plant"
     dat$pool_sum_formula <- formula(cbind(Clo, 
-                                          En, 
                                           Be, 
-                                          Pl, 
-                                          Ca, 
+                                          Cap, 
+                                          Cau, 
+                                          En, 
                                           Herbivory, 
                                           Timepoint) ~ Plant)
     dat$pool_min_formula <- formula(cbind(Genotype, Population) ~ Plant)
