@@ -3,6 +3,7 @@
 #' Modified function for computing association matrices when using covariate dependent latent variables.
 #' @param object A fitted Hmsc model object.
 #' @param ... See ?Hmsc::Compute associations for the rest
+#' @export
 
 computeAssociations_modified <- function (hM, start = 1, thin = 1) 
 

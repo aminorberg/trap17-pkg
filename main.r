@@ -1,72 +1,72 @@
-# TRAP17 ANALYSIS 2020
 
-# 1 DATA: importation and raw data figures
-rm(list = ls(all = TRUE)) ; gc()
+# 1 DATA: importation (and processing)
+rm(list = ls(all = TRUE))
+gc()
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
 setwd(working_dir)
 library("trap17")
-dirs <- set_dirs(working_dir = working_dir)
+
+dirs <- set_dirs(working_dir = working_dir, raw_data = TRUE)
 #saveRDS(dirs, file = file.path(working_dir, "dirs.rds"))
 
 # 1.1a process...
 #dat <- process_data(filename = "TRAP17.csv",
-#                  dirs = dirs,
-#                  save_data = TRUE,
-#                  return_data = TRUE)
+#                    dirs = dirs)
 
 # 1.1b ...or load the processed data
 dat <- trapdata
-str(dat)
 
 # 2 MODEL FITTING
 
 # 2.1 sampling settings
+# settings good for testing
 sampling <- sampling_settings(totsamp = 1000,
                               trans = 500,
-                              thn = 1,
+                              thn = 10,
                               nchains = 1,
-                              nfolds = 3)
+                              nfolds = 5)
+# settings used for the submitted study
+#sampling <- sampling_settings(totsamp = 200000,
+#                              trans = 100000,
+#                              thn = 100,
+#                              nchains = 2,
+#                              nfolds = 10)
+
+# save the settings
+saveRDS(sampling, 
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+
+# 2.2 create a folder for the model with these settings and a figures folder under that
 foldname <- create_name(study = "trap17",
                         totsamp = sampling$totsamp,
                         nfolds = sampling$nfolds, 
                         type = "fold")
-create_directories(foldname = foldname, dirs = dirs) # muokkaa yleisemmäksi
-saveRDS(sampling, 
-        file = file.path(dirs$fits, foldname, "sampling.rds"))
+create_directories(foldname = foldname, dirs = dirs)
 
-# 2.2 model fitting and cross-validation
+# 2.3 model fitting and cross-validation
 evals <- model_and_cv(dat = dat,
                       dirs = dirs,
-                      variants = 1:7,
+                      variants = 1:6,
                       sampling = sampling,
                       saveCVs = TRUE)
-
-str(evals)
 saveRDS(evals, 
         file = file.path(dirs$fits, foldname, "evals.rds"))
 
 # 3 RESULTS
-#rm(list = setdiff(ls(), c("working_dir", "dirs", "foldname", "sampling", "dat"))); gc()
-#setwd(working_dir)
-#library("trap17")
-foc_study <- "trap17_totsamp1e"
-foldname <- "trap17_totsamp1e+05"
+foc_study <- "trap17_totsamp2e"
+foldname <- "trap17_totsamp2e+05"
 
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
 
 # 3.1 cv-based R2s
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
-
 lapply(tjurs, mean)
 lapply(cors, mean)
-ps_sel <- c(3:4, 7)
-lapply(tjurs, mean)[ps_sel]
-lapply(cors, mean)[ps_sel]
-lapply(tjurs, sd)[ps_sel]
-lapply(cors, sd)[ps_sel]
 
 # 3.2 Co-occurrence combinations
+
+# 3.2.1 Original combinations
 orig_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype","Population")],
                            Y_arr = array(dat$Y_pooled, 
                                          dim = c(nrow(dat$Y_pooled), 
@@ -78,41 +78,50 @@ orig_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype","Population")]
 saveRDS(orig_combs, 
         file = file.path(dirs$fits, foldname, "orig_combs.rds"))
 
-modelled_combs <- vector(mode = "list", length = length(evals))
-for (i in 1:length(evals)) {
-    yarr <- evals[[i]]$cv_predictions
+# 3.2.2 Predicted combinations
+cv_preds <- load_objects_from_dir(path = dirs$fits, 
+                                  study = foc_study,
+                                  obj_type = "cv_preds")
+
+# select the model you want to include in co-infection profile predictions
+whichPs <- 3
+cv_preds_variant <- cv_preds[whichPs]
+
+modelled_combs <- vector(mode = "list", length = length(cv_preds_variant))    
+for (i in 1:length(modelled_combs)) {
+    yarr <- cv_preds_variant[[i]]
     dimnames(yarr) <- list(1:dim(yarr)[1],
                            colnames(dat$Y_pooled),
                            1:dim(yarr)[3])
     modelled_combs[[i]] <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",
-                                                                     "Population")],
-                                         Y_arr = yarr) 
+                                                                    "Population")],
+                                        Y_arr = yarr) 
 }
 saveRDS(modelled_combs, 
-        file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
-
-str(orig_combs)
-str(modelled_combs)
+       file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
 
 all_virus_combs <- as.character(unique(unlist(lapply(lapply(modelled_combs, 
                                                             dimnames), 
                                                             '[', 
                                                             1))))
-
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), decreasing = TRUE)]
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), 
+                                         decreasing = TRUE)]
 all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
 
+# 3.2.3 Plot original co-occurrence combinations (Fig 4)
 
-prev_ord_pop <- c(3, 2, 4, 1)
+# NOTE: genotypes and populations are ordered by prevalence in the figures
 prev_ord_genot <- c(2, 4, 1, 3)
-
+prev_ord_pop <- c(2, 3, 1, 4)
+#
 
 colrs <- load_colour_palette()
 colmat <- cbind(all_virus_combs, colrs[[2]])
 rownames(colmat) <- colmat[,1]
 
+colmat_legend <- gsub("Ca", "Cau", colmat)
+colmat_legend <- gsub("Pl", "Cap", colmat_legend)
 
-# 3.2.1 plot original co-occurrence combinations
 pdf(file = file.path(dirs$fits, 
                      foldname, 
                      "figs",
@@ -138,13 +147,13 @@ pdf(file = file.path(dirs$fits,
     }
 dev.off()
 
-# 3.2.2 predicted co-occurrence combinations
+# 3.2.5 predicted co-occurrence combinations (Fig 4)
 for (i in c(1:length(modelled_combs))) {
     pdf(file = file.path(dirs$fits, 
                          foldname, 
                          "figs",
                          paste0("co_occs_ps", 
-                                i,
+                                whichPs[i],
                                 ".pdf")
                         ),
         bg = "transparent", 
@@ -171,7 +180,7 @@ for (i in c(1:length(modelled_combs))) {
     dev.off()
 }
 
-# 3.2.3 legend
+# 3.2.3 legend (Fig 4)
 pdf(file = file.path(dirs$fits, 
                      foldname, 
                      "figs", 
@@ -181,14 +190,15 @@ pdf(file = file.path(dirs$fits,
     height = 10)
     par(family = "serif")
     plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")
-    legend("topleft", legend = colmat[,1], fill = colmat[,2], bty = 'n')
+    legend("topleft", legend = colmat_legend[,1], fill = colmat_legend[,2], bty = 'n')
 dev.off()
 
-# 3.3 results for the best model variant
+# 3.3 Results for the best model variant
 pss <- load_objects_from_dir(path = dirs$fits, 
                              study = foc_study,
                              obj_type = "ps")
 names(pss)
+# select the model you want to include in co-infection profile predictions
 whichPs <- 3
 ps <- pss[[whichPs]]
 
@@ -203,12 +213,10 @@ if (whichPs > 2 & whichPs != 7) {
                   "Population", 
                   "Genotype", 
                   "Herbivory")
-
     if (whichPs == 5 | whichPs == 6) {
         selnames <- selnames[-which(selnames == "Genotype")]
         sel <- c(1, 2, rep(3, 3), 4)
     }
-    
     vp <- Hmsc::computeVariancePartitioning(ps, 
                                       group = sel, 
                                       groupnames = selnames)
@@ -217,13 +225,24 @@ if (whichPs > 2 & whichPs != 7) {
     toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]
     cov_order <- switch(as.character(whichPs), 
                         "3" = c("Genotype", "Population", "Plant.area", "Herbivory"), 
-                        "4" = c("Genotype", "Population", "Plant.area", "Herbivory", "Random: Plant"), 
+                        "4" = c("Genotype", 
+                                "Population", 
+                                "Plant.area", 
+                                "Herbivory", 
+                                "Random: Plant"), 
                         "5" = c("Population", "Plant.area", "Herbivory", "Random: Plant"),
-                        "6" = c("Population", "Plant.area", "Herbivory", "Random: Plant", "Random: Genotype"),
-                        "7" = c("Genotype", "Population", "Plant.area", "Herbivory", "Random: Plant"))
+                        "6" = c("Population", 
+                                "Plant.area", 
+                                "Herbivory", 
+                                "Random: Plant", 
+                                "Random: Genotype"),
+                        "7" = c("Genotype", 
+                                "Population", 
+                                "Plant.area", 
+                                "Herbivory", 
+                                "Random: Plant"))
     toPlot <- toPlot[cov_order, ]
     round(rowMeans(toPlot*100), 2)
-
     wesandcols_sel <- wesandcols[1:nrow(toPlot)]
     pdf(file = file.path(dirs$fits, 
                          foldname, 
@@ -323,11 +342,10 @@ if (whichPs == 7) {
 }
 
 # 3.3.3 betas
-summary(mpost$Beta)
 betaPost_ps <- Hmsc:::getPostEstimate(ps, "Beta", q = c(0.05, 0.95))
 betaMeans_ps <- betaPost_ps$mean
 rownames(betaMeans_ps) <- colnames(ps$X)
-supportLevel <- 0.75
+supportLevel <- 0.95
 betaSig <- ((betaPost_ps$support > supportLevel)
             + (betaPost_ps$support < (1-supportLevel)) > 0)
 betaSig <- betaSig * 1            
@@ -340,11 +358,16 @@ write.csv(round(betaMeans_ps, 2),
                             paste0("betameans_ps", whichPs, ".csv")))
 
 betas <- round(betaMeans_ps * betaSig, 2)
+write.csv(round(betas, 2), 
+          file = file.path(dirs$fits, 
+                           foldname, 
+                           "figs",
+                            paste0("betameans_", supportLevel, "_ps", whichPs, ".csv")))
 betas    
 betaPost_ps$q
 colSums(dat$Y_pooled)
 
-# 3.4 mixing
+# 3.3.4 mixing
 whichPs <- 3
 ps <- pss[[whichPs]]
 
@@ -353,14 +376,28 @@ par(family = "serif", mfrow = c(1, 1))
 plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
 
 psfrs <- coda:::gelman.diag(mpost$Beta)$psrf
+# the lowest point estimate for the psfr  
+min(psfrs[,1])
+# highest 
+max(psfrs[,1])
+# all point estimates were below their corresponding upper confidence limits
 all((psfrs[,2] - psfrs[,1]) > 0)
-sum(psfrs[,2] > 1.05)
 
 #effectiveSize(mpost$Beta)
 coda:::gelman.plot(mpost$Beta, ask = TRUE)
 
-# 3.5 cooccurrence by genotype
+
+# 3.4 cooccurrence tests
 library(cooccur)
+
+# 3.4.1 cooccurrence test for full data
+cooc_test <- cooccur(mat = t(dat$Y_pooled),
+                     type = "spp_site",
+                     spp_names = TRUE,
+                     thresh = TRUE)
+#cooc_test$results
+
+# 3.4.2 cooccurrence by genotype test
 cooc_test_genot <- list()
 for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {
     g1 <- sort(unique(dat$X_pooled[,"Genotype"]))[g]
@@ -374,30 +411,161 @@ for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {
         },
         error = function(e) { print(e) },
         warning = function(w) { print(w) }
-    )    
+    )
 }
-cooc_test <- cooccur(mat = t(dat$Y_pooled),
-                     type = "spp_site",
-                     spp_names = TRUE,
-                     thresh = TRUE)
+
+# 3.4.3 cooccurrence by population test
+cooc_test_pop <- list()
+for (p in 1:length(unique(dat$X_pooled[,"Population"]))) {
+    p1 <- sort(unique(dat$X_pooled[,"Population"]))[p]
+    com <- t(dat$Y_pooled[which(dat$X_pooled[,"Population"]  == p1), ])
+    tryCatch(
+        expr = {
+            cooc_test_pop[[p]] <- cooccur(mat = com,
+                                            type = "spp_site",
+                                            spp_names = TRUE,
+                                            thresh = TRUE)
+        },
+        error = function(e) { print(e) },
+        warning = function(w) { print(w) }
+    )
+}
+
+# 3.5 raw data results figures
+
+# 3.5.1 abundances by population and genotype (Fig 1)
+
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")
+
+abundances_genot <- list()
+for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {
+    g1 <- sort(unique(dat$X_pooled[,"Genotype"]))[g]
+    abundances_genot[[g]] <- colSums(dat$Y_pooled[which(dat$X_pooled[,"Genotype"]  == g1), ])
+    names(abundances_genot[[g]]) <- gsub("Ca", "Cau", names(abundances_genot[[g]]))
+    names(abundances_genot[[g]]) <- gsub("Pl", "Cap", names(abundances_genot[[g]]))
+    abundances_genot[[g]] <- abundances_genot[[g]][sp_ord]
+}
+abundances_genot <- abundances_genot[prev_ord_genot]
+
+abundances_pops <- list()
+for (p in 1:length(unique(dat$X_pooled[,"Population"]))) {
+    p1 <- sort(unique(dat$X_pooled[,"Population"]))[p]
+    abundances_pops[[p]] <- colSums(dat$Y_pooled[which(dat$X_pooled[,"Population"]  == p1), ])
+    names(abundances_pops[[p]]) <- gsub("Ca", "Cau", names(abundances_pops[[p]]))
+    names(abundances_pops[[p]]) <- gsub("Pl", "Cap", names(abundances_pops[[p]]))
+    abundances_pops[[p]] <- abundances_pops[[p]][sp_ord]
+}
+abundances_pops <- abundances_pops[prev_ord_pop]
+
+colrs_rwplt <- colmat[c("Clo", "Be", "Pl", "Ca", "En"),]
+
+pdf(file = file.path(dirs$fits, 
+                     foldname, 
+                     "figs",
+                     "abundances_by_pop.pdf"),
+    bg = "transparent", 
+    width = 4, 
+    height = 5)
+    par(family = "serif")
+    barplot(simplify2array(abundances_pops),
+            col = colrs_rwplt[,2],
+            ylim = c(0, 200),
+            xaxt = "n",
+            yaxt = "n")
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "400"), tick = TRUE, las = 2)
+dev.off()
+
+pdf(file = file.path(dirs$fits, 
+                     foldname, 
+                     "figs",
+                     "abundances_by_genot.pdf"),
+    bg = "transparent", 
+    width = 4, 
+    height = 5)
+    par(family = "serif")
+    barplot(simplify2array(abundances_genot),
+            col = colrs_rwplt[,2],
+            ylim = c(0, 200),
+            xaxt = "n",
+            yaxt = "n")
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "400"), tick = TRUE, las = 2)
+dev.off()
 
 
-#cooc_test$positive
-#cooc_test$results
-#
-cooc_test_genot[[2]]$results
-cooc_test_genot[[2]]$positive
-cooc_test_genot[[2]]$negative
+leg <- cbind(sp_ord, colrs_rwplt[,2])
+leg <- leg[nrow(leg):1, ]
+pdf(file = file.path(dirs$fits, 
+                     foldname, 
+                     "figs", 
+                     "abundances_legend.pdf"),
+    bg = "transparent", 
+    width = 3, 
+    height = 5)
+    par(family = "serif")
+    plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")
+    legend("topleft", legend = c("Empty", leg[, 1]), fill = c("grey75", leg[, 2]), bty = 'n')
+dev.off()
 
 
-# 3.6 raw data results figures
+# 3.5.2 all co-occurrences
+library(circleplot)
+
+pdf(file = file.path(dirs$wd, 
+                     "raw_coocc_legend.pdf"),
+    bg = "transparent", 
+    width = 5, 
+    height = 3)
+    par(family = "serif")
+    plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")
+    legend("topleft", 
+           legend = c("No co-occurrences",
+                      "1 co-occurrence", 
+                      "1-8 co-occurrences", 
+                      ">8 co-occurrences"), 
+           fill = c("#d9d9d9", 
+                   "#faeaee", 
+                   "#e795aa", 
+                   "#c60032"), 
+           bty = 'n')
+dev.off()
+
+cooc_all <- crossprod(dat$Y_pooled)
+
+rownames(cooc_all) <- gsub("Ca", "Cau", rownames(cooc_all))
+rownames(cooc_all) <- gsub("Pl", "Cap", rownames(cooc_all))
+colnames(cooc_all) <- rownames(cooc_all)
+
+toPlotDist <- as.dist(cooc_all)
+
+pdf(file = file.path(dirs$wd,
+                     "cooccurrences.pdf"),
+    bg = "transparent", 
+    width = 3, 
+    height = 3)
+    par(family = "serif")
+        circleplot:::circleplot(toPlotDist, 
+                   cluster = FALSE,
+                   style = "classic",
+                   plot.control = list(point.labels = TRUE,
+                                       cex.point = 5,
+                                       line.breaks = c(-1,0,1,8,100),
+                                       line.cols = c("#d9d9d9", 
+                                                     "#faeaee", 
+                                                     "#e795aa", 
+                                                     "#c60032"),
+                                       line.widths = 5))
+dev.off()
+
+# 3.5.3 co-occurrences by genotype
+
 cooc_genot <- list()
 for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {
     g1 <- sort(unique(dat$X_pooled[,"Genotype"]))[g]
     cooc_genot[[g]] <- crossprod(dat$Y_pooled[which(dat$X_pooled[,"Genotype"]  == g1), ])
+    rownames(cooc_genot[[g]]) <- gsub("Ca", "Cau", rownames(cooc_genot[[g]]))
+    rownames(cooc_genot[[g]]) <- gsub("Pl", "Cap", rownames(cooc_genot[[g]]))
+    colnames(cooc_genot[[g]]) <- rownames(cooc_genot[[g]])
 }
-
-# NOTE: genotypes ordered by prevalence
 pdf(file = file.path(dirs$wd,
                      "cooccurrences_genot.pdf"),
     bg = "transparent", 
@@ -412,7 +580,7 @@ pdf(file = file.path(dirs$wd,
                    plot.control = list(point.labels = TRUE,
                                        cex.point = 5,
                                        line.breaks = c(-1,0,1,8,100),
-                                       line.cols = c("#ffffff", 
+                                       line.cols = c("#d9d9d9", 
                                                      "#faeaee", 
                                                      "#e795aa", 
                                                      "#c60032"),
@@ -420,24 +588,39 @@ pdf(file = file.path(dirs$wd,
     }
 dev.off()
 
-cooc_all <- crossprod(dat$Y_pooled)
-toPlotDist <- as.dist(cooc_all)
+# 3.5.3 co-occurrences by population
+
+cooc_pop <- list()
+for (p in 1:length(unique(dat$X_pooled[,"Population"]))) {
+    p1 <- sort(unique(dat$X_pooled[,"Population"]))[p]
+    cooc_pop[[p]] <- crossprod(dat$Y_pooled[which(dat$X_pooled[,"Population"]  == p1), ])
+    rownames(cooc_pop[[p]]) <- gsub("Ca", "Cau", rownames(cooc_pop[[p]]))
+    rownames(cooc_pop[[p]]) <- gsub("Pl", "Cap", rownames(cooc_pop[[p]]))
+    colnames(cooc_pop[[p]]) <- rownames(cooc_pop[[p]])
+}
 pdf(file = file.path(dirs$wd,
-                     "cooccurrences.pdf"),
+                     "cooccurrences_pop.pdf"),
     bg = "transparent", 
-    width = 3, 
+    width = 13, 
     height = 3)
-    par(family = "serif")
+    par(family = "serif", mfrow = c(1, length(cooc_pop)))
+    for (p in 1:length(cooc_pop)) {
+        toPlotDist <- as.dist(cooc_pop[prev_ord_pop][[p]])
         circleplot:::circleplot(toPlotDist, 
                    cluster = FALSE,
                    style = "classic",
                    plot.control = list(point.labels = TRUE,
                                        cex.point = 5,
                                        line.breaks = c(-1,0,1,8,100),
-                                       line.cols = c("#ffffff", 
+                                       line.cols = c("#d9d9d9", 
                                                      "#faeaee", 
                                                      "#e795aa", 
                                                      "#c60032"),
                                        line.widths = 5))
+    }
 dev.off()
+
+
+
+
 

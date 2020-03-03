@@ -9,7 +9,7 @@ prepare_m <- function(vars,
 {
     Y <- dat$Y_pooled
     Xorig <- dat$X_pooled
-    if (vars$xvars == "(Intercept)") {
+    if (all(vars$xvars == "(Intercept)")) {
         X <- matrix(1, ncol = 1, nrow = nrow(dat$X_pooled))
     } else {
         X <- dat$X_pooled[,vars$xvars]
