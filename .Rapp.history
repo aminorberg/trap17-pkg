@@ -1,30 +1,3 @@
-library(gbm)
-citation(gbm)
-citation("gbm")
-citation("dismo")
-?glm
-require("e1071")
-citation("e1071")
-require("mvabund")
-citation("mvabund")
-citation("yaImpute")
-paste(FD,set_no,"/gjam_",j,".RData",sep="")
-r
-rm(list = ls())#
-install.packages(c("tidyr","dplyr"))
-system("defaults write org.R-project.R force.LANG en_US.UTF-8")
-sum(is.na(sp_occ_probs[[1]]))
-newIDs
-load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/PREDICTIONS/birds/bc2_PAs_1_150.RData")
-m<-2
-j<-1
-require(BayesComm)
-bc<-bc2
-?predict.bc
-?predict.BC
-?predict
-require(nlme)#
-require(MASS)
 ?glmmPQL
 FD2 <- paste(WD,"FITS2/",sep="")
 require(e1071)
@@ -354,24 +327,516 @@ library("trap17")
 dat <- trapdata#
 str(dat)
 80*4
+# 1 DATA: importation (and processing)#
 rm(list = ls(all = TRUE))#
 gc()#
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
 setwd(working_dir)#
 library("trap17")
-dirs <- set_dirs(working_dir = working_dir)
-dat <- trapdata#
-str(dat)#
-head(dat$Y_pooled)#
-head(dat$X_pooled)
-dirs <- set_dirs(working_dir = working_dir, raw_data = TRUE)
-trapdata <- process_data(filename = "TRAP17.csv",#
-                 dirs = dirs,#
-                 save_data = TRUE,#
-                 return_data = TRUE)
-head(trapdata$Y)
-setwd(pkg_dir)
-use_data(trapdata, overwrite = TRUE)
+dirs <- set_dirs(working_dir = working_dir)#
+                 #raw_data = TRUE)
+dat <- trapdata
+foc_study <- "trap17_totsamp2e"#
+foldname <- "trap17_totsamp2e+05"
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
+cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
+lapply(tjurs, mean)#
+lapply(cors, mean)
+orig_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype","Population")],#
+                           Y_arr = array(dat$Y_pooled, #
+                                         dim = c(nrow(dat$Y_pooled), #
+                                                 ncol(dat$Y_pooled), #
+                                                 1),#
+                                         dimnames = list(1:nrow(dat$Y_pooled),#
+                                                         colnames(dat$Y_pooled),#
+                                                         1)))
+cv_preds <- load_objects_from_dir(path = dirs$fits, #
+                                  study = foc_study,#
+                                  obj_type = "cv_preds")#
+names(cv_preds)#
+pss <- load_objects_from_dir(path = dirs$fits, #
+                             study = foc_study,#
+                             obj_type = "ps")#
+names(pss)
+whichPs <- 3#
+cv_preds_variant <- cv_preds[whichPs]
+sp_new_nams <- c("Clo", "En", "Be", "Cap", "Cau") #(*)#
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En") #(*)
+modelled_combs <- readRDS(file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
+str(modelled_combs)
+all_virus_combs <- as.character(unique(unlist(lapply(lapply(modelled_combs, #
+                                                            dimnames), #
+                                                            '[', #
+                                                            1))))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)
+all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     sp_ord[length(sp_ord):1])
+colrs <- load_colour_palette()
+colrs
+#' Load colour palette#
+#'#
+#' Load a custom, colour-blind-friendly palette of colours for results plotting#
+#' @export#
+#
+load_colour_palette <- function() {#
+#
+    res <- list()#
+    res[[1]] <- c("grey75",#
+                "#2f1855",#
+                "#98c339",#
+                "#6349bc",#
+                "#3dc662",#
+                "#5b006f",#
+                "#02da89",#
+                "#c759c8",#
+                "#32901a",#
+                "#e860c6",#
+                "#9aa400",#
+                "#0046a5",#
+                "#ffc746",#
+                "#43b3ff",#
+                "#cf5f18",#
+                "#02c0ad",#
+                "#8e0059",#
+                "#7fe9a5",#
+                "#78005f",#
+                "#bbe16f",#
+                "#60002f",#
+                "#74e8c5",#
+                "#740011",#
+                "#007f42",#
+                "#ff68a5",#
+                "#b4c87d",#
+                "#6e0027",#
+                "#ffbe58",#
+                "#e6b4ff",#
+                "#746600",#
+                "#ff7081",#
+                "#7f3d00")#
+#
+    res[[2]] <- c("grey75",#
+                "#e79fff",#
+                "#ffad6a",#
+                "#b10b80",#
+                "#f2d250",#
+                "#d0b3ff",#
+                "#9669a9",#
+                "#015dcf",#
+                "#98000a",#
+                "#246a00",#
+                "#ff71ba",#
+                "#cb57c4",#
+                "#c1232e",#
+                "#d1dc70",#
+                "#59007b",#
+                "#ff6686",#
+                "#770055",#
+                "#fe8fff",#
+                "#01a0f2",#
+                "#5b50c4",#
+                "#391255",#
+                "#a99500",#
+                "#f34890",#
+                "#ff9276",#
+                "#ffafe6",#
+                "#d52a4c",#
+                "#cc4525",#
+                "#00b262",#
+                "#0160a6",#
+                "#002700",#
+                "#ffab4b",#
+                "#7c92d9")#
+#
+    res[[3]] <- cbind(c("Clo", "Be", "Cap", "Cau", "En"),#
+                      c("#7c92d9", "#ffab4b", "#002700", "#0160a6", "#00b262"))#
+#
+    return(res)#
+}
+colrs <- load_colour_palette()
+colmat <- cbind(all_virus_combs, colrs[[2]])
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+        }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+    }
+#' Load colour palette#
+#'#
+#' Load a custom, colour-blind-friendly palette of colours for results plotting#
+#' @export#
+#
+load_colour_palette <- function() {#
+#
+    res <- list()#
+    res[[1]] <- c("grey75",#
+                "#2f1855",#
+                "#98c339",#
+                "#6349bc",#
+                "#3dc662",#
+                "#5b006f",#
+                "#02da89",#
+                "#c759c8",#
+                "#32901a",#
+                "#e860c6",#
+                "#9aa400",#
+                "#0046a5",#
+                "#ffc746",#
+                "#43b3ff",#
+                "#cf5f18",#
+                "#02c0ad",#
+                "#8e0059",#
+                "#7fe9a5",#
+                "#78005f",#
+                "#bbe16f",#
+                "#60002f",#
+                "#74e8c5",#
+                "#740011",#
+                "#007f42",#
+                "#ff68a5",#
+                "#b4c87d",#
+                "#6e0027",#
+                "#ffbe58",#
+                "#e6b4ff",#
+                "#746600",#
+                "#ff7081",#
+                "#7f3d00")#
+#
+    res[[2]] <- c("grey75",#
+                "#e79fff",#
+                "#ffad6a",#
+                "#b10b80",#
+                "#f2d250",#
+                "#d0b3ff",#
+                "#9669a9",#
+                "#015dcf",#
+                "#98000a",#
+                "#246a00",#
+                "#ff71ba",#
+                "#cb57c4",#
+                "#c1232e",#
+                "#d1dc70",#
+                "#59007b",#
+                "#ff6686",#
+                "#770055",#
+                "#fe8fff",#
+                "#01a0f2",#
+                "#5b50c4",#
+                "#391255",#
+                "#a99500",#
+                "#f34890",#
+                "#ff9276",#
+                "#ffafe6",#
+                "#d52a4c",#
+                "#cc4525",#
+                "#00b262",#
+                "#0160a6",#
+                "#003b00",#
+                "#ffab4b",#
+                "#7c92d9")#
+#
+    res[[3]] <- cbind(c("Clo", "Be", "Cap", "Cau", "En"),#
+                      c("#7c92d9", "#ffab4b", "#003b00", "#0160a6", "#00b262"))#
+#
+    return(res)#
+}
+colrs <- load_colour_palette()#
+colmat <- cbind(all_virus_combs, colrs[[2]])#
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+        }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+    }
+i<-1
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp12 <- NULL#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+                tmp12 <- modelled_combs[[i]][,g,p][rownames(colmat)]#
+                tmp11 <- cbind(tmp11, tmp12)#
+        }#
+        if (any(is.na(tmp11))) { #
+            tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+        }#
+        colrs1 <- colmat[rownames(tmp11), 2]#
+        colrs1 <- colrs1[nrow(tmp11):1]#
+        barplot(tmp11[nrow(tmp11):1,],#
+                col = colrs1,#
+                xaxt = "n")#
+                #legend.text = rownames(tmp11)[nrow(tmp11):1])#
+    }
+#' Load colour palette#
+#'#
+#' Load a custom, colour-blind-friendly palette of colours for results plotting#
+#' @export#
+#
+load_colour_palette <- function() {#
+#
+    res <- list()#
+    res[[1]] <- c("grey75",#
+                "#2f1855",#
+                "#98c339",#
+                "#6349bc",#
+                "#3dc662",#
+                "#5b006f",#
+                "#02da89",#
+                "#c759c8",#
+                "#32901a",#
+                "#e860c6",#
+                "#9aa400",#
+                "#0046a5",#
+                "#ffc746",#
+                "#43b3ff",#
+                "#cf5f18",#
+                "#02c0ad",#
+                "#8e0059",#
+                "#7fe9a5",#
+                "#78005f",#
+                "#bbe16f",#
+                "#60002f",#
+                "#74e8c5",#
+                "#740011",#
+                "#007f42",#
+                "#ff68a5",#
+                "#b4c87d",#
+                "#6e0027",#
+                "#ffbe58",#
+                "#e6b4ff",#
+                "#746600",#
+                "#ff7081",#
+                "#7f3d00")#
+#
+    res[[2]] <- c("grey75",#
+                "#e79fff",#
+                "#ffad6a",#
+                "#b10b80",#
+                "#f2d250",#
+                "#d0b3ff",#
+                "#9669a9",#
+                "#015dcf",#
+                "#98000a",#
+                "#246a00",#
+                "#ffd500",#
+                "#cb57c4",#
+                "#c1232e",#
+                "#d1dc70",#
+                "#59007b",#
+                "#ff6686",#
+                "#770055",#
+                "#fe8fff",#
+                "#01a0f2",#
+                "#5b50c4",#
+                "#391255",#
+                "#a99500",#
+                "#f34890",#
+                "#ff9276",#
+                "#ffafe6",#
+                "#d52a4c",#
+                "#cc4525",#
+                "#00b262",#
+                "#0160a6",#
+                "#003b00",#
+                "#ffab4b",#
+                "#7c92d9")#
+#
+    res[[3]] <- cbind(c("Clo", "Be", "Cap", "Cau", "En"),#
+                      c("#7c92d9", "#ffab4b", "#003b00", "#0160a6", "#00b262"))#
+#
+    return(res)#
+}
+colrs <- load_colour_palette()#
+colmat <- cbind(all_virus_combs, colrs[[2]])#
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp12 <- NULL#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+                tmp12 <- modelled_combs[[i]][,g,p][rownames(colmat)]#
+                tmp11 <- cbind(tmp11, tmp12)#
+        }#
+        if (any(is.na(tmp11))) { #
+            tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+        }#
+        colrs1 <- colmat[rownames(tmp11), 2]#
+        colrs1 <- colrs1[nrow(tmp11):1]#
+        barplot(tmp11[nrow(tmp11):1,],#
+                col = colrs1,#
+                xaxt = "n")#
+                #legend.text = rownames(tmp11)[nrow(tmp11):1])#
+    }
+pdf(file = file.path(dirs$raw_data_figs, #
+                     "orig_cooccs.pdf"),#
+    bg = "transparent", #
+    width = 15, #
+    height = 5)#
+    par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+        }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+    }#
+dev.off()#
+#
+# 3.2.5 predicted co-occurrence combinations (Fig 4)#
+for (i in 1:length(modelled_combs)) {#
+    pdf(file = file.path(dirs$fits, #
+                         foldname, #
+                         "figs",#
+                         paste0("co_occs_ps", #
+                                whichPs[i],#
+                                ".pdf")#
+                        ),#
+        bg = "transparent", #
+        width = 15, #
+        height = 5)#
+    par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp12 <- NULL#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+                tmp12 <- modelled_combs[[i]][,g,p][rownames(colmat)]#
+                tmp11 <- cbind(tmp11, tmp12)#
+        }#
+        if (any(is.na(tmp11))) { #
+            tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+        }#
+        colrs1 <- colmat[rownames(tmp11), 2]#
+        colrs1 <- colrs1[nrow(tmp11):1]#
+        barplot(tmp11[nrow(tmp11):1,],#
+                col = colrs1,#
+                xaxt = "n")#
+                #legend.text = rownames(tmp11)[nrow(tmp11):1])#
+    }#
+    dev.off()#
+}
+pdf(file = file.path(dirs$fits, #
+                     foldname, #
+                     "figs", #
+                     "cooccurrencebars_legend.pdf"),#
+    bg = "transparent", #
+    width = 5, #
+    height = 10)#
+    par(family = "serif")#
+    plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")#
+    legend("topleft", legend = colmat_legend[,1], fill = colmat_legend[,2], bty = 'n')#
+dev.off()
+abundances_genot <- list()#
+for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {#
+    g1 <- sort(unique(dat$X_pooled[,"Genotype"]))[g]#
+    abundances_genot[[g]] <- colSums(dat$Y_pooled[which(dat$X_pooled[,"Genotype"]  == g1), ])#
+}#
+abundances_genot <- abundances_genot[prev_ord_genot]
+abundances_pops <- list()#
+for (p in 1:length(unique(dat$X_pooled[,"Population"]))) {#
+    p1 <- sort(unique(dat$X_pooled[,"Population"]))[p]#
+    abundances_pops[[p]] <- colSums(dat$Y_pooled[which(dat$X_pooled[,"Population"]  == p1), ])#
+}#
+abundances_pops <- abundances_pops[prev_ord_pop]#
+#
+colrs <- load_colour_palette()#
+colrs_rwplt <- colrs[[3]]#
+rownames(colrs_rwplt) <- colrs_rwplt[,1]
+par(family = "serif")#
+    barplot(simplify2array(abundances_pops),#
+            col = colrs_rwplt[,2],#
+            ylim = c(0, 200),#
+            xaxt = "n",#
+            yaxt = "n")#
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "320"), tick = TRUE, las = 2)
+par(family = "serif")#
+    barplot(simplify2array(abundances_genot),#
+            col = colrs_rwplt[,2],#
+            ylim = c(0, 200),#
+            xaxt = "n",#
+            yaxt = "n")#
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "320"), tick = TRUE, las = 2)
+leg <- cbind(sp_ord, colrs_rwplt[,2])#
+leg <- leg[nrow(leg):1, ]
+par(family = "serif")#
+    plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")#
+    legend("topleft", legend = c("Empty", leg[, 1]), fill = c("grey75", leg[, 2]), bty = 'n')
+pdf(file = file.path(dirs$raw_data_figs, #
+                     "abundances_by_pop.pdf"),#
+    bg = "transparent", #
+    width = 4, #
+    height = 5)#
+    par(family = "serif")#
+    barplot(simplify2array(abundances_pops),#
+            col = colrs_rwplt[,2],#
+            ylim = c(0, 200),#
+            xaxt = "n",#
+            yaxt = "n")#
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "320"), tick = TRUE, las = 2)#
+dev.off()#
+#
+pdf(file = file.path(dirs$raw_data_figs, #
+                     "abundances_by_genot.pdf"),#
+    bg = "transparent", #
+    width = 4, #
+    height = 5)#
+    par(family = "serif")#
+    barplot(simplify2array(abundances_genot),#
+            col = colrs_rwplt[,2],#
+            ylim = c(0, 200),#
+            xaxt = "n",#
+            yaxt = "n")#
+    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "320"), tick = TRUE, las = 2)#
+dev.off()#
+#
+leg <- cbind(sp_ord, colrs_rwplt[,2])#
+leg <- leg[nrow(leg):1, ]#
+pdf(file = file.path(dirs$raw_data_figs, #
+                     "abundances_legend.pdf"),#
+    bg = "transparent", #
+    width = 3, #
+    height = 5)#
+    par(family = "serif")#
+    plot(x = 1:10, 1:10, type = 'n', xaxt = 'n', yaxt = 'n', xlab = "", ylab = "")#
+    legend("topleft", legend = c("Empty", leg[, 1]), fill = c("grey75", leg[, 2]), bty = 'n')#
+dev.off()
 rm(list = ls(all = TRUE)) #
 gc()#
 #install.packages("devtools")#
@@ -382,15 +847,15 @@ library("roxygen2")#
 #
 root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
-library("trap17")
-dirs <- set_dirs(working_dir = working_dir, raw_data = TRUE)#
-trapdata <- process_data(filename = "TRAP17.csv",#
-                 dirs = dirs,#
-                 save_data = TRUE,#
-                 return_data = TRUE)
-setwd(pkg_dir)
-use_data(trapdata, overwrite = TRUE)
-document()
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"#
+#
+### create the package#
+#setwd(root_dir)#
+#create("trap17")#
+### document the package#
+setwd(pkg_dir)#
+document()#
+#
+### install and load#
 setwd(working_dir)#
 install("trap17")

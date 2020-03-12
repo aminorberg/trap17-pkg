@@ -50,7 +50,7 @@ load_colour_palette <- function() {
                 "#015dcf",
                 "#98000a",
                 "#246a00",
-                "#ff71ba",
+                "#ffd500",
                 "#cb57c4",
                 "#c1232e",
                 "#d1dc70",
@@ -69,12 +69,12 @@ load_colour_palette <- function() {
                 "#cc4525",
                 "#00b262",
                 "#0160a6",
-                "#ff9ec3",
+                "#003b00",
                 "#ffab4b",
                 "#7c92d9")
 
     res[[3]] <- cbind(c("Clo", "Be", "Cap", "Cau", "En"),
-                      c("#7c92d9", "#ffab4b", "#ff9ec3", "#0160a6", "#00b262"))
+                      c("#7c92d9", "#ffab4b", "#003b00", "#0160a6", "#00b262"))
 
     return(res)
             
