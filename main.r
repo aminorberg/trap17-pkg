@@ -2,6 +2,7 @@
 # 1 DATA: importation (and processing)
 rm(list = ls(all = TRUE))
 gc()
+# define working directory
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
 setwd(working_dir)
 library("trap17")
@@ -95,8 +96,9 @@ names(pss)
 # select the model you want to include in co-infection profile predictions
 whichPs <- 3
 cv_preds_variant <- cv_preds[whichPs]
+str(cv_preds_variant)
 
-# MUUTA MERKITYT (*) JAHKA UUDET SOVITUKSET VALMIIT OIKEILLA VIRUSNIMILLÄ
+# change names for the species for figures (*)
 sp_new_nams <- c("Clo", "En", "Be", "Cap", "Cau") #(*)
 sp_ord <- c("Clo", "Be", "Cap", "Cau", "En") #(*)
 
@@ -113,7 +115,7 @@ for (i in 1:length(modelled_combs)) {
 }
 saveRDS(modelled_combs, 
        file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
-#modelled_combs <- readRDS(file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
+modelled_combs <- readRDS(file = file.path(dirs$fits, foldname, "modelled_combs.rds"))
 
 all_virus_combs <- as.character(unique(unlist(lapply(lapply(modelled_combs, 
                                                             dimnames), 
@@ -125,7 +127,7 @@ all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")
 
 # 3.2.3 Plot original co-occurrence combinations (Fig 4)
 
-# NOTE: viruses, genotypes and populations are ordered by prevalence in the figures
+# note: viruses, genotypes and populations are ordered by prevalence in the figures
 sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")
 prev_ord_genot <- c(2, 4, 1, 3)
 prev_ord_pop <- c(2, 3, 1, 4)
@@ -175,6 +177,7 @@ for (i in 1:length(modelled_combs)) {
         width = 15, 
         height = 5)
     par(family = "serif", mfrow = c(1,4))
+    
     for (g in prev_ord_genot) {
         tmp12 <- NULL
         tmp11 <- c()
@@ -394,10 +397,6 @@ min(psfrs[,1])
 max(psfrs[,1])
 # all point estimates were below their corresponding upper confidence limits
 all((psfrs[,2] - psfrs[,1]) > 0)
-
-#effectiveSize(mpost$Beta)
-#coda:::gelman.plot(mpost$Beta, ask = TRUE)
-
 
 # 3.4 cooccurrence tests
 library(cooccur)
