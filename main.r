@@ -19,7 +19,8 @@ dirs <- set_dirs(working_dir = working_dir)
 # 1.1b ...or load the processed data
 dat <- trapdata
 str(dat)
-colSums(dat$Y_pooled)
+sum(rowSums(dat$Y_pooled) > 0) / nrow(dat$Y_pooled)
+sum(rowSums(dat$Y_pooled) > 1) / sum(rowSums(dat$Y_pooled) > 0)
 
 # 2 MODEL FITTING
 
@@ -61,14 +62,57 @@ saveRDS(evals,
 foc_study <- "trap17_totsamp2e"
 foldname <- "trap17_totsamp2e+05"
 
+# 3.1.1 explanatory power
+pss <- load_objects_from_dir(path = dirs$fits, 
+                             study = foc_study,
+                             obj_type = "ps")
+
+eval_exp <- list()
+for (i in 1:length(pss)) {
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]], 
+                                              alignPost = FALSE)
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], 
+                                            predY = preds_exp)
+}
+eval_exp_arr <- lapply(eval_exp, simplify2array)
+names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
+eval_exp_means
+
+# 3.1.2 conditional predictions and predictive power
+partition_sp <- 1:ncol(pss[[1]]$Y)
+fit <- 2
+vars <- trap17:::set_vars(study = "trap17",
+                          fit = fit,
+                          sampling = sampling)
+cv_partition <- Hmsc:::createPartition(hM = pss[[2]], 
+                                       nfolds = sampling$nfolds, 
+                                       column = vars$partition)
+
+if (!is.null(vars$covDepXvars)) {
+    cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
+                                                         partition = cv_partition,
+                                                         partition.sp =  partition_sp,
+                                                         expected = expected,
+                                                         alignPost = FALSE)
+} else {
+    cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], 
+                                              partition = cv_partition, 
+                                              partition.sp = partition_sp,
+                                              expected = expected,
+                                              alignPost = TRUE)
+}
+
+
+# 3.1.3 cv-based R2s
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
 #evals <- evals[c(1:5,7)]
-
-# 3.1 cv-based R2s
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
 lapply(tjurs, mean)
 lapply(cors, mean)
+
 
 # 3.2 Co-occurrence combinations
 
