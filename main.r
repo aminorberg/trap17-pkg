@@ -62,11 +62,15 @@ saveRDS(evals,
 foc_study <- "trap17_totsamp2e"
 foldname <- "trap17_totsamp2e+05"
 
-# 3.1.1 explanatory power
-pss <- load_objects_from_dir(path = dirs$fits, 
-                             study = foc_study,
-                             obj_type = "ps")
+# load model variants
+pss <- list()
+for (i in 1:3) {
+    filename <- paste0("ps_", i, ".rds")
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))
+    names(pss)[i] <- filename 
+}
 
+# 3.1.1 explanatory power
 eval_exp <- list()
 for (i in 1:length(pss)) {
     preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]], 
@@ -75,44 +79,39 @@ for (i in 1:length(pss)) {
                                             predY = preds_exp)
 }
 eval_exp_arr <- lapply(eval_exp, simplify2array)
-names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))
+names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
 eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
 colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
 eval_exp_means
 
 # 3.1.2 conditional predictions and predictive power
 partition_sp <- 1:ncol(pss[[1]]$Y)
-fit <- 2
-vars <- trap17:::set_vars(study = "trap17",
-                          fit = fit,
-                          sampling = sampling)
-cv_partition <- Hmsc:::createPartition(hM = pss[[2]], 
+cv_partition <- Hmsc:::createPartition(hM = pss[[fit]], 
                                        nfolds = sampling$nfolds, 
-                                       column = vars$partition)
-
-if (!is.null(vars$covDepXvars)) {
-    cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
-                                                         partition = cv_partition,
-                                                         partition.sp =  partition_sp,
-                                                         expected = expected,
-                                                         alignPost = FALSE)
-} else {
-    cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], 
-                                              partition = cv_partition, 
-                                              partition.sp = partition_sp,
-                                              expected = expected,
-                                              alignPost = TRUE)
+                                       column = "Plant")
+cond_cv_preds <- list() 
+for (fit in 1:3) {
+    if (!is.null(vars$covDepXvars)) {
+        cond_cv_preds[[fit]] <- trap17:::computePredictedValues_modified(hM = pss[[fit]], 
+                                                             partition = cv_partition,
+                                                             partition.sp =  partition_sp,
+                                                             alignPost = FALSE)
+    } else {
+        cond_cv_preds[[fit]] <- Hmsc:::computePredictedValues(hM = pss[[fit]], 
+                                                  partition = cv_partition, 
+                                                  partition.sp = partition_sp,
+                                                  alignPost = TRUE)
+    }
 }
-
 
 # 3.1.3 cv-based R2s
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-#evals <- evals[c(1:5,7)]
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
 lapply(tjurs, mean)
 lapply(cors, mean)
 
+# PÄIVITETTY TÄHÄN ASTI 120620
 
 # 3.2 Co-occurrence combinations
 
