@@ -11,10 +11,9 @@ Description: Toolbox for JSDM modelling the trap17 virus data with HMSC and post
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0.9000
 Depends: R (>= 3.0.2), Hmsc (>= 3.0-4)
 Imports: dummies, devtools, dplyr 
 Remotes: hmsc-r/HMSC
 Suggests: 
-    testthat (>= 2.1.0),
     circleplot

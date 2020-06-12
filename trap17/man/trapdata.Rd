@@ -4,7 +4,8 @@
 \name{trapdata}
 \alias{trapdata}
 \title{TRAP17 DATA SET}
-\format{A list of data frames, character vectors and formulas.
+\format{
+A list of data frames, character vectors and formulas.
 \describe{
   \item{Y}{Virus occurrences.}
   \item{Y_pooled}{Virus occurrences, pooled over the two sampling time points during summer 2017.}
@@ -14,7 +15,8 @@
   \item{xvars}{Names of the independent variables.}
   \item{pool_}{Formulas for pooling the independent variables.}
   \item{poolvar}{The unit over which variables were grouped.}
-}}
+}
+}
 \usage{
 trapdata
 }

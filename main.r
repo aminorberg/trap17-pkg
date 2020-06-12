@@ -2,6 +2,7 @@
 # 1 DATA: importation (and processing)
 rm(list = ls(all = TRUE))
 gc()
+
 # define working directory
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
 setwd(working_dir)
