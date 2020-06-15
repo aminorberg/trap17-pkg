@@ -1,206 +1,3 @@
-newIDs
-load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/PREDICTIONS/birds/bc2_PAs_1_150.RData")
-m<-2
-j<-1
-require(BayesComm)
-bc<-bc2
-?predict.bc
-?predict.BC
-?predict
-require(nlme)#
-require(MASS)
-?glmmPQL
-FD2 <- paste(WD,"FITS2/",sep="")
-require(e1071)
-?svm
-library(sppairs)#
-# then import a site by species matrix for example purposes#
-library(cooccur)#
-data(beetles)#
-# remove rare species (<10% sites)#
-dataset <-clean.dataset(beetles, cutoff.min=0.1)
-or.symmetric(dataset[, 1:2]) # Symmetric odds ratio = 28.89#
-or.asymmetric(dataset[, 1:2]) # Asymmetric odds ratio = 11.45#
-mutual.information(dataset[, 1:2]) # MI = 0.235#
-cor(dataset[, 1], dataset[, 2]) # Pearson's correlation (from base R) = 0.62
-# default is to calculate the symmetric odds ratio#
-result <-spaa(dataset)
-# create grouping variable for example purposes ONLY#
-groups <-as.factor(rep(c(1:10), length.out=dim(beetles)[1])) #
-# alternatively, return some raw coefficients from mixed models, rather than odds ratios#
-result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)
-result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)[, 1:3]
-plot.spaa(result)
-graph.data <- graph_from_data_frame(result)
-plot(graph.data) # see ?igraph.plotting for more options
-result
-graph.data
-?graph_from_data_frame
-str(nmds_m)
-for (e in 2:length(ENS)) {#
-	for (p in 1:length(PRV)) {#
-		opts<-list(modelEnsemble=ENS[[e]],prevaleceThreshold=PRV[[p]])		#
-		for (sz in 1:2) {#
-			# modify predictions to probs, sp richness, beta indices	#
-			for (d in 1:length(Sets)) {#
-				set_no <- Sets[d]#
-				source(readdata)#
-				source(paste(modpredsFolder,"sp_occ_probs.r",sep="/"))#
-			}#
-			for (d in 1:length(Sets)) {#
-				set_no <- Sets[d]#
-				source(readdata)#
-				source(paste(modpredsFolder,"sp_rich_site.r",sep="/"))#
-			}#
-			for (d in 1:length(Sets)) {#
-				set_no <- Sets[d]#
-				source(readdata)#
-				source(paste(modpredsFolder,"beta_inds.r",sep="/"))#
-			}#
-		}#
-	}#
-}
-require(doParallel)
-require(doMC)
-?doParallel
-filebody<-paste(RDfinal,dataN[sz],"/meta_analysis/PMS",sep="")
-?axis
-load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/RESULTS2/birds/sp_occ_probs_150.RData")
-ls()
-str(sp_occ_probs)
-50*15
-0.7*0.3
-sqrt(0.7*0.3)
-30/75
-5/12
-require(gjam)
-?gjam
-.\Localadmin_anorberg
-(1000/30)*9
-}
-library('MASS')
-a <- 5
-require(Hmsc)
-Hmsc::Hmsc
-?structure
-structure(1:6, dim = 2:3)
-?class
-?Hmsc
-Hmsc::Hmsc
-Hmsc::Hmsc::Hmsc
-Hmsc:::Hmsc
-c <- structure(list("a"=1, "b"=2), class="myclass")
-c
-library(Hmsc)
-?Hmsc
-Hmsc::computeDataParameters
-rLs
-library("sdmCom")
-?sdmCom
-?get_os
-get_os <- function() {#
-  if (.Platform$OS.type == "windows") { #
-    "win"#
-  } else if (Sys.info()["sysname"] == "Darwin") {#
-    "osx" #
-  } else if (.Platform$OS.type == "unix") { #
-    "unix"#
-  } else {#
-    stop("Unknown OS")#
-  }#
-}
-get_os()
-os <- get_os()
-os
-library("sdmCom")
-?get_os
-?sdmCom
-library("sdmCom")
-?sdmCom
-?get_os
-library("sdmCom")
-?get_os
-?sdmCom
-#' Identify your operating system#
-#'#
-#' @return Your operating system, either OSX, Unix or Windows#
-#' @examples#
-#' os <- get_os()#
-#' os#
-#
-get_os <- function() {#
-  if (.Platform$OS.type == "windows") { #
-    "win"#
-  } else if (Sys.info()["sysname"] == "Darwin") {#
-    "osx" #
-  } else if (.Platform$OS.type == "unix") { #
-    "unix"#
-  } else {#
-    stop("Unknown OS")#
-  }#
-}#
-#
-roxygen2::roxygenise()
-?roxygenise
-roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
-roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
-?sdmCom
-library("sdmCom")
-?sdmCom
-os <- get_os()#
-os
-?sample
-y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
-y
-y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
-common_sp <- function(y, prevalence_threshold = 0.1) {#
-    com_sp <- which((colSums(y)/nrow(y)) >= prevalence_threshold)#
-    return(com_sp)#
-#
-}
-y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
-y_subset
-y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
-y_subset <- y[,y_subset_inds]
-y_subset
-y_subset_inds
-y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
-y_subset <- y[,y_subset_inds]
-y_subset
-set.seed(7)
-y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
-y_subset <- y[,y_subset_inds]
-y_subset
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
-y_subset <- y[,y_subset_inds]
-y_subset
-y_subset_inds
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.6)
-y_subset <- y[,y_subset_inds]
-y_subset
-y_subset_inds
-y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.4)
-y_subset <- y[,y_subset_inds]
-y_subset
-roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
-library("sdmCom")
-?sdmCom
-roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/pkg/sdmCom")
-q()
-library('caret')
-?train
-library(mlbench)#
-data(BostonHousing)
-library(mlbench)
-install.packages("mlbench")
-library(mlbench)#
-data(BostonHousing)
-lmFit <- train(medv ~ . + rm:lstat,#
-               data = BostonHousing,#
-               method = "lm")
 library(rpart)
 rpartFit <- train(medv ~ .,#
                   data = BostonHousing,#
@@ -353,49 +150,274 @@ library("roxygen2")
 quartz()
 par(family = "serif", mar = c(9, 2, 5, 1))
 rm(list = ls(all = TRUE))#
-gc()#
-#
+gc()
 # define working directory#
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
 setwd(working_dir)#
-library("trap17")#
-#
+library("trap17")
 dirs <- set_dirs(working_dir = working_dir)
-rm(list = ls(all = TRUE))#
-gc()#
-#
-# define working directory#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)
-rm(list = ls(all = TRUE)) #
-gc()#
-#install.packages("devtools")#
-#install_github("klutometis/roxygen")#
-#
-library("devtools")#
-library("roxygen2")#
-#
-root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
-setwd(pkg_dir)#
-document()#
-#
-### install and load#
-setwd(working_dir)#
-install("trap17")
-library("trap17")#
-#
-dirs <- set_dirs(working_dir = working_dir)
-rowSums(dat$Y_pooled)
-dat <- trapdata
-rowSums(dat$Y_pooled)
-sum(rowSums(dat$Y_pooled) > 0)
-sum(rowSums(dat$Y_pooled) > 0)/nrow(dat$Y_pooled)
-sum(rowSums(dat$Y_pooled) > 1)/nrow(dat$Y_pooled)
-sum(rowSums(dat$Y_pooled) > 0)
+dat <- trapdata#
+str(dat)#
+sum(rowSums(dat$Y_pooled) > 0) / nrow(dat$Y_pooled)#
 sum(rowSums(dat$Y_pooled) > 1) / sum(rowSums(dat$Y_pooled) > 0)
-sum(rowSums(dat$Y_pooled) > 1)
-sum(rowSums(dat$Y_pooled) > 1) / nrow(dat$Y_pooled)
-sum(rowSums(dat$Y_pooled) > 0) / nrow(dat$Y_pooled)
-nrow(dat$Y_pooled)
+foc_study <- "trap17_totsamp2e"#
+foldname <- "trap17_totsamp2e+05"
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+evals
+pss <- load_objects_from_dir(path = dirs$fits, #
+                             study = foc_study,#
+                             obj_type = "ps")
+preds_exp <- list()#
+eval_exp <- list()
+preds_exp <- list()#
+eval_exp <- list()
+for (i in 1:length(pss)) {#
+    preds_exp[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]], #
+                                              alignPost = FALSE)#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], predY = preds_exp)#
+#
+}
+preds_exp <- list()#
+eval_exp <- list()#
+for (i in 1:length(pss)) {#
+    preds_exp[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]], #
+                                              alignPost = FALSE)#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
+                                            predY = preds_exp[[i]])#
+#
+}
+eval_exp
+lapply(eval_exp, mean)
+lapply(eval_exp, apply, mean)
+lapply(eval_exp, lapply, mean)
+unlist(lapply(eval_exp, lapply, mean))
+simplify2array(lapply(eval_exp, lapply, mean))
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
+eval_exp_means
+eval_exp
+simplify2array(eval_exp)
+eval_exp_means <- lapply(eval_exp, lapply, simplify2array)
+eval_exp_means
+eval_exp_means <- lapply(eval_exp, simplify2array)
+eval_exp_means
+eval_exp_arr <- lapply(eval_exp, simplify2array)
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
+eval_exp_arr
+names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))
+eval_exp_arr <- lapply(eval_exp, simplify2array)#
+names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))#
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
+eval_exp_means
+eval_exp_arr[[1]]
+eval_exp_arr[[2]]
+eval_exp_arr[[3]]
+eval_exp_arr[[4]]
+eval_exp_arr[[5]]
+eval_exp_arr[[6]]
+eval_exp_arr[[7]]
+eval_exp_means
+ncol(pss[[1]]$Y)
+partition.sp <- 1:ncol(pss[[1]]$Y)
+sampling <- sampling_settings(totsamp = 200000,#
+                             trans = 100000,#
+                             thn = 100,#
+                             nchains = 2,#
+                             nfolds = 10)
+foldname <- create_name(study = "trap17",#
+                        totsamp = sampling$totsamp,#
+                        nfolds = sampling$nfolds, #
+                        type = "fold")
+sampling$nfolds
+fit
+fit <- 2
+sampling
+fit <- 2#
+vars <- trap17:::set_vars(study = "trap17",#
+                          fit = fit,#
+                          sampling = sampling)
+vars
+cv_partition <- Hmsc:::createPartition(hM = pss[[2]], #
+                                       nfolds = sampling$nfolds, #
+                                       column = vars$partition)
+cv_partition
+(!is.null(vars$covDepXvars))
+cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
+                                              partition = cv_partition, #
+                                              expected = expected,#
+                                              alignPost = TRUE)
+?Hmsc:::computePredictedValues
+cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
+                                              partition = cv_partition, #
+                                              partition.sp =  partition_sp,#
+                                              expected = expected,#
+                                              alignPost = TRUE)
+eval_exp_means
+pss
+pss[[4]]
+names(pss[[4]])
+names(pss[[5]])
+ps <- pss[[5]]
+names(ps)
+ps$XFormula
+ps$rL
+ps <- pss[[6]]
+ps$rL
+ps <- pss[[7]]
+ps$rL
+ps
+ps <- pss[[5]]#
+ps#
+ps$rL
+ps <- pss[[4]]#
+ps#
+ps$rL
+ps <- pss[[6]]
+ps#
+ps$rL
+ps <- pss[[7]]
+ps <- pss[[7]]#
+ps#
+ps$rL
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+evals
+evals <- evals[c(4:5,7)]
+tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
+cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
+lapply(tjurs, mean)
+lapply(cors, mean)
+names(evals)
+names(evals) <- c("ps1","ps2","ps3")
+file.path(dirs$fits, foldname, "evals.rds")
+saveRDS(evals, #
+        file = file.path(dirs$fits, foldname, "evals.rds"))
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
+cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
+lapply(tjurs, mean)#
+lapply(cors, mean)
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+evals
+evals <- evals[c(5:4,7)]
+names(evals) <- c("ps1","ps2","ps3")
+saveRDS(evals, #
+        file = file.path(dirs$fits, foldname, "evals.rds"))
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))#
+tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
+cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
+lapply(tjurs, mean)#
+lapply(cors, mean)
+dirs$fits
+foc_study
+pss <- load_objects_from_dir(path = dirs$fits, #
+                             study = foc_study,#
+                             obj_type = "ps")
+pss
+pss <- pss[c(5:4,7)]
+pss
+names(pss)
+names(pss) <- c("trap17_totsamp2e+05_ps_1.rds","trap17_totsamp2e+05_ps_2.rds","trap17_totsamp2e+05_ps_3.rds")
+pss
+loadRDS
+dirs
+i<-1
+file.path(dirs$fits, foldname, "ps_", i, ".rds")
+file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))
+pss <- list()
+for (i in 1:3) {#
+    pss[[i]] <- loadRDS(file = file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))) #
+}
+readRDS
+pss <- list()#
+for (i in 1:3) {#
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))) #
+}
+pss
+paste0("ps_", i, ".rds")
+filenames <- paste0("ps_", i, ".rds")
+pss <- list()#
+for (i in 1:3) {#
+    filenames <- paste0("ps_", i, ".rds")#
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filenames))#
+    names(pss)[i] <- filename #
+}
+# load model variants#
+pss <- list()#
+for (i in 1:3) {#
+    filename <- paste0("ps_", i, ".rds")#
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
+    names(pss)[i] <- filename #
+}
+pss
+eval_exp <- list()#
+for (i in 1:length(pss)) {#
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]], #
+                                              alignPost = FALSE)#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
+                                            predY = preds_exp)#
+}
+eval_exp_arr <- lapply(eval_exp, simplify2array)#
+names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))#
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
+eval_exp_means
+eval_exp_arr <- lapply(eval_exp, simplify2array)
+ncol(eval_exp_means)
+eval_exp_arr <- lapply(eval_exp, simplify2array)
+eval_exp_arr
+names(eval_exp_arr)
+length(eval_exp_arr)
+names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
+names(eval_exp_arr)
+eval_exp_arr <- lapply(eval_exp, simplify2array)
+names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
+eval_exp_means
+expected
+?computePredictedValues
+partition_sp <- 1:ncol(pss[[1]]$Y)#
+fit <- 3
+vars <- trap17:::set_vars(study = "trap17",#
+                          fit = fit,#
+                          sampling = sampling)#
+cv_partition <- Hmsc:::createPartition(hM = pss[[2]], #
+                                       nfolds = sampling$nfolds, #
+                                       column = vars$partition)
+vars$partition
+cv_partition <- Hmsc:::createPartition(hM = pss[[fit]], #
+                                       nfolds = sampling$nfolds, #
+                                       column = "Plant")
+if (!is.null(vars$covDepXvars)) {#
+    cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
+                                                         partition = cv_partition,#
+                                                         partition.sp =  partition_sp,#
+                                                         alignPost = FALSE)#
+} else {#
+    cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
+                                              partition = cv_partition, #
+                                              partition.sp = partition_sp,#
+                                              alignPost = TRUE)#
+}
+partition_sp
+?computePredictedValues
+partition_sp <- 1:ncol(pss[[1]]$Y)#
+cv_partition <- Hmsc:::createPartition(hM = pss[[fit]], #
+                                       nfolds = sampling$nfolds, #
+                                       column = "Plant")
+cond_cv_preds <- list()
+cond_cv_preds
+for (fit in 1:3) {#
+    if (!is.null(vars$covDepXvars)) {#
+        cond_cv_preds[[fit]] <- trap17:::computePredictedValues_modified(hM = pss[[fit]], #
+                                                             partition = cv_partition,#
+                                                             partition.sp =  partition_sp,#
+                                                             alignPost = FALSE)#
+    } else {#
+        cond_cv_preds[[fit]] <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
+                                                  partition = cv_partition, #
+                                                  partition.sp = partition_sp,#
+                                                  alignPost = TRUE)#
+    }#
+}

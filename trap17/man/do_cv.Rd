@@ -11,7 +11,7 @@ do_cv(
   vars,
   higher_eval_levels = TRUE,
   save_cv = TRUE,
-  expected = FALSE
+  expected = TRUE
 )
 }
 \arguments{

@@ -12,7 +12,7 @@ sample_Hmsc <- function(dat = dat,
                              vars = vars)
 
     foldname <- create_name(study = vars$study,
-                            totsamp = vars$totsamp,
+                            totsamp = vars$sampling$totsamp,
                             nfolds = vars$nfolds, 
                             type = "fold")
     output_dir <- file.path(dirs$fits, foldname)
@@ -37,19 +37,17 @@ sample_Hmsc <- function(dat = dat,
         post_align <- FALSE
     }
 
-    print(paste("Model fitted for", vars$study))
-    print(paste("Model fit type", vars$fit))
+    print(paste("Model variant", vars$fit))
     ps <- NULL
     ps <- Hmsc:::sampleMcmc(m1, 
-                            samples = vars$samps,
-                            transient = vars$trans,
-                            thin = vars$thn,
-                            nChains = vars$nchains,
-                            nParallel = vars$nchains,
+                            samples = vars$sampling$samps,
+                            transient = vars$sampling$trans,
+                            thin = vars$sampling$thn,
+                            nChains = vars$sampling$nchains,
+                            nParallel = vars$sampling$nchains,
                             alignPost = post_align)
 
-    filename <- paste("ps", vars$fit, sep = "_")
-    filename <- paste0(filename, ".rds")
+    filename <- paste0("ps_", vars$fit, ".rds")
     saveRDS(ps, file = file.path(output_dir, filename)) 
     if (return_ps) {
         return(ps)

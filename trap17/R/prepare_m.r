@@ -12,7 +12,7 @@ prepare_m <- function(vars,
     if (all(vars$xvars == "(Intercept)")) {
         X <- matrix(1, ncol = 1, nrow = nrow(dat$X_pooled))
     } else {
-        X <- dat$X_pooled[,vars$xvars]
+        X <- dat$X_pooled[, vars$xvars]
         Xorig_sel <- X
 
         if (any(!is.na(vars$dumvars))) {
@@ -39,13 +39,8 @@ prepare_m <- function(vars,
             names(X) <- "foo"
         }
     }
-    xForm <- switch(vars$fit, 
-                    "1" = formula(~1), 
-                    "2" = formula(~1),
-                    "3" = formula(~.),
-                    "4" = formula(~.),
-                    "5" = formula(~.),
-                    "6" = formula(~.))
+
+    xForm <- formula(~.)
 
     rLs <- NULL
     if (all(is.na(vars$pivars))) {

@@ -36,12 +36,8 @@ set_vars <- function(study = "trap17",
 
     vars$study <- study
     vars$fit <- fit
-    vars$totsamp <- sampling$totsamp
-    vars$trans <- sampling$trans
-    vars$thn <- sampling$thn
-    vars$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
-    vars$nchains <- sampling$nchains
-    vars$nfolds <- sampling$nfolds
+    vars$sampling <- sampling
+    vars$sampling$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
 
     vars$yvars <- c("Clo",
                     "En", 
@@ -50,61 +46,32 @@ set_vars <- function(study = "trap17",
                     "Cau")
 
     vars$xvars <- switch(fit, 
-                         "1" = "(Intercept)", 
-                         "2" = "(Intercept)", 
-                         "3" = c("Population", 
+                         "1" = c("Population",
+                                 "Herbivory",
+                                 "Plant.area"),
+                         "2" = c("Population", 
                                  "Genotype",
                                  "Herbivory",
                                  "Plant.area"),
-                         "4" = c("Population", 
-                                 "Genotype",
-                                 "Herbivory",
-                                 "Plant.area"),
-                         "5" = c("Population",
-                                 "Herbivory",
-                                 "Plant.area"),
-                         "6" = c("Population",
+                         "3" = c("Population",
                                  "Genotype",
                                  "Herbivory",
                                  "Plant.area"))
-    vars$boolvars <- switch(fit, 
-                             "1" = NA, 
-                             "2" = NA, 
-                             "3" = "Herbivory",
-                             "4" = "Herbivory",
-                             "5" = "Herbivory",
-                             "6" = "Herbivory")
+    vars$boolvars <- "Herbivory"
     vars$dumvars <- switch(fit, 
-                           "1" = NA, 
-                           "2" = NA, 
+                           "1" = "Population",
+                           "2" = c("Population", 
+                                   "Genotype"),
                            "3" = c("Population", 
-                                   "Genotype"),
-                           "4" = c("Population", 
-                                   "Genotype"),
-                           "5" = "Population",
-                           "6" = c("Population", 
                                    "Genotype"))
                                        
-    vars$pivars <- switch(fit, 
-                          "1" = "Plant", 
-                          "2" = "Plant", 
-                          "3" = "Plant", 
-                          "4" = "Plant", 
-                          "5" = "Plant",
-                          "6" = "Plant")
-                          
+    vars$pivars <- "Plant"
     vars$partition <- "Plant"
     
-    vars$random <- switch(fit, 
-                          "1" = FALSE, 
-                          "2" = TRUE, 
-                          "3" = FALSE, 
-                          "4" = TRUE,
-                          "5" = TRUE,
-                          "6" = TRUE)
+    vars$random <- TRUE
 
     vars$covDepXvars <- NULL
-    if (fit == "6") {    
+    if (fit == "3") {    
         vars$covDepXvars <- "Genotype"
         vars$covDepLevel <- 1
     }

@@ -9,14 +9,14 @@ do_cv <- function(ps,
                   vars,
                   higher_eval_levels = TRUE, 
                   save_cv = TRUE,
-                  expected = FALSE)
+                  expected = TRUE)
 {
 
     res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),
                      class = "cvresults")
   
     cv_partition <- Hmsc:::createPartition(hM = ps, 
-                                           nfolds = vars$nfolds, 
+                                           nfolds = vars$sampling$nfolds, 
                                            column = vars$partition)
 
     if (!is.null(vars$covDepXvars)) {
@@ -32,19 +32,18 @@ do_cv <- function(ps,
     }
 
     if (save_cv) {
-    
         foldname <- create_name(study = vars$study,
-                                totsamp = vars$totsamp,
-                                nfolds = vars$nfolds, 
-                                type = "fold")
+                            totsamp = vars$sampling$totsamp,
+                            nfolds = vars$sampling$nfolds, 
+                            type = "fold")
 
         output_dir <- file.path(dirs$fits, foldname)
         if (!dir.exists(output_dir)) {
             dir.create(output_dir)
         }
 
-        cv_filename <- create_name(totsamp = vars$totsamp,
-                                   nfolds = vars$nfolds, 
+        cv_filename <- create_name(totsamp = vars$sampling$totsamp,
+                                   nfolds = vars$sampling$nfolds, 
                                    type = "cv")
         cv_filename <- paste(cv_filename, "ps", vars$fit, sep = "_")
         saveRDS(cv_preds, file = file.path(output_dir, paste0(cv_filename, ".rds")))
@@ -53,10 +52,10 @@ do_cv <- function(ps,
 
     if (higher_eval_levels) {
         form <- formula(cbind(Clo, 
-                              En, 
                               Be, 
-                              Pl, 
-                              Ca) ~ Population + Genotype)
+                              Cap, 
+                              Cau, 
+                              En) ~ Population + Genotype)
 
         pooled_occ_true <- as.matrix(aggregate(formula = form, 
                                                data = cbind(dat$X_pooled, dat$Y_pooled), 
@@ -65,7 +64,7 @@ do_cv <- function(ps,
                         nrow = dim(cv_preds)[3],
                         ncol = ncol(ps$Y))
         for (j in 1:dim(cv_preds)[3]) {
-            tmp <- cv_preds[,,j]
+            tmp <- cv_preds[, , j]
             colnames(tmp) <- colnames(ps$Y)
             tmp <- cbind(tmp, dat$X_pooled)
             preds <- as.matrix(aggregate(formula = form, 
