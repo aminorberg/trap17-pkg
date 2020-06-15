@@ -1,144 +1,3 @@
-library(rpart)
-rpartFit <- train(medv ~ .,#
-                  data = BostonHousing,#
-                  method = "rpart",#
-                  tuneLength = 9)
-setwd(".")
-getwd()
-file.exists(".")
-str(fits)
-str(preds$predictions$bcs$bc1)
-??caret
-citation(caret)
-library('SSDM')#
-library('zoon')#
-library('sdm')#
-library('caret')
-citation(caret)
-library('caret')
-citation(caret)
-citation("caret"")
-citation("caret")
-citation('SSDM')
-??cssdm
-??SSDM
-??sdm
-??caret
-??zoon
-install.packages('biomod2')
-citation('biomod2')
-citation('sdm')
-citation('zoon')
-library('sdmCom')
-??sdmCom
-??caret
-?train
-names(getModelInfo())
-trellis.par.set(caretTheme())
-sdm::sdm
-sdm:::sdm
-showMethods("sdm")
-??SSDM
-??zoon
-library('zoon')
-?workflow
-zoon::workflow
-zoon:::workflow
-GetModuleList()
-?BayesComm
-library(BayesComm)
-?BayesComm
-library(gbm)
-?gbm
-library(mgcv)
-?mgcv
-200/3
-830/5
-3*(830/5)
-500/6
-850/6
-171+187
-citation(mvpart)
-citation("mvpart")
-citation("dismo")
-citation("boral")
-citation()
-install.packages(c("Hmsc"))
-library(Hmsc)
-m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2)
-rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))
-rL
-rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))#
-#
-studyDesign = data.frame(sample = as.factor(1:50), plot = as.factor(sample(1:20,50,replace=TRUE)))#
-rL1 = HmscRandomLevel(units=TD$studyDesign$plot)#
-rL2 = HmscRandomLevel(units=TD$studyDesign$sample)#
-#
-m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2,studyDesign=studyDesign,ranLevels=list("sample"=rL,"plot"=rL2))
-M
-m
-tmp <- sampleMcmc(m, samples=100)
-library(devtools)
-install_github("hmsc-r/HMSC", #
-                 build_opts = c("--no-resave-data", #
-                                "--no-manual"))
-library(Hmsc)#
-studyDesign <- data.frame(sample = as.factor(1:50),#
-                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
-rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
-xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
-rL1 <- HmscRandomLevel(xData = xData)#
-m <- Hmsc(Y = TD$Y,XData = TD$X,#
-          XFormula = ~x1+x2,#
-          studyDesign = studyDesign,#
-          ranLevels = list("sample" = rL1, "plot" = rL2))
-ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
-install.packages("Hmsc")
-library(Hmsc)
-studyDesign <- data.frame(sample = as.factor(1:50),#
-                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
-rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
-xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
-rL1 <- HmscRandomLevel(xData = xData)#
-m <- Hmsc(Y = TD$Y,XData = TD$X,#
-          XFormula = ~x1+x2,#
-          studyDesign = studyDesign,#
-          ranLevels = list("sample" = rL1, "plot" = rL2))#
-ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
-library(devtools)
-install_github("hmsc-r/HMSC", #
-                build_opts = c("--no-resave-data", #
-                               "--no-manual"))
-library(Hmsc)
-studyDesign <- data.frame(sample = as.factor(1:50),#
-                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
-rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
-xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
-rL1 <- HmscRandomLevel(xData = xData)#
-m <- Hmsc(Y = TD$Y,XData = TD$X,#
-          XFormula = ~x1+x2,#
-          studyDesign = studyDesign,#
-          ranLevels = list("sample" = rL1, "plot" = rL2))#
-ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
-ps <- sampleMcmc(m, samples = 100, alignPost=FALSE)
-m
-sampling_settings <- list(totsamp = 100000, #
-                          trans = 50000, #
-                          thn = 10, #
-                          nFolds = 5)
-m
-m$rL
-m$rL$sample
-str(m$rL$sample)
-vars$samps
-library("trap17")
-dat <- trapdata#
-str(dat)
-80*4
-library(Hmsc)
-?Hmsc
-names(pss)
-library(igraphdata)
 data(yeast)
 yes <- data(yeast)
 yes
@@ -150,206 +9,23 @@ library("roxygen2")
 quartz()
 par(family = "serif", mar = c(9, 2, 5, 1))
 rm(list = ls(all = TRUE))#
-gc()
+gc()#
+#
 # define working directory#
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
 setwd(working_dir)#
-library("trap17")
+library("trap17")#
+#
 dirs <- set_dirs(working_dir = working_dir)
-dat <- trapdata#
-str(dat)#
-sum(rowSums(dat$Y_pooled) > 0) / nrow(dat$Y_pooled)#
-sum(rowSums(dat$Y_pooled) > 1) / sum(rowSums(dat$Y_pooled) > 0)
+dat <- trapdata
 foc_study <- "trap17_totsamp2e"#
 foldname <- "trap17_totsamp2e+05"
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-evals
-pss <- load_objects_from_dir(path = dirs$fits, #
-                             study = foc_study,#
-                             obj_type = "ps")
-preds_exp <- list()#
-eval_exp <- list()
-preds_exp <- list()#
-eval_exp <- list()
-for (i in 1:length(pss)) {#
-    preds_exp[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]], #
-                                              alignPost = FALSE)#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], predY = preds_exp)#
-#
-}
-preds_exp <- list()#
-eval_exp <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]], #
-                                              alignPost = FALSE)#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp[[i]])#
-#
-}
-eval_exp
-lapply(eval_exp, mean)
-lapply(eval_exp, apply, mean)
-lapply(eval_exp, lapply, mean)
-unlist(lapply(eval_exp, lapply, mean))
-simplify2array(lapply(eval_exp, lapply, mean))
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
-eval_exp_means
-eval_exp
-simplify2array(eval_exp)
-eval_exp_means <- lapply(eval_exp, lapply, simplify2array)
-eval_exp_means
-eval_exp_means <- lapply(eval_exp, simplify2array)
-eval_exp_means
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
-eval_exp_arr
-names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))
-eval_exp_arr <- lapply(eval_exp, simplify2array)#
-names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means
-eval_exp_arr[[1]]
-eval_exp_arr[[2]]
-eval_exp_arr[[3]]
-eval_exp_arr[[4]]
-eval_exp_arr[[5]]
-eval_exp_arr[[6]]
-eval_exp_arr[[7]]
-eval_exp_means
-ncol(pss[[1]]$Y)
-partition.sp <- 1:ncol(pss[[1]]$Y)
-sampling <- sampling_settings(totsamp = 200000,#
-                             trans = 100000,#
-                             thn = 100,#
-                             nchains = 2,#
-                             nfolds = 10)
-foldname <- create_name(study = "trap17",#
-                        totsamp = sampling$totsamp,#
-                        nfolds = sampling$nfolds, #
-                        type = "fold")
-sampling$nfolds
-fit
-fit <- 2
-sampling
-fit <- 2#
-vars <- trap17:::set_vars(study = "trap17",#
-                          fit = fit,#
-                          sampling = sampling)
-vars
-cv_partition <- Hmsc:::createPartition(hM = pss[[2]], #
-                                       nfolds = sampling$nfolds, #
-                                       column = vars$partition)
-cv_partition
-(!is.null(vars$covDepXvars))
-cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
-                                              partition = cv_partition, #
-                                              expected = expected,#
-                                              alignPost = TRUE)
-?Hmsc:::computePredictedValues
-cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
-                                              partition = cv_partition, #
-                                              partition.sp =  partition_sp,#
-                                              expected = expected,#
-                                              alignPost = TRUE)
-eval_exp_means
-pss
-pss[[4]]
-names(pss[[4]])
-names(pss[[5]])
-ps <- pss[[5]]
-names(ps)
-ps$XFormula
-ps$rL
-ps <- pss[[6]]
-ps$rL
-ps <- pss[[7]]
-ps$rL
-ps
-ps <- pss[[5]]#
-ps#
-ps$rL
-ps <- pss[[4]]#
-ps#
-ps$rL
-ps <- pss[[6]]
-ps#
-ps$rL
-ps <- pss[[7]]
-ps <- pss[[7]]#
-ps#
-ps$rL
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-evals
-evals <- evals[c(4:5,7)]
-tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
-cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
-lapply(tjurs, mean)
-lapply(cors, mean)
-names(evals)
-names(evals) <- c("ps1","ps2","ps3")
-file.path(dirs$fits, foldname, "evals.rds")
-saveRDS(evals, #
-        file = file.path(dirs$fits, foldname, "evals.rds"))
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
-cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
-lapply(tjurs, mean)#
-lapply(cors, mean)
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-evals
-evals <- evals[c(5:4,7)]
-names(evals) <- c("ps1","ps2","ps3")
-saveRDS(evals, #
-        file = file.path(dirs$fits, foldname, "evals.rds"))
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))#
-tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
-cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
-lapply(tjurs, mean)#
-lapply(cors, mean)
-dirs$fits
-foc_study
-pss <- load_objects_from_dir(path = dirs$fits, #
-                             study = foc_study,#
-                             obj_type = "ps")
-pss
-pss <- pss[c(5:4,7)]
-pss
-names(pss)
-names(pss) <- c("trap17_totsamp2e+05_ps_1.rds","trap17_totsamp2e+05_ps_2.rds","trap17_totsamp2e+05_ps_3.rds")
-pss
-loadRDS
-dirs
-i<-1
-file.path(dirs$fits, foldname, "ps_", i, ".rds")
-file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))
-pss <- list()
-for (i in 1:3) {#
-    pss[[i]] <- loadRDS(file = file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))) #
-}
-readRDS
-pss <- list()#
-for (i in 1:3) {#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, paste0("ps_", i, ".rds"))) #
-}
-pss
-paste0("ps_", i, ".rds")
-filenames <- paste0("ps_", i, ".rds")
-pss <- list()#
-for (i in 1:3) {#
-    filenames <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filenames))#
-    names(pss)[i] <- filename #
-}
-# load model variants#
 pss <- list()#
 for (i in 1:3) {#
     filename <- paste0("ps_", i, ".rds")#
     pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
     names(pss)[i] <- filename #
 }
-pss
 eval_exp <- list()#
 for (i in 1:length(pss)) {#
     preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]], #
@@ -358,66 +34,856 @@ for (i in 1:length(pss)) {#
                                             predY = preds_exp)#
 }
 eval_exp_arr <- lapply(eval_exp, simplify2array)#
-names(eval_exp_arr) <- paste0("ps", 1:ncol(eval_exp_means))#
+names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
 eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
 colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
 eval_exp_means
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-ncol(eval_exp_means)
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-eval_exp_arr
-names(eval_exp_arr)
-length(eval_exp_arr)
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
-names(eval_exp_arr)
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
+evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
+cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
+lapply(tjurs, mean)#
+lapply(cors, mean)
+whichPs <- 3#
+ps <- pss[[whichPs]]
+library(wesanderson)#
+wesandcols <- wes_palette("Cavalcanti1")[5:1]
+pss
+sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
+    selnames <- c("Intercept", #
+                  "Plant.area", #
+                  "Population", #
+                  "Genotype", #
+                  "Herbivory")
+if (whichPs == 1) {#
+        selnames <- selnames[-which(selnames == "Genotype")]#
+        sel <- c(1, 2, rep(3, 3), 4)#
+    }
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                      group = sel, #
+                                      groupnames = selnames)
+whichPs <- 2
+ps <- pss[[whichPs]]
+library(wesanderson)#
+wesandcols <- wes_palette("Cavalcanti1")[5:1]
+head(ps$X)
+sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
+selnames <- c("Intercept", #
+              "Plant.area", #
+              "Population", #
+              "Genotype", #
+              "Herbivory")#
+}#
+if (whichPs == 1) {#
+    selnames <- selnames[-which(selnames == "Genotype")]#
+    sel <- c(1, 2, rep(3, 3), 4)#
+}#
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                  group = sel, #
+                                  groupnames = selnames)
+sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
+selnames <- c("Intercept", #
+              "Plant.area", #
+              "Population", #
+              "Genotype", #
+              "Herbivory")
+if (whichPs == 1) {#
+    selnames <- selnames[-which(selnames == "Genotype")]#
+    sel <- c(1, 2, rep(3, 3), 4)#
+}#
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                  group = sel, #
+                                  groupnames = selnames)
+vp
+rowMeans(vp)
+rowMeans(vp$vals)
+toPlot <- vp$vals[-1,]#
+toPlot <- toPlot[nrow(toPlot):1,]#
+toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
+cov_order <- switch(as.character(whichPs), #
+                    "1" = c("Population", #
+                            "Plant.area", #
+                            "Herbivory", #
+                            "Random: Plant"), #
+                    "2" = c("Genotype", #
+                            "Population", #
+                            "Plant.area", #
+                            "Herbivory", #
+                            "Random: Plant"), #
+                    "3" = c("Genotype", #
+                            "Population", #
+                            "Plant.area", #
+                            "Herbivory", #
+                            "Random: Plant"))
+toPlot <- toPlot[cov_order, ]
+toPlot
+round(rowMeans(toPlot*100), 2)
+wesandcols_sel <- wesandcols[1:nrow(toPlot)]
+par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
+    barplot(toPlot, #
+            col = wesandcols_sel,#
+            xpd = TRUE,#
+            las = 2)#
+    legend(x = 6.25, y = 1, #
+           legend = rownames(toPlot)[nrow(toPlot):1],#
+           fill = wesandcols_sel[length(wesandcols_sel):1])
+library(circleplot)
+whichPs
 eval_exp_means
-expected
-?computePredictedValues
-partition_sp <- 1:ncol(pss[[1]]$Y)#
-fit <- 3
-vars <- trap17:::set_vars(study = "trap17",#
-                          fit = fit,#
-                          sampling = sampling)#
-cv_partition <- Hmsc:::createPartition(hM = pss[[2]], #
-                                       nfolds = sampling$nfolds, #
-                                       column = vars$partition)
-vars$partition
-cv_partition <- Hmsc:::createPartition(hM = pss[[fit]], #
-                                       nfolds = sampling$nfolds, #
-                                       column = "Plant")
-if (!is.null(vars$covDepXvars)) {#
-    cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
-                                                         partition = cv_partition,#
-                                                         partition.sp =  partition_sp,#
-                                                         alignPost = FALSE)#
-} else {#
-    cv_preds <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
-                                              partition = cv_partition, #
-                                              partition.sp = partition_sp,#
-                                              alignPost = TRUE)#
+whichPs <- 2#
+ps <- pss[[whichPs]]
+whichPs <- 3
+ps <- pss[[whichPs]]
+omgcors <- trap17:::computeAssociations_modified(ps)
+lev <- 1
+supportLevel <- 0
+toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlotDist
+supportLevel
+omgcors <- trap17:::computeAssociations_modified(ps)#
+    lev <- 1#
+    supportLevel <- 0.7#
+    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlotDist
+omgcors <- trap17:::computeAssociations_modified(ps)#
+    lev <- 1#
+    supportLevel <- 0.6#
+    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlotDist
+omgcors[[lev]]$support
+1-supportLevel
+lev <- 0#
+    supportLevel <- 0.6#
+    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlotDist
+omgcors <- trap17:::computeAssociations_modified(ps)#
+    lev <- 0#
+    supportLevel <- 0#
+    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlot
+toPlot
+omgcors <- trap17:::computeAssociations_modified(ps)#
+    lev <- 1#
+    supportLevel <- 0#
+    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
+              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
+    toPlotDist <- list()#
+    for (i in 1:dim(toPlot)[3]) {#
+        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
+        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
+    }
+toPlot
+par(family = "serif", mfrow = c(1, length(toPlotDist)))#
+            for (i in 1:length(toPlotDist)) {#
+                circleplot(toPlotDist[prev_ord_genot][[i]], #
+                           cluster = FALSE,#
+                           style = "classic",#
+                           plot.control = list(point.labels = TRUE,#
+                                               cex.point = 5,#
+                                               line.breaks = c(-1,0,1),#
+                                               line.cols = c("#00468b", "#c60032"),#
+                                               line.widths = 5))#
+            }
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)
+par(family = "serif", mfrow = c(1, length(toPlotDist)))#
+            for (i in 1:length(toPlotDist)) {#
+                circleplot(toPlotDist[prev_ord_genot][[i]], #
+                           cluster = FALSE,#
+                           style = "classic",#
+                           plot.control = list(point.labels = TRUE,#
+                                               cex.point = 5,#
+                                               line.breaks = c(-1,0,1),#
+                                               line.cols = c("#00468b", "#c60032"),#
+                                               line.widths = 5))#
+            }
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)
+orig_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype","Population")],#
+                           Y_arr = array(dat$Y_pooled, #
+                                         dim = c(nrow(dat$Y_pooled), #
+                                                 ncol(dat$Y_pooled), #
+                                                 1),#
+                                         dimnames = list(1:nrow(dat$Y_pooled),#
+                                                         colnames(dat$Y_pooled),#
+                                                         1)))
+dirs$raw_data_figs
+cv_preds <- load_objects_from_dir(path = dirs$fits, #
+                                  study = foc_study,#
+                                  obj_type = "cv_preds")
+file.path(dirs$fits, foldname)
+sampling
+sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
+sampling
+file.path(file.path(dirs$fits, foldname), #
+                                             "cv_preds_nfolds", #
+                                             sampling$nfolds, #
+                                             "_ps_3", #
+                                             whichPs, #
+                                             ".rds")
+file.path(dirs$fits, foldname)
+file.path(dirs$fits, foldname, #
+                                             paste0("cv_preds_nfolds", #
+                                                    sampling$nfolds, #
+                                                    "_ps_3", #
+                                                    whichPs, #
+                                                    ".rds"))
+cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
+                                             paste0("cv_preds_nfolds", #
+                                                    sampling$nfolds, #
+                                                    "_ps_", #
+                                                    whichPs, #
+                                                    ".rds")))
+str(cv_preds_variant)
+sp_new_nams <- c("Clo", "En", "Be", "Cap", "Cau") #(*)#
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En") #(*)
+modelled_combs <- vector(mode = "list", length = length(cv_preds_variant))
+length(cv_preds_variant)
+modelled_combs <- vector(mode = "list", length = dim(cv_preds_variant)[3])
+str(modelled_combs)
+i<-1
+yarr <- cv_preds_variant[[i]]
+yarr
+yarr <- cv_preds_variant[,,i]
+dimnames(yarr) <- list(1:dim(yarr)[1],#
+                           sp_new_nams,     #(*)#
+                           1:dim(yarr)[3])
+dim(yarr)
+dim(yarr)[1]
+dimnames(yarr) <- list(1:dim(yarr)[1],#
+                           sp_new_nams,     #(*)#
+                           1:dim(yarr)[3])
+dim(yarr)[3]
+dimnames(cv_preds_variant) <- list(1:dim(cv_preds_variant)[1],#
+                                  sp_new_nams,     #(*)#
+                                  1:dim(cv_preds_variant)[3])
+str(cv_preds_variant)
+cv_preds_variant <- yarr[,cv_preds_variant,]                  #(*)
+cv_preds_variant <- cv_preds_variant[,sp_ord,]                  #(*)
+modelled_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",#
+                                                           "Population")],#
+                               Y_arr = yarr)
+modelled_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",#
+                                                           "Population")],#
+                               Y_arr = cv_preds_variant)
+whichPs
+file.path(dirs$fits, foldname, "modelled_combs_ps_", whichPs, ".rds")
+file.path(dirs$fits, #
+                        foldname, #
+                        paste0("modelled_combs_ps_", whichPs, ".rds"))
+saveRDS(modelled_combs, #
+       file = file.path(dirs$fits, #
+                        foldname, #
+                        paste0("modelled_combs_ps_", whichPs, ".rds")))
+saveRDS(modelled_combs, #
+       file = file.path(dirs$fits, #
+                        foldname, #
+                        paste0("modelled_combs_ps_", whichPs, ".rds")))
+modelled_combs <- readRDS(file = file.path(dirs$fits, #
+                          foldname, #
+                          paste0("modelled_combs_ps_", whichPs, ".rds")))
+modelled_combs
+all_virus_combs <- as.character(unique(unlist(lapply(lapply(modelled_combs, #
+                                                            dimnames), #
+                                                            '[', #
+                                                            1))))
+all_virus_combs
+all_virus_combs <- as.character(unique(unlist(lapply(modelled_combs, #
+                                                            dimnames), #
+                                                            '[', #
+                                                            1)))
+all_virus_combs
+lapply(modelled_combs, #
+                                                            dimnames)
+dimnames(modelled_combs)
+dimnames(modelled_combs)[[1]]
+as.character(unique(dimnames(modelled_combs)[[1]]))
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]
+all_virus_combs
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
+all_virus_combs
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]
+all_virus_combs == "Empty"
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)
+all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     sp_ord[length(sp_ord):1])
+all_virus_combs
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])#
+#
+# 3.2.3 Plot original co-occurrence combinations (Fig 4)#
+#
+# note: viruses, genotypes and populations are ordered by prevalence in the figures#
+sp_ord <- c("Clo", "Be", "Cap", "Cau", "En")#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)#
+##
+#
+all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     sp_ord[length(sp_ord):1])
+colrs <- load_colour_palette()
+colmat <- cbind(all_virus_combs, colrs[[2]])
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+        }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+    }
+whichPs
+file.path(dirs$fits, #
+                     foldname, #
+                     "figs",#
+                     paste0("co_occs_ps", #
+                            whichPs,#
+                            ".pdf")#
+                    )
+par(family = "serif")#
+for (g in prev_ord_genot) {#
+    tmp12 <- NULL#
+    tmp11 <- c()#
+    for (p in prev_ord_pop) {#
+            tmp12 <- modelled_combs[[i]][,g,p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+    }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+            #legend.text = rownames(tmp11)[nrow(tmp11):1])#
 }
-partition_sp
-?computePredictedValues
-partition_sp <- 1:ncol(pss[[1]]$Y)#
-cv_partition <- Hmsc:::createPartition(hM = pss[[fit]], #
-                                       nfolds = sampling$nfolds, #
-                                       column = "Plant")
-cond_cv_preds <- list()
-cond_cv_preds
-for (fit in 1:3) {#
+prev_ord_genot
+par(family = "serif")#
+for (g in prev_ord_genot) {#
+    tmp12 <- NULL#
+    tmp11 <- c()#
+    for (p in prev_ord_pop) {#
+            tmp12 <- modelled_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+    }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+            #legend.text = rownames(tmp11)[nrow(tmp11):1])#
+}
+par(family = "serif", mfrow = c(2, 4))
+for (g in prev_ord_genot) {#
+        tmp11 <- c()#
+        for (p in prev_ord_pop) {#
+            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+        }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+    }
+for (g in prev_ord_genot) {#
+    tmp12 <- NULL#
+    tmp11 <- c()#
+    for (p in prev_ord_pop) {#
+            tmp12 <- modelled_combs[, g, p][rownames(colmat)]#
+            tmp11 <- cbind(tmp11, tmp12)#
+    }#
+    if (any(is.na(tmp11))) { #
+        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
+    }#
+    colrs1 <- colmat[rownames(tmp11), 2]#
+    colrs1 <- colrs1[nrow(tmp11):1]#
+    barplot(tmp11[nrow(tmp11):1,],#
+            col = colrs1,#
+            xaxt = "n")#
+            #legend.text = rownames(tmp11)[nrow(tmp11):1])#
+}
+file.path(dirs$fits, #
+                     foldname, #
+                     "figs",#
+                     paste0("co_occs_ps_", #
+                            whichPs,#
+                            ".pdf")#
+                    )
+rm(list = ls(all = TRUE))#
+gc()
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"
+setwd(working_dir)#
+library("trap17")
+dirs <- set_dirs(working_dir = working_dir)
+working_dir
+dat <- trapdata
+sampling <- sampling_settings(totsamp = 100,#
+                              trans = 50,#
+                              thn = 1,#
+                              nchains = 1,#
+                              nfolds = 2)
+foldname <- create_name(study = "trap17",#
+                        totsamp = sampling$totsamp,#
+                        nfolds = sampling$nfolds, #
+                        type = "fold")
+foldname
+create_directories(foldname = foldname, dirs = dirs)
+file.path(dirs$fits, foldname, "sampling.rds")
+saveRDS(sampling, #
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+variants = "ALL"
+sampling
+saveCVs = TRUE
+if (any(variants == "ALL")) {#
+        fitss <- as.character(1:3)#
+    } else {#
+        fitss <- as.character(variants)#
+    }#
+    res <- list()
+do_cv = TRUE
+saveCVs = TRUE
+length(fitss)
+fitss
+f<-1
+fit = fitss[f]
+fit = fitss[f]
+study = "trap17"
+if (class(sampling) != "mcmcsettings") {#
+        stop((print("parameter 'sampling' is not a  'mcmcsettings' object")))#
+    }
+vars <- structure(list(study = NA,#
+                           fit = NA,#
+                           xvars = NA,#
+                           pivars = NA,#
+                           studyDesign = NA,#
+                           partition = NA,#
+                           random = FALSE,#
+                           spat = NA,#
+                           boolvars = NA,#
+                           dumvars = NA,#
+                           covDepXvars = NA,#
+                           covDepLevel = NA,#
+                           totsamp = NA,#
+                           trans = NA,#
+                           thn = NA,#
+                           samps = NA,#
+                           nchains = NA,#
+                           nfolds = NA), #
+                      class = "varlist")
+vars$study <- study#
+    vars$fit <- fit#
+    vars$totsamp <- sampling$totsamp#
+    vars$trans <- sampling$trans#
+    vars$thn <- sampling$thn#
+    vars$samps <- (sampling$totsamp-sampling$trans)/sampling$thn#
+    vars$nchains <- sampling$nchains#
+    vars$nfolds <- sampling$nfolds
+vars
+vars$study <- study#
+    vars$fit <- fit#
+    vars$sampling <- sampling#
+    vars$sampling$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
+vars
+vars$yvars <- c("Clo",#
+                    "En", #
+                    "Be", #
+                    "Cap", #
+                    "Cau")
+if (class(sampling) != "mcmcsettings") {#
+        stop((print("parameter 'sampling' is not a  'mcmcsettings' object")))#
+    }#
+#
+    vars <- structure(list(study = NA,#
+                           fit = NA,#
+                           xvars = NA,#
+                           pivars = NA,#
+                           studyDesign = NA,#
+                           partition = NA,#
+                           random = FALSE,#
+                           spat = NA,#
+                           boolvars = NA,#
+                           dumvars = NA,#
+                           covDepXvars = NA,#
+                           covDepLevel = NA,#
+                           totsamp = NA,#
+                           trans = NA,#
+                           thn = NA,#
+                           samps = NA,#
+                           nchains = NA,#
+                           nfolds = NA), #
+                      class = "varlist")            #
+#
+    vars$study <- study#
+    vars$fit <- fit#
+    vars$sampling <- sampling#
+    vars$sampling$samps <- (sampling$totsamp-sampling$trans)/sampling$thn#
+#
+    vars$yvars <- c("Clo",#
+                    "En", #
+                    "Be", #
+                    "Cap", #
+                    "Cau")#
+#
+    vars$xvars <- switch(fit, #
+                         "1" = c("Population",#
+                                 "Herbivory",#
+                                 "Plant.area"),#
+                         "2" = c("Population", #
+                                 "Genotype",#
+                                 "Herbivory",#
+                                 "Plant.area"),#
+                         "3" = c("Population",#
+                                 "Genotype",#
+                                 "Herbivory",#
+                                 "Plant.area"))#
+    vars$boolvars <- "Herbivory"#
+    vars$dumvars <- switch(fit, #
+                           "1" = "Population",#
+                           "2" = c("Population", #
+                                   "Genotype"),#
+                           "3" = c("Population", #
+                                   "Genotype"))#
+    vars$pivars <- "Plant"#
+    vars$partition <- "Plant"#
+    vars$random <- TRUE#
+#
+    vars$covDepXvars <- NULL#
+    if (fit == "3") {    #
+        vars$covDepXvars <- "Genotype"#
+        vars$covDepLevel <- 1#
+    }
+vars
+return_ps = TRUE
+Y <- dat$Y_pooled#
+    Xorig <- dat$X_pooled#
+    if (all(vars$xvars == "(Intercept)")) {#
+        X <- matrix(1, ncol = 1, nrow = nrow(dat$X_pooled))#
+    } else {#
+        X <- dat$X_pooled[,vars$xvars]#
+        Xorig_sel <- X#
+#
+        if (any(!is.na(vars$dumvars))) {#
+            dums <- trap17:::dummify(dat = X,#
+                                     dumvars = vars$dumvars)    #
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$dumvars)])#
+            colnames(Xtmp) <- setdiff(colnames(X), vars$dumvars)#
+            X <- data.frame(Xtmp, dums)#
+        }#
+        if (any(!is.na(vars$boolvars))) {#
+            bools <- trap17:::boolify(dat = Xorig_sel,#
+                            boolvars = vars$boolvars)    #
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$boolvars)])#
+            colnames(Xtmp) <- setdiff(colnames(X), vars$boolvars)#
+            X <- data.frame(Xtmp, bools)#
+        }#
+        if (!is.null(dim(X)) & any(is.na(X))) {#
+            for (i in 1:ncol(X)) {#
+                X[which(is.na(X[, i])), i] <- mean(X[, i], na.rm = TRUE)    #
+            }#
+        }#
+        if (is.null(dim(X)) & all(is.na(X))) {#
+            X <- data.frame(matrix(0, ncol = 1, nrow = nrow(Y)))#
+            names(X) <- "foo"#
+        }#
+    }
+Y <- dat$Y_pooled#
+    Xorig <- dat$X_pooled
+(all(vars$xvars == "(Intercept)"))
+X <- dat$X_pooled[,vars$xvars]#
+        Xorig_sel <- X
+(any(!is.na(vars$dumvars)))
+dums <- trap17:::dummify(dat = X,#
+                                     dumvars = vars$dumvars)    #
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$dumvars)])#
+            colnames(Xtmp) <- setdiff(colnames(X), vars$dumvars)#
+            X <- data.frame(Xtmp, dums)
+if (any(!is.na(vars$boolvars))) {#
+            bools <- trap17:::boolify(dat = Xorig_sel,#
+                            boolvars = vars$boolvars)    #
+            Xtmp <- data.frame(X[ , !(colnames(X) %in% vars$boolvars)])#
+            colnames(Xtmp) <- setdiff(colnames(X), vars$boolvars)#
+            X <- data.frame(Xtmp, bools)#
+        }
+if (!is.null(dim(X)) & any(is.na(X))) {#
+            for (i in 1:ncol(X)) {#
+                X[which(is.na(X[, i])), i] <- mean(X[, i], na.rm = TRUE)    #
+            }#
+        }
+if (is.null(dim(X)) & all(is.na(X))) {#
+            X <- data.frame(matrix(0, ncol = 1, nrow = nrow(Y)))#
+            names(X) <- "foo"#
+        }
+head(X)
+fit
+(all(is.na(vars$pivars)))
+studyDesign <- data.frame(Xorig[, vars$pivars])#
+        for (i in 1:ncol(studyDesign)) {#
+            studyDesign[, i] <- as.factor(studyDesign[, i])#
+        }#
+        names(studyDesign) <- vars$pivars
+if (vars$random) {#
+            rLs <- list()#
+            for (i in 1:ncol(studyDesign)) {#
+                rLs[[i]] <- Hmsc:::HmscRandomLevel(units = studyDesign[,i])#
+            }#
+            names(rLs) <- colnames(studyDesign)#
+            if (!is.na(vars$spat)) {#
+                spatial_level <- which(colnames(studyDesign) == vars$spat)#
+                rLs[[spatial_level]] <- Hmsc:::HmscRandomLevel(sData = dat$spat)#
+            }#
+        }
+if (!is.null(vars$covDepXvars)) {#
+            xData <- data.frame(rep(1, nrow(X)), X[, grep("Genotype", colnames(X))])#
+            colnames(xData) <- c("(Intercept)", colnames(X[, grep("Genotype", colnames(X))]))#
+            rLs[[vars$covDepLevel]] <- Hmsc:::HmscRandomLevel(xData = xData)        #
+        }
+X <- as.data.frame(X)
+head(X)
+m1 <- Hmsc:::Hmsc(Y = as.matrix(Y), #
+                      XData = X,#
+                      XFormula = xForm,#
+                      studyDesign = studyDesign,#
+                      ranLevels = rLs,#
+                      distr = "probit",#
+                      XScale = TRUE,#
+                      XSelect = NULL,#
+                      phyloTree = NULL,#
+                      C = NULL)
+xForm <- formula(~.)
+m1 <- Hmsc:::Hmsc(Y = as.matrix(Y), #
+                      XData = X,#
+                      XFormula = xForm,#
+                      studyDesign = studyDesign,#
+                      ranLevels = rLs,#
+                      distr = "probit",#
+                      XScale = TRUE,#
+                      XSelect = NULL,#
+                      phyloTree = NULL,#
+                      C = NULL)
+foldname <- create_name(study = vars$study,#
+                            totsamp = vars$sampling$totsamp,#
+                            nfolds = vars$nfolds, #
+                            type = "fold")
+foldname
+output_dir <- file.path(dirs$fits, foldname)#
+    if (!dir.exists(output_dir)) {#
+        dir.create(output_dir)#
+    }
+tblname <- paste("model", vars$fit, sep = "_")#
+    tblname <- paste0(tblname, ".txt")#
+    vars2 <- vars#
+    vars2$yvars <- colnames(m1$Y)#
+    vars2$xvars <- colnames(m1$X)#
+    vars2$studyDesign <- colnames(m1$studyDesign)#
+    vars2$random <- m1$ranLevels#
+    write.table(unlist(vars2), #
+                file = file.path(output_dir, tblname), #
+                quote = FALSE, #
+                sep = ":", #
+                col.names = FALSE)
+post_align <- TRUE#
     if (!is.null(vars$covDepXvars)) {#
-        cond_cv_preds[[fit]] <- trap17:::computePredictedValues_modified(hM = pss[[fit]], #
-                                                             partition = cv_partition,#
-                                                             partition.sp =  partition_sp,#
+        post_align <- FALSE#
+    }
+print(paste("Model fitted for", vars$study))#
+    print(paste("Model fit type", vars$fit))
+print(paste("Model variant", vars$fit))#
+    ps <- NULL
+ps <- Hmsc:::sampleMcmc(m1, #
+                            samples = vars$sampling$samps,#
+                            transient = vars$sampling$trans,#
+                            thin = vars$sampling$thn,#
+                            nChains = vars$sampling$nchains,#
+                            nParallel = vars$sampling$nchains,#
+                            alignPost = post_align)
+vars$sampling$nchains
+filename <- paste("ps", vars$fit, sep = "_")
+filename
+filename <- paste0(filename, ".rds")
+filename
+filename <- paste0("ps_", vars$fit, ".rds")
+filename
+do_cv
+save_cv = TRUE
+higher_eval_levels = TRUE
+res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
+                     class = "cvresults")
+cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$nfolds, #
+                                           column = vars$partition)
+vars$sampling
+vars$sampling$partition
+column = vars$partition)
+vars$partition
+cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$sampling$nfolds, #
+                                           column = vars$partition)
+cv_partition
+(!is.null(vars$covDepXvars))
+cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
+                                                  partition = cv_partition, #
+                                                  expected = expected,#
+                                                  alignPost = TRUE)
+?computePredictedValues
+expected = TRUE
+res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
+                     class = "cvresults")
+cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$sampling$nfolds, #
+                                           column = vars$partition)#
+#
+    if (!is.null(vars$covDepXvars)) {#
+        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
+                                                             partition = cv_partition, #
+                                                             expected = expected,#
                                                              alignPost = FALSE)#
     } else {#
-        cond_cv_preds[[fit]] <- Hmsc:::computePredictedValues(hM = pss[[fit]], #
+        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
                                                   partition = cv_partition, #
-                                                  partition.sp = partition_sp,#
+                                                  expected = expected,#
                                                   alignPost = TRUE)#
-    }#
-}
+    }
+foldname <- create_name(study = vars$study,#
+                            totsamp = vars$sampling$totsamp,#
+                            nfolds = vars$sampling$nfolds, #
+                            type = "fold")
+output_dir <- file.path(dirs$fits, foldname)#
+        if (!dir.exists(output_dir)) {#
+            dir.create(output_dir)#
+        }
+cv_filename <- create_name(totsamp = vars$sampling$totsamp,#
+                                   nfolds = vars$sampling$nfolds, #
+                                   type = "cv")
+cv_filename <- paste(cv_filename, "ps", vars$fit, sep = "_")
+cv_filename
+form <- formula(cbind(Clo, #
+                              En, #
+                              Be, #
+                              Pl, #
+                              Ca) ~ Population + Genotype)
+pooled_occ_true <- as.matrix(aggregate(formula = form, #
+                                               data = cbind(dat$X_pooled, dat$Y_pooled), #
+                                               FUN = sum))[, -c(1:2)]
+head(dat$Y_pooled)
+form <- formula(cbind(Clo, #
+                              Be, #
+                              Cap, #
+                              Cau, #
+                              En) ~ Population + Genotype)
+pooled_occ_true <- as.matrix(aggregate(formula = form, #
+                                               data = cbind(dat$X_pooled, dat$Y_pooled), #
+                                               FUN = sum))[, -c(1:2)]
+corrs <- matrix(NA, #
+                        nrow = dim(cv_preds)[3],#
+                        ncol = ncol(ps$Y))
+for (j in 1:dim(cv_preds)[3]) {#
+            tmp <- cv_preds[, , j]#
+            colnames(tmp) <- colnames(ps$Y)#
+            tmp <- cbind(tmp, dat$X_pooled)#
+            preds <- as.matrix(aggregate(formula = form, #
+                                         data = tmp, #
+                                         FUN = sum))[, -c(1:2)]#
+            corrs[j,] <- diag(apply(preds, 2, cor, pooled_occ_true, method = "spearman"))#
+        }
+corrs
+colmeans(corrs)
+colMeans(corrs)
+if (higher_eval_levels) {#
+        form <- formula(cbind(Clo, #
+                              Be, #
+                              Cap, #
+                              Cau, #
+                              En) ~ Population + Genotype)#
+#
+        pooled_occ_true <- as.matrix(aggregate(formula = form, #
+                                               data = cbind(dat$X_pooled, dat$Y_pooled), #
+                                               FUN = sum))[, -c(1:2)]#
+        corrs <- matrix(NA, #
+                        nrow = dim(cv_preds)[3],#
+                        ncol = ncol(ps$Y))#
+        for (j in 1:dim(cv_preds)[3]) {#
+            tmp <- cv_preds[, , j]#
+            colnames(tmp) <- colnames(ps$Y)#
+            tmp <- cbind(tmp, dat$X_pooled)#
+            preds <- as.matrix(aggregate(formula = form, #
+                                         data = tmp, #
+                                         FUN = sum))[, -c(1:2)]#
+            corrs[j,] <- diag(apply(preds, 2, cor, pooled_occ_true, method = "spearman"))#
+        }#
+    }
+cv_eval_filename <- create_name(nfolds = vars$nfolds, #
+                                        type = "eval_cv")#
+        cv_eval_filename <- paste(cv_eval_filename, "ps", vars$fit, sep = "_")
+?computePredictedValues
+rm(list = ls(all = TRUE)) #
+gc()
+library("devtools")#
+library("roxygen2")
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"
+setwd(pkg_dir)#
+document()
+setwd(working_dir)#
+install("trap17")
+library("trap17")
