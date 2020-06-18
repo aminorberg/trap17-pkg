@@ -34,7 +34,8 @@ co_occ_combs <- function(partition,
     }
 
     tmp_res <- apply(Y_arr, MARGIN = 3, FUN = calc_combs, Xpart = Xpartition)
-
+    
+    
     res_iters <- NA
     for (i in 1:ncol(tmp_res)) {
         tmp1 <- matrix(tmp_res[,i], ncol = (ncol(Xpartition)+1), nrow = (length(tmp_res[,i])/3))

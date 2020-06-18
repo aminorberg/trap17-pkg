@@ -26,12 +26,7 @@ set_vars <- function(study = "trap17",
                            dumvars = NA,
                            covDepXvars = NA,
                            covDepLevel = NA,
-                           totsamp = NA,
-                           trans = NA,
-                           thn = NA,
-                           samps = NA,
-                           nchains = NA,
-                           nfolds = NA), 
+                           sampling = NA), 
                       class = "varlist")            
 
     vars$study <- study
@@ -40,10 +35,10 @@ set_vars <- function(study = "trap17",
     vars$sampling$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
 
     vars$yvars <- c("Clo",
-                    "En", 
                     "Be", 
                     "Cap", 
-                    "Cau")
+                    "Cau",
+                    "En")
 
     vars$xvars <- switch(fit, 
                          "1" = c("Population",

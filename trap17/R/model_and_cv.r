@@ -46,8 +46,8 @@ model_and_cv <- function(dat,
         names(res) <- paste0("ps", fitss)
         if (saveCVs) {
             foldname <- create_name(study = vars$study,
-                                    totsamp = vars$totsamp,
-                                    nfolds = vars$nfolds, 
+                                    totsamp = vars$sampling$totsamp,
+                                    nfolds = vars$sampling$nfolds, 
                                     type = "fold")
             output_dir <- file.path(dirs$fits, foldname)
             filename <- "cv_res_all.rds"
