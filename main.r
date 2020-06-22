@@ -35,11 +35,6 @@ dat <- trapdata
 #                            thn = 100,
 #                            nchains = 2,
 #                            nfolds = 10)
-sampling <- sampling_settings(totsamp = 5000,
-                             trans = 3000,
-                             thn = 10,
-                             nchains = 1,
-                             nfolds = 10)
 
 # 2.2 create a folder for the model with these settings and a figures folder under that
 foldname <- create_name(study = "trap17",
@@ -62,11 +57,8 @@ saveRDS(evals,
         file = file.path(dirs$fits, foldname, "evals.rds"))
 
 # 3 RESULTS
-foc_study <- "trap17_totsamp5000"
-foldname <- "trap17_totsamp5000"
-
-#foc_study <- "trap17_totsamp2e"
-#foldname <- "trap17_totsamp2e+05"
+foc_study <- "trap17_totsamp2e"
+foldname <- "trap17_totsamp2e+05"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
@@ -81,18 +73,26 @@ for (i in 1:3) {
 # 3.1.1 explanatory power and predicted realisations
 eval_exp <- list()
 preds_realz <- list()
+preds_realz_cors <- list()
 for (i in 1:length(pss)) {
     preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])
     eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], 
                                             predY = preds_exp)
     preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],
                                                      expected = FALSE)
+    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])
 }
 eval_exp_arr <- lapply(eval_exp, simplify2array)
 names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
 eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))
 colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))
 eval_exp_means
+names(preds_realz_cors) <- paste0("ps", 1:length(preds_realz_cors))
+preds_realz_cors_arr <- simplify2array(preds_realz_cors)
+preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, 
+                                         colMeans,
+                                         na.rm = TRUE))
+colMeans(preds_realz_cors_means)
 
 # 3.1.2 conditional predictions and predictive power
 #cond_cv_preds <- list() 
@@ -118,6 +118,7 @@ eval_exp_means
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
+str(evals)
 lapply(tjurs, mean)
 lapply(cors, mean)
 
@@ -139,12 +140,16 @@ orig_combs <- readRDS(file = file.path(dirs$raw_data_figs, "orig_combs.rds"))
 # select the model variant for which you want to make the co-infection profile predictions
 whichPs <- 2
 preds_realz_variant <- preds_realz[[whichPs]]
-#cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, 
-#                                             paste0("cv_preds_nfolds", 
-#                                                    sampling$nfolds, 
-#                                                    "_ps_", 
-#                                                    whichPs, 
-#                                                    ".rds")))
+# 190620
+# tee ennusteet cv_predseistä, mutta lisää kohinaa ja muuta 0/1
+# tsekkaa ennustefunktiosta miten
+cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, 
+                                            paste0("cv_preds_nfolds", 
+                                                   sampling$nfolds, 
+                                                   "_ps_", 
+                                                   whichPs, 
+                                                   ".rds")))
+
 
 dimnames(preds_realz_variant) <- list(1:dim(preds_realz_variant)[1],
                                   colnames(dat$Y_pooled),
@@ -253,9 +258,14 @@ dev.off()
 whichPs <- 2
 ps <- pss[[whichPs]]
 
-library(wesanderson)
-wesandcols <- wes_palette("Cavalcanti1")[c(1, 5, 2, 4)]
-wesandcols_vp <- c(wesandcols, "grey50")
+vp_cols <- c("#cc9900", "#004D40", "#ffbf00", "#ffe59a", "#D81B60")
+vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))
+rownames(vp_cols) <- vp_cols[, 2]
+#D81B60 nice red -> host plant level latent variable
+#004D40 green -> local environmental context
+#ffbf00 dark yellow -> host genotype
+#cc9900 orange -> host plant size
+#ffe59a light orange -> signs of herbivory
 
 # 3.3.1 variance partitioning
 sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) 
@@ -277,22 +287,24 @@ toPlot <- vp$vals[-1,]
 toPlot <- toPlot[nrow(toPlot):1,]
 toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]
 cov_order <- switch(as.character(whichPs), 
-                    "1" = c("Population", 
-                            "Plant.area", 
+                    "1" = c("Plant.area", 
                             "Herbivory", 
+                            "Population", 
                             "Random: Plant"), 
                     "2" = c("Genotype", 
-                            "Population", 
                             "Plant.area", 
                             "Herbivory", 
+                            "Population", 
                             "Random: Plant"), 
                     "3" = c("Genotype", 
-                            "Population", 
                             "Plant.area", 
                             "Herbivory", 
+                            "Population", 
                             "Random: Plant"))
 toPlot <- toPlot[cov_order, ]
 round(rowMeans(toPlot*100), 2)
+vp_cols <- vp_cols[cov_order,]
+
 pdf(file = file.path(dirs$fits, 
                      foldname, 
                      "figs",
@@ -305,12 +317,12 @@ pdf(file = file.path(dirs$fits,
     height = 5)
     par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)
     barplot(toPlot, 
-            col = wesandcols_vp,
+            col = vp_cols[,1],
             xpd = TRUE,
             las = 2)
     legend(x = 6.25, y = 1, 
            legend = rownames(toPlot)[nrow(toPlot):1],
-           fill = wesandcols_vp[length(wesandcols_vp):1])
+           fill = vp_cols[nrow(vp_cols):1],1)
 dev.off()
 
 # 3.3.2 residual correlations
@@ -395,11 +407,22 @@ if (whichPs == 3) {
 betaPost_ps <- Hmsc:::getPostEstimate(ps, "Beta", q = c(0.05, 0.95))
 betaMeans_ps <- betaPost_ps$mean
 rownames(betaMeans_ps) <- colnames(ps$X)
+# Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population2")] <- "Pop3302"
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population3")] <- "Pop9031"
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population4")] <- "Pop433"
+
+# Genotypes: 1 = 511_14, 2 = 609_19, 3 = 2818_6, 4 = 4_13
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype2")] <- "Gen609_19"
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype3")] <- "Gen2818_6"
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype4")] <- "Gen4_13"
+
 supportLevel <- 0.9
 betaSig <- ((betaPost_ps$support > supportLevel)
             + (betaPost_ps$support < (1-supportLevel)) > 0)
 betaSig <- betaSig * 1            
-rownames(betaSig) <- colnames(ps$X)
+rownames(betaSig) <- rownames(betaMeans_ps)
+
 
 write.csv(round(betaMeans_ps, 2), 
           file = file.path(dirs$fits, 
