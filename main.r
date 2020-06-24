@@ -24,17 +24,25 @@ dat <- trapdata
 
 # 2.1 sampling settings
 # settings good for testing
-#sampling <- sampling_settings(totsamp = 150,
-#                              trans = 50,
-#                              thn = 1,
-#                              nchains = 1,
-#                              nfolds = 2)
+sampling <- sampling_settings(totsamp = 150,
+                              trans = 50,
+                              thn = 1,
+                              nchains = 1,
+                              nfolds = 2)
 # settings used for the submitted study
 #sampling <- sampling_settings(totsamp = 200000,
 #                            trans = 100000,
 #                            thn = 100,
 #                            nchains = 2,
 #                            nfolds = 10)
+
+#sampling <- sampling_settings(totsamp = 300000,
+#                              trans = 100000,
+#                              thn = 100,
+#                              nchains = 2,
+#                              nfolds = 10)
+
+sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
 
 # 2.2 create a folder for the model with these settings and a figures folder under that
 foldname <- create_name(study = "trap17",
@@ -52,13 +60,17 @@ evals <- model_and_cv(dat = dat,
                       dirs = dirs,
                       variants = "ALL",
                       sampling = sampling,
+                      start_iter = sampling$pred_start_iter,
                       saveCVs = TRUE)
 saveRDS(evals, 
         file = file.path(dirs$fits, foldname, "evals.rds"))
 
 # 3 RESULTS
-foc_study <- "trap17_totsamp2e"
-foldname <- "trap17_totsamp2e+05"
+foc_study <- "trap17_totsamp3e"
+foldname <- "trap17_totsamp3e+05"
+
+#foc_study <- "trap17_totsamp150"
+#foldname <- "trap17_totsamp150"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
@@ -75,11 +87,13 @@ eval_exp <- list()
 preds_realz <- list()
 preds_realz_cors <- list()
 for (i in 1:length(pss)) {
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]],
+                                              start = sampling$pred_start_iter)
     eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], 
                                             predY = preds_exp)
     preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],
-                                                     expected = FALSE)
+                                                     expected = FALSE,
+                                                     start = sampling$pred_start_iter)
     preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])
 }
 eval_exp_arr <- lapply(eval_exp, simplify2array)
@@ -118,7 +132,6 @@ colMeans(preds_realz_cors_means)
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
-str(evals)
 lapply(tjurs, mean)
 lapply(cors, mean)
 
@@ -181,7 +194,7 @@ all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_viru
                      virus_names[length(virus_names):1])
 
 colrs <- load_colour_palette()
-colmat <- cbind(all_virus_combs, colrs[[2]])
+colmat <- cbind(all_virus_combs, colrs[[2]][c(1:length(all_virus_combs))])
 rownames(colmat) <- colmat[,1]
 colmat_legend <- colmat
 
@@ -280,8 +293,9 @@ if (whichPs == 1) {
 }
 
 vp <- Hmsc::computeVariancePartitioning(ps, 
-                                  group = sel, 
-                                  groupnames = selnames)
+                                        group = sel, 
+                                        groupnames = selnames,
+                                        start = sampling$pred_start_iter)
 
 toPlot <- vp$vals[-1,]
 toPlot <- toPlot[nrow(toPlot):1,]
@@ -404,7 +418,10 @@ if (whichPs == 3) {
 }
 
 # 3.3.3 betas
-betaPost_ps <- Hmsc:::getPostEstimate(ps, "Beta", q = c(0.05, 0.95))
+betaPost_ps <- Hmsc:::getPostEstimate(ps, 
+                                      "Beta", 
+                                      q = c(0.05, 0.95),
+                                      start = sampling$pred_start_iter)
 betaMeans_ps <- betaPost_ps$mean
 rownames(betaMeans_ps) <- colnames(ps$X)
 # Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433
@@ -442,7 +459,8 @@ write.csv(round(betas, 2),
 whichPs <- 2
 ps <- pss[[whichPs]]
 
-mpost <- Hmsc:::convertToCodaObject(ps)
+#mpost <- Hmsc:::convertToCodaObject(ps)
+mpost <- Hmsc:::convertToCodaObject(ps, start = sampling$pred_start_iter)
 par(family = "serif", mfrow = c(1, 1))
 plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
 

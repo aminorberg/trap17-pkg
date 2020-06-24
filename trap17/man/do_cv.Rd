@@ -11,6 +11,7 @@ do_cv(
   vars,
   higher_eval_levels = TRUE,
   save_cv = TRUE,
+  start_iter,
   expected = TRUE
 )
 }

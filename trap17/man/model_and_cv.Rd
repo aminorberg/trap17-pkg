@@ -9,6 +9,7 @@ model_and_cv(
   dirs,
   variants = "ALL",
   sampling,
+  start_iter,
   do_cv = TRUE,
   saveCVs = TRUE
 )

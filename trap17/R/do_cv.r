@@ -9,6 +9,7 @@ do_cv <- function(ps,
                   vars,
                   higher_eval_levels = TRUE, 
                   save_cv = TRUE,
+                  start_iter,
                   expected = TRUE)
 {
 
@@ -23,11 +24,13 @@ do_cv <- function(ps,
         cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
                                                              partition = cv_partition, 
                                                              expected = expected,
+                                                             start = start_iter,
                                                              alignPost = FALSE)
     } else {
         cv_preds <- Hmsc:::computePredictedValues(hM = ps, 
                                                   partition = cv_partition, 
                                                   expected = expected,
+                                                  start = start_iter,
                                                   alignPost = TRUE)
     }
 

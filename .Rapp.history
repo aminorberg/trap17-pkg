@@ -1,17 +1,179 @@
+library("sdmCom")
+?sdmCom
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/pkg/sdmCom")
+q()
+library('caret')
+?train
+library(mlbench)#
+data(BostonHousing)
+library(mlbench)
+install.packages("mlbench")
+library(mlbench)#
+data(BostonHousing)
+lmFit <- train(medv ~ . + rm:lstat,#
+               data = BostonHousing,#
+               method = "lm")
+library(rpart)
+rpartFit <- train(medv ~ .,#
+                  data = BostonHousing,#
+                  method = "rpart",#
+                  tuneLength = 9)
+setwd(".")
+getwd()
+file.exists(".")
+str(fits)
+str(preds$predictions$bcs$bc1)
+??caret
+citation(caret)
+library('SSDM')#
+library('zoon')#
+library('sdm')#
+library('caret')
+citation(caret)
+library('caret')
+citation(caret)
+citation("caret"")
+citation("caret")
+citation('SSDM')
+??cssdm
+??SSDM
+??sdm
+??caret
+??zoon
+install.packages('biomod2')
+citation('biomod2')
+citation('sdm')
+citation('zoon')
+library('sdmCom')
+??sdmCom
+??caret
+?train
+names(getModelInfo())
+trellis.par.set(caretTheme())
+sdm::sdm
+sdm:::sdm
+showMethods("sdm")
+??SSDM
+??zoon
+library('zoon')
+?workflow
+zoon::workflow
+zoon:::workflow
+GetModuleList()
+?BayesComm
+library(BayesComm)
+?BayesComm
+library(gbm)
+?gbm
+library(mgcv)
+?mgcv
+200/3
+830/5
+3*(830/5)
+500/6
+850/6
+171+187
+citation(mvpart)
+citation("mvpart")
+citation("dismo")
+citation("boral")
+citation()
+install.packages(c("Hmsc"))
+library(Hmsc)
+m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2)
+rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))
+rL
+rL = HmscRandomLevel(xData=data.frame(x1=rep(1,length(TD$X$x1)),x2=TD$X$x2))#
+#
+studyDesign = data.frame(sample = as.factor(1:50), plot = as.factor(sample(1:20,50,replace=TRUE)))#
+rL1 = HmscRandomLevel(units=TD$studyDesign$plot)#
+rL2 = HmscRandomLevel(units=TD$studyDesign$sample)#
+#
+m = Hmsc(Y=TD$Y, XData=TD$X, XFormula=~x1+x2,studyDesign=studyDesign,ranLevels=list("sample"=rL,"plot"=rL2))
+M
+m
+tmp <- sampleMcmc(m, samples=100)
+library(devtools)
+install_github("hmsc-r/HMSC", #
+                 build_opts = c("--no-resave-data", #
+                                "--no-manual"))
+library(Hmsc)#
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+install.packages("Hmsc")
+library(Hmsc)
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))#
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+library(devtools)
+install_github("hmsc-r/HMSC", #
+                build_opts = c("--no-resave-data", #
+                               "--no-manual"))
+library(Hmsc)
+studyDesign <- data.frame(sample = as.factor(1:50),#
+                          plot = as.factor(sample(1:20, 50, replace = TRUE)))#
+rL2 <- HmscRandomLevel(units = TD$studyDesign$plot)#
+xData = data.frame(x1=rep(1, length(TD$X$x1)), x2=as.numeric(TD$X$x2=="c"))#
+rL1 <- HmscRandomLevel(xData = xData)#
+m <- Hmsc(Y = TD$Y,XData = TD$X,#
+          XFormula = ~x1+x2,#
+          studyDesign = studyDesign,#
+          ranLevels = list("sample" = rL1, "plot" = rL2))#
+ps <- sampleMcmc(m, samples = 1000, alignPost=FALSE)
+ps <- sampleMcmc(m, samples = 100, alignPost=FALSE)
+m
+sampling_settings <- list(totsamp = 100000, #
+                          trans = 50000, #
+                          thn = 10, #
+                          nFolds = 5)
+m
+m$rL
+m$rL$sample
+str(m$rL$sample)
+vars$samps
+library("trap17")
+dat <- trapdata#
+str(dat)
+80*4
+library(Hmsc)
+?Hmsc
+names(pss)
+library(igraphdata)
+data(yeast)
+yes <- data(yeast)
+yes
+library(graph)
+install.packages("graph")
+library("devtools")#
+library("roxygen2")
+?create
+quartz()
 par(family = "serif", mar = c(9, 2, 5, 1))
+# define working directory#
 working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
 setwd(working_dir)#
-library("trap17")
-dirs <- set_dirs(working_dir = working_dir)#
-                 #raw_data = TRUE)
+library("trap17")#
+#
+dirs <- set_dirs(working_dir = working_dir)
 dat <- trapdata
-sampling <- sampling_settings(totsamp = 5000,#
-                             trans = 3000,#
-                             thn = 10,#
-                             nchains = 1,#
-                             nfolds = 10)
-foc_study <- "trap17_totsamp5000"#
-foldname <- "trap17_totsamp5000"
+foc_study <- "trap17_totsamp3e"#
+foldname <- "trap17_totsamp3e+05"#
+#
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 pss <- list()#
 for (i in 1:3) {#
@@ -19,225 +181,390 @@ for (i in 1:3) {#
     pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
     names(pss)[i] <- filename #
 }
-# 3.1.1 explanatory power#
-eval_exp <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]], #
-                                              alignPost = FALSE)#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-}
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
-cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
-lapply(tjurs, mean)#
-lapply(cors, mean)
-dirs$raw_data_figs
-orig_combs <- readRDS(file = file.path(dirs$raw_data_figs, "orig_combs.rds"))
-orig_combs
-whichPs <- 3#
-cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
-                                             paste0("cv_preds_nfolds", #
-                                                    sampling$nfolds, #
-                                                    "_ps_", #
-                                                    whichPs, #
-                                                    ".rds")))
-whichPs <- 2
-cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
-                                             paste0("cv_preds_nfolds", #
-                                                    sampling$nfolds, #
-                                                    "_ps_", #
-                                                    whichPs, #
-                                                    ".rds")))
-str(cv_preds_variant)
-colnames(dat$Y_pooled)
-dimnames(cv_preds_variant) <- list(1:dim(cv_preds_variant)[1],#
-                                  colnames(dat$Y_pooled),#
-                                  1:dim(cv_preds_variant)[3])
-modelled_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",#
-                                                           "Population")],#
-                               Y_arr = cv_preds_variant)
-file.path(dirs$fits, #
-                        foldname, #
-                        paste0("modelled_combs_ps_", whichPs, ".rds"))
-saveRDS(modelled_combs, #
-       file = file.path(dirs$fits, #
-                        foldname, #
-                        paste0("modelled_combs_ps_", whichPs, ".rds")))
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
-                                         decreasing = TRUE)]#
-all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
-prev_ord_genot <- c(2, 4, 1, 3)#
-prev_ord_pop <- c(2, 3, 1, 4)
-sp_ord[length(sp_ord):1]
-colnames(ps$Y)
-colnames(pss[[whichPs]]$Y)
-virus_names <- colnames(pss[[whichPs]]$Y)
-all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])
-length(virus_names)
-virus_names
-virus_names[length(virus_names):1]
-all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))]
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
-                                         decreasing = TRUE)]#
-all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
-all_virus_combs
-modelled_combs
-dimnames(modelled_combs)
-as.character(unique(dimnames(modelled_combs)[[1]]))
-str(cv_preds_variant)
-partition = dat$X_pooled[,c("Genotype",#
-                                                           "Population")]
-Y_arr = cv_preds_variant
-Xpartition <- as.data.frame(partition)#
-    for (i in 1:ncol(Xpartition)) {#
-        Xpartition[,i] <- paste0(colnames(Xpartition)[i], Xpartition[,i])    #
-    }
-Xpartition
-calc_combs <- function (Y, Xpart) {        #
-        combpaste <- function(y, sp_names) {#
-             tmp1 <- paste(sp_names[as.logical(y)], #
-                           collapse = "+")#
-            return(tmp1)           #
-        }#
-        y_df <- as.data.frame(Y)           #
-        tmp11 <- apply(y_df, MARGIN = 1, FUN = combpaste, sp_names = dimnames(y_df)[[2]])#
-        Combinations <- matrix(tmp11, ncol = 1)#
-#
-        res_iter <- switch(ncol(Xpart), #
-                           "1" = cbind(Combinations, Xpart[,1]), #
-                           "2" = cbind(Combinations, Xpart[,1], Xpart[,2]), #
-                           "3" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3]),#
-                           "4" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,4]),#
-                           "5" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3], Xpart[,4], Xpart[,5]))#
-        return(res_iter)#
-    }
-res_iter
-calc_combs <- function (Y, Xpart) {        #
-        combpaste <- function(y, sp_names) {#
-             tmp1 <- paste(sp_names[as.logical(y)], #
-                           collapse = "+")#
-            return(tmp1)           #
-        }#
-        y_df <- as.data.frame(Y)           #
-        tmp11 <- apply(y_df, MARGIN = 1, FUN = combpaste, sp_names = dimnames(y_df)[[2]])#
-        Combinations <- matrix(tmp11, ncol = 1)#
-#
-        res_iter <- switch(ncol(Xpart), #
-                           "1" = cbind(Combinations, Xpart[,1]), #
-                           "2" = cbind(Combinations, Xpart[,1], Xpart[,2]), #
-                           "3" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3]),#
-                           "4" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,4]),#
-                           "5" = cbind(Combinations, Xpart[,1], Xpart[,2], Xpart[,3], Xpart[,4], Xpart[,5]))#
-        return(res_iter)#
-    }
-res_iter
-tmp_res <- apply(Y_arr, MARGIN = 3, FUN = calc_combs, Xpart = Xpartition)
-tmp_res
-str(Y_arr)
-is.list(Y_arr)
-str(tmp_res)
-str(Y_arr)
-ytmp <- Y_arr[,,1]
-Y<-ytmp
-Xpart = Xpartition
-combpaste <- function(y, sp_names) {#
-             tmp1 <- paste(sp_names[as.logical(y)], #
-                           collapse = "+")#
-            return(tmp1)           #
-        }
-y_df <- as.data.frame(Y)
-y_df
-sp_ord
-sp_new_nams
-head(cv_preds_variant)
-?computePredictedValues
-Hmsc::computePredictedValues
-Hmsc::predict
-Hmsc:::predict
-Hmsc:::predict.Hmsc
-preds_exp
-eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)
-?computePredictedValues
 eval_exp <- list()#
 preds_realz <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]])#
-}
-preds_exp
-eval_exp[[i]]
-preds_realz
-preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE
-)
-preds_realz[[i]]
-eval_exp <- list()#
-preds_realz <- list()#
+preds_realz_cors <- list()#
 for (i in 1:length(pss)) {#
     preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
     eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
                                             predY = preds_exp)#
     preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
                                                      expected = FALSE)#
+    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
+}
+rm(list = ls(all = TRUE)) #
+gc()#
+#install.packages("devtools")#
+#install_github("klutometis/roxygen")#
+#
+library("devtools")#
+library("roxygen2")#
+#
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"#
+#
+### create the package#
+#setwd(root_dir)#
+#create("trap17")#
+### document the package#
+setwd(pkg_dir)#
+document()
+setwd(working_dir)#
+install("trap17")
+library("trap17")
+# 1 DATA: importation (and processing)#
+rm(list = ls(all = TRUE))#
+gc()
+# define working directory#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+setwd(working_dir)#
+library("trap17")#
+#
+dirs <- set_dirs(working_dir = working_dir)
+dat <- trapdata
+foc_study <- "trap17_totsamp3e"#
+foldname <- "trap17_totsamp3e+05"#
+#
+sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
+pss <- list()#
+for (i in 1:3) {#
+    filename <- paste0("ps_", i, ".rds")#
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
+    names(pss)[i] <- filename #
+}
+eval_exp <- list()#
+preds_realz <- list()#
+preds_realz_cors <- list()#
+for (i in 1:length(pss)) {#
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
+                                            predY = preds_exp)#
+    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
+                                                     expected = FALSE)#
+    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
 }
 eval_exp_arr <- lapply(eval_exp, simplify2array)
 names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
 eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
 colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
 eval_exp_means
+names(preds_realz_cors) <- paste0("ps", 1:length(preds_realz_cors))#
+preds_realz_cors_arr <- simplify2array(preds_realz_cors)#
+preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, #
+                                         colMeans,#
+                                         na.rm = TRUE))#
+colMeans(preds_realz_cors_means)
+preds_realz_cors_means
+whichPs <- 2#
+ps <- pss[[whichPs]]
+mpost <- Hmsc:::convertToCodaObject(ps)
+par(family = "serif", mfrow = c(1, 1))#
+plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
+par(family = "serif", mfrow = c(1, 1))#
+plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
+whichPs <- 2#
+ps <- pss[[whichPs]]#
+#
+mpost <- Hmsc:::convertToCodaObject(ps)#
+par(family = "serif", mfrow = c(1, 1))#
+plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
+?Hmsc:::convertToCodaObject
+ps
+mpost <- Hmsc:::convertToCodaObject(ps, start = 501)
+par(family = "serif", mfrow = c(1, 1))#
+plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
+?Hmsc
+?Hmsc
+?computePredictedValues
+sampling
+sampling$totsamp - sampling$trans
+(sampling$totsamp - sampling$trans) / 2
+(sampling$totsamp - sampling$trans) / 100
+((sampling$totsamp - sampling$trans) / 100) / 2
+(((sampling$totsamp - sampling$trans) / 100) / 2) + 1
+sampling <- sampling_settings(totsamp = 300000,#
+                              trans = 100000,#
+                              thn = 100,#
+                              nchains = 2,#
+                              nfolds = 10)#
+(((sampling$totsamp - sampling$trans) / 100) / 2) + 1
+sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / 100) / 2) + 1)
+sampling
+rm(list = ls(all = TRUE)) #
+gc()#
+#install.packages("devtools")#
+#install_github("klutometis/roxygen")#
+#
+library("devtools")#
+library("roxygen2")#
+#
+root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"#
+#
+### create the package#
+#setwd(root_dir)#
+#create("trap17")#
+### document the package#
+setwd(pkg_dir)#
+document()
+### install and load#
+setwd(working_dir)#
+install("trap17")
+library("trap17")
+# 1 DATA: importation (and processing)#
+rm(list = ls(all = TRUE))#
+gc()#
+#
+# define working directory#
+working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
+setwd(working_dir)#
+library("trap17")#
+#
+dirs <- set_dirs(working_dir = working_dir)
+dat <- trapdata
+sampling <- sampling_settings(totsamp = 150,#
+                              trans = 50,#
+                              thn = 1,#
+                              nchains = 1,#
+                              nfolds = 2)
+sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / 100) / 2) + 1)
+foldname <- create_name(study = "trap17",#
+                        totsamp = sampling$totsamp,#
+                        nfolds = sampling$nfolds, #
+                        type = "fold")
+create_directories(foldname = foldname, dirs = dirs)
+saveRDS(sampling, #
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+evals <- model_and_cv(dat = dat,#
+                      dirs = dirs,#
+                      variants = "ALL",#
+                      sampling = sampling,#
+                      start_iter = sampling$pred_start_iter,#
+                      saveCVs = TRUE)
+start_iter = sampling$pred_start_iter
+saveCVs = TRUE
+saveCVs = TRUE
+do_cv = TRUE
+variants = "ALL"
+if (any(variants == "ALL")) {#
+        fitss <- as.character(1:3)#
+    } else {#
+        fitss <- as.character(variants)#
+    }#
+    res <- list()
+f<-1
+vars <- trap17:::set_vars(study = "trap17",#
+                                  fit = fitss[f],#
+                                  sampling = sampling)#
+#
+        ps <- trap17:::sample_Hmsc(dat = dat,#
+                                   vars = vars,#
+                                   dirs = dirs,#
+                                   return_ps = TRUE)
+res[[f]] <- trap17:::do_cv(ps = ps,#
+                                       dat = dat,#
+                                       dirs = dirs,#
+                                       vars = vars,#
+                                       start_iter = start_iter,#
+                                       save_cv = TRUE,#
+                                       higher_eval_levels = TRUE)
+higher_eval_levels = TRUE
+save_cv = TRUE
+res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
+                     class = "cvresults")
+cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$sampling$nfolds, #
+                                           column = vars$partition)
+if (!is.null(vars$covDepXvars)) {#
+        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
+                                                             partition = cv_partition, #
+                                                             expected = expected,#
+                                                             start = start_iter,#
+                                                             alignPost = FALSE)#
+    } else {#
+        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
+                                                  partition = cv_partition, #
+                                                  expected = expected,#
+                                                  start = start_iter,#
+                                                  alignPost = TRUE)#
+    }
+expected = TRUE
+res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
+                     class = "cvresults")#
+    cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$sampling$nfolds, #
+                                           column = vars$partition)#
+#
+    if (!is.null(vars$covDepXvars)) {#
+        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
+                                                             partition = cv_partition, #
+                                                             expected = expected,#
+                                                             start = start_iter,#
+                                                             alignPost = FALSE)#
+    } else {#
+        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
+                                                  partition = cv_partition, #
+                                                  expected = expected,#
+                                                  start = start_iter,#
+                                                  alignPost = TRUE)#
+    }
+foldname <- create_name(study = vars$study,#
+                            totsamp = vars$sampling$totsamp,#
+                            nfolds = vars$sampling$nfolds, #
+                            type = "fold")
+cv_partition <- Hmsc:::createPartition(hM = ps, #
+                                           nfolds = vars$sampling$nfolds, #
+                                           column = vars$partition)
+if (!is.null(vars$covDepXvars)) {#
+        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
+                                                             partition = cv_partition, #
+                                                             expected = expected,#
+                                                             start = start_iter,#
+                                                             alignPost = FALSE)#
+    } else {#
+        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
+                                                  partition = cv_partition, #
+                                                  expected = expected,#
+                                                  start = start_iter,#
+                                                  alignPost = TRUE)#
+    }
+(!is.null(vars$covDepXvars))
+start_iter
+sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
+sampling$pred_start_iter
+saveRDS(sampling, #
+        file = file.path(dirs$fits, foldname, "sampling.rds"))
+sampling$pred_start_iter
+evals <- model_and_cv(dat = dat,#
+                      dirs = dirs,#
+                      variants = "ALL",#
+                      sampling = sampling,#
+                      start_iter = sampling$pred_start_iter,#
+                      saveCVs = TRUE)
+foldname
+saveRDS(evals, #
+        file = file.path(dirs$fits, foldname, "evals.rds"))
+foc_study <- "trap17_totsamp150"#
+foldname <- "trap17_totsamp150"
+pss <- list()#
+for (i in 1:3) {#
+    filename <- paste0("ps_", i, ".rds")#
+    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
+    names(pss)[i] <- filename #
+}
+eval_exp <- list()#
+preds_realz <- list()#
+preds_realz_cors <- list()#
+for (i in 1:length(pss)) {#
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
+                                            predY = preds_exp)#
+    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
+                                                     expected = FALSE)#
+    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
+}#
+eval_exp_arr <- lapply(eval_exp, simplify2array)#
+names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
+eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
+colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
+eval_exp_means#
+names(preds_realz_cors) <- paste0("ps", 1:length(preds_realz_cors))#
+preds_realz_cors_arr <- simplify2array(preds_realz_cors)#
+preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, #
+                                         colMeans,#
+                                         na.rm = TRUE))#
+colMeans(preds_realz_cors_means)
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))#
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
+str(evals)#
 lapply(tjurs, mean)#
 lapply(cors, mean)
-eval_exp_means
-str(cv_preds_variant)
-str(preds_realz)
+whichPs <- 2#
 preds_realz_variant <- preds_realz[[whichPs]]
+cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
+                                            paste0("cv_preds_nfolds", #
+                                                   sampling$nfolds, #
+                                                   "_ps_", #
+                                                   whichPs, #
+                                                   ".rds")))
 dimnames(preds_realz_variant) <- list(1:dim(preds_realz_variant)[1],#
                                   colnames(dat$Y_pooled),#
                                   1:dim(preds_realz_variant)[3])
 modelled_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",#
                                                            "Population")],#
                                Y_arr = preds_realz_variant)
-modelled_combs
+foldname
 saveRDS(modelled_combs, #
        file = file.path(dirs$fits, #
                         foldname, #
-                        paste0("modelled_combs_ps_", whichPs, ".rds")))
-dirs$fits
-foldname
+                        paste0("modelled_combs_ps_", whichPs, ".rds")))#
 modelled_combs <- readRDS(file = file.path(dirs$fits, #
                           foldname, #
-                          paste0("modelled_combs_ps_", whichPs, ".rds")))
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar),
-decreasing = TRUE)]
+                          paste0("modelled_combs_ps_", whichPs, ".rds")))#
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
 all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
 all_virus_combs
 virus_names <- colnames(pss[[whichPs]]$Y)#
 prev_ord_genot <- c(2, 4, 1, 3)#
-prev_ord_pop <- c(2, 3, 1, 4)
+prev_ord_pop <- c(2, 3, 1, 4)#
+#
 all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])
-all_virus_combs
+                     virus_names[length(virus_names):1])#
+#
 colrs <- load_colour_palette()#
 colmat <- cbind(all_virus_combs, colrs[[2]])#
 rownames(colmat) <- colmat[,1]#
 colmat_legend <- colmat
-for (g in prev_ord_genot) {#
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])#
+#
+# 3.2.3 Plot original co-occurrence combinations (Fig 4)#
+#
+# genotypes and populations are ordered by prevalence in the figures#
+virus_names <- colnames(pss[[whichPs]]$Y)#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)#
+#
+all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     virus_names[length(virus_names):1])#
+#
+colrs <- load_colour_palette()#
+colmat <- cbind(all_virus_combs, colrs[[2]])#
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
+all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
+                                         decreasing = TRUE)]#
+all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])#
+#
+# 3.2.3 Plot original co-occurrence combinations (Fig 4)#
+#
+# genotypes and populations are ordered by prevalence in the figures#
+virus_names <- colnames(pss[[whichPs]]$Y)#
+prev_ord_genot <- c(2, 4, 1, 3)#
+prev_ord_pop <- c(2, 3, 1, 4)
+all_virus_combs
+c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     virus_names[length(virus_names):1])
+all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
+                     virus_names[length(virus_names):1])
+colrs <- load_colour_palette()
+colrs
+colmat <- cbind(all_virus_combs, colrs[[2]])
+colrs[[2]]
+all_virus_combs
+colmat <- cbind(all_virus_combs, colrs[[2]][c(1:length(all_virus_combs))])
+rownames(colmat) <- colmat[,1]#
+colmat_legend <- colmat
+par(family = "serif", mfrow = c(1,4))#
+    for (g in prev_ord_genot) {#
         tmp11 <- c()#
         for (p in prev_ord_pop) {#
             tmp12 <- orig_combs[, g, p][rownames(colmat)]#
@@ -252,43 +579,7 @@ for (g in prev_ord_genot) {#
             col = colrs1,#
             xaxt = "n")#
     }
-par(family = "serif", mfrow = c(1, 4))
-for (g in prev_ord_genot) {#
-    tmp12 <- NULL#
-    tmp11 <- c()#
-    for (p in prev_ord_pop) {#
-            tmp12 <- modelled_combs[, g, p][rownames(colmat)]#
-            tmp11 <- cbind(tmp11, tmp12)#
-    }#
-    if (any(is.na(tmp11))) { #
-        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
-    }#
-    colrs1 <- colmat[rownames(tmp11), 2]#
-    colrs1 <- colrs1[nrow(tmp11):1]#
-    barplot(tmp11[nrow(tmp11):1,],#
-            col = colrs1,#
-            xaxt = "n")#
-            #legend.text = rownames(tmp11)[nrow(tmp11):1])#
-}
-file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("co_occs_ps_", #
-                            whichPs,#
-                            ".pdf")#
-                    )
-dirs$raw_data_figs
-# 3.2.5 predicted co-occurrence combinations (Fig 4)#
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("co_occs_ps_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "transparent", #
-    width = 15, #
-    height = 5)#
+orig_combs <- readRDS(file = file.path(dirs$raw_data_figs, "orig_combs.rds"))
 par(family = "serif", mfrow = c(1, 4))#
 for (g in prev_ord_genot) {#
     tmp12 <- NULL#
@@ -306,813 +597,24 @@ for (g in prev_ord_genot) {#
             col = colrs1,#
             xaxt = "n")#
             #legend.text = rownames(tmp11)[nrow(tmp11):1])#
-}#
-dev.off()
+}
+?computeVariancePartitioning
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                  group = sel, #
+                                  groupnames = selnames,#
+                                  start = sampling$pred_start_iter)
 whichPs <- 2#
 ps <- pss[[whichPs]]#
 #
-library(wesanderson)#
-wesandcols <- wes_palette("Cavalcanti1")[5:1]
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}
-head(ps$X)
-colnames(ps$X)
-selnames
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"))
-toPlot
-toPlot <- toPlot[cov_order, ]
-round(rowMeans(toPlot*100), 2)
-wesandcols_sel <- wesandcols[1:nrow(toPlot)]
-file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    )
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_sel,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-wesandcols <- c(wes_palette("Cavalcanti1")[5:2], "grey50")
-wesandcols_vp <- c(wes_palette("Cavalcanti1")[5:2], "grey50")
-wesandcols_vp <- c(wesandcols[2:5], "grey50")
-wesandcols_vp
-wesandcols <- wes_palette("Cavalcanti1")[5:1]#
-wesandcols_vp <- c(wesandcols[2:5], "grey50")
-wesandcols_vp
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_sel,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-wesandcols_sel <- wesandcols_vp[1:nrow(toPlot)]
-barplot(toPlot, #
-            col = wesandcols_sel,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-wesandcols_vp <- c("grey50", wesandcols)
-wesandcols_vp <- c("grey50", wesandcols)
-wesandcols_sel <- wesandcols_vp[1:nrow(toPlot)]
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_sel,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-wesandcols_vp <- c(wesandcols,"grey50")
-wesandcols_vp <- c(wesandcols, "grey50")
-wesandcols <- wes_palette("Cavalcanti1")[4:1]#
-wesandcols_vp <- c(wesandcols, "grey50")
-wesandcols_sel <- wesandcols_vp[1:nrow(toPlot)]
-barplot(toPlot, #
-            col = wesandcols_sel,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-wesandcols <- wes_palette("Cavalcanti1")[5:2]
-wesandcols_vp <- c(wesandcols, "grey50")
-wesandcols_vp
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_vp,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_sel[length(wesandcols_sel):1])
-barplot(toPlot, #
-            col = wesandcols_vp,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_vp[length(wesandcols_vp):1])
-wes_palette("Cavalcanti1")
-wesandcols <- wes_palette("Cavalcanti1")[c(1, 5, 2, 4)]
-wesandcols_vp <- c(wesandcols, "grey50")
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_vp,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_vp[length(wesandcols_vp):1])
-?computeVariancePartitioning
-vp
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "white", #
-    width = 7, #
-    height = 5)#
-    par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = wesandcols_vp,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = wesandcols_vp[length(wesandcols_vp):1])#
-dev.off()
-library(circleplot)#
-#
-if (whichPs == 3) {#
-    omgcors <- trap17:::computeAssociations_modified(ps)#
-    lev <- 1#
-    supportLevel <- 0#
-    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
-              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
-    toPlotDist <- list()#
-    for (i in 1:dim(toPlot)[3]) {#
-        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
-        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
-    }#
-} else {#
-    OmegaCor <- Hmsc:::computeAssociations(ps)#
-    lev <- 1#
-    supportLevel <- 0#
-    toPlot <- ((OmegaCor[[lev]]$support > supportLevel)#
-              + (OmegaCor[[lev]]$support < (1-supportLevel)) > 0) * OmegaCor[[lev]]$mean#
-    toPlotDist <- as.dist(toPlot)#
-    toPlotDist[which(toPlotDist == 0)] <- NA#
-}
-toPlotDist
-OmegaCor[[lev]]$support
-if (whichPs == 3) {#
-    pdf(file = file.path(dirs$fits,#
-                         foldname,#
-                         "figs", #
-                         paste0("omega_",#
-                         ps$rLNames[lev],#
-                         "_suppLev",#
-                         supportLevel * 100,#
-                         "_ps", #
-                         whichPs,#
-                         ".pdf")),#
-        bg = "transparent", #
-        width = 13, #
-        height = 3)#
-        par(family = "serif", mfrow = c(1, length(toPlotDist)))#
-            for (i in 1:length(toPlotDist)) {#
-                circleplot(toPlotDist[prev_ord_genot][[i]], #
-                           cluster = FALSE,#
-                           style = "classic",#
-                           plot.control = list(point.labels = TRUE,#
-                                               cex.point = 5,#
-                                               line.breaks = c(-1,0,1),#
-                                               line.cols = c("#00468b", "#c60032"),#
-                                               line.widths = 5))#
-            }#
-    dev.off()#
-} else {#
-    pdf(file = file.path(dirs$fits,#
-                         foldname,#
-                         "figs", #
-                         paste0("omega_",#
-                         ps$rLNames[lev],#
-                         "_suppLev",#
-                         supportLevel * 100,#
-                         "_ps", #
-                         whichPs,#
-                         ".pdf")),#
-        bg = "transparent", #
-        width = 3, #
-        height = 3)#
-        par(family = "serif")#
-        circleplot(toPlotDist, #
-                   cluster = FALSE,#
-                   style = "classic",#
-                   plot.control = list(point.labels = TRUE,#
-                                       cex.point = 5,#
-                                       line.breaks = c(-1,0,1),#
-                                       line.cols = c("#00468b", "#c60032"),#
-                                       line.widths = 5))#
-    dev.off()#
-}
-betaPost_ps <- Hmsc:::getPostEstimate(ps, "Beta", q = c(0.05, 0.95))#
-betaMeans_ps <- betaPost_ps$mean#
-rownames(betaMeans_ps) <- colnames(ps$X)#
-supportLevel <- 0.95#
-betaSig <- ((betaPost_ps$support > supportLevel)#
-            + (betaPost_ps$support < (1-supportLevel)) > 0)#
-betaSig <- betaSig * 1            #
-rownames(betaSig) <- colnames(ps$X)
-betaSig
-betaPost_ps <- Hmsc:::getPostEstimate(ps, "Beta", q = c(0.05, 0.95))#
-betaMeans_ps <- betaPost_ps$mean#
-rownames(betaMeans_ps) <- colnames(ps$X)#
-supportLevel <- 0.9#
-betaSig <- ((betaPost_ps$support > supportLevel)#
-            + (betaPost_ps$support < (1-supportLevel)) > 0)#
-betaSig <- betaSig * 1            #
-rownames(betaSig) <- colnames(ps$X)
-betas <- round(betaMeans_ps * betaSig, 2)
-betas
-betaMeans_ps
-?Hmsc
-Hmsc:::evaluateModelFit
-?auc
-citation(pROC)
-library(pROC)
-citation(pROC)
-citation("pROC")
-whichPs<-2
-whichPs<-3
-whichPs <- 3
-ps <- pss[[whichPs]]
-library(circleplot)
-omgcors <- trap17:::computeAssociations_modified(ps)#
-    lev <- 1#
-    supportLevel <- 0#
-    toPlot <- ((omgcors[[lev]]$support > supportLevel)#
-              + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean#
-    toPlotDist <- list()#
-    for (i in 1:dim(toPlot)[3]) {#
-        toPlotDist[[i]] <- as.dist(toPlot[,,i])#
-        toPlotDist[[i]][which(toPlotDist[[i]] == 0)] <- NA#
-    }
-toPlotDist
-omgcors[[lev]]$support
-citation("Hmsc")
-library(cooccur)
-cooc_test_genot <- list()#
-for (g in 1:length(unique(dat$X_pooled[,"Genotype"]))) {#
-    g1 <- sort(unique(dat$X_pooled[,"Genotype"]))[g]#
-    com <- t(dat$Y_pooled[which(dat$X_pooled[,"Genotype"]  == g1), ])#
-    tryCatch(#
-        expr = {#
-            cooc_test_genot[[g]] <- cooccur(mat = com,#
-                                            type = "spp_site",#
-                                            spp_names = TRUE,#
-                                            thresh = TRUE)#
-        },#
-        error = function(e) { print(e) },#
-        warning = function(w) { print(w) }#
-    )#
-}
-cooc_test_pop <- list()#
-for (p in 1:length(unique(dat$X_pooled[,"Population"]))) {#
-    p1 <- sort(unique(dat$X_pooled[,"Population"]))[p]#
-    com <- t(dat$Y_pooled[which(dat$X_pooled[,"Population"]  == p1), ])#
-    tryCatch(#
-        expr = {#
-            cooc_test_pop[[p]] <- cooccur(mat = com,#
-                                            type = "spp_site",#
-                                            spp_names = TRUE,#
-                                            thresh = TRUE)#
-        },#
-        error = function(e) { print(e) },#
-        warning = function(w) { print(w) }#
-    )#
-}#
-cooc_test_pop[[3]]$results # population 433
-cooc_test_genot[[2]]$results # genotype 609_19
-cooc_test_genot[[3]]$results # genotype 2818_6
-cooc_test <- cooccur(mat = t(dat$Y_pooled),#
-                     type = "spp_site",#
-                     spp_names = TRUE,#
-                     thresh = TRUE)
-cooc_test$results
-foldname
-whichPs <- 2#
-ps <- pss[[whichPs]]
-library(wesanderson)#
-wesandcols <- wes_palette("Cavalcanti1")[c(1, 5, 2, 4)]#
-wesandcols_vp <- c(wesandcols, "grey50")
-wesandcols_vp
-vp_cols <- c("#ffa500", "#3d9e3d", "#ff7b00", "#ffcf76", "#ff4d4d")
-whichPs
-# 3.3.1 variance partitioning#
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Population", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Random: Plant"))
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[length(vp_cols):1])
-vp_cols <- c("#ffa500", "#004d00", "#ff7b00", "#ffcf76", "#ff4d4d")
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[length(vp_cols):1])
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[length(vp_cols):1])
-cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))
-rownames(vp_cols) <- vp_cols[,1]
-cov_order
-vp_cols[cov_order,]
-cov_order
-vp_cols
-rownames(vp_cols) <- vp_cols[,2]
-vp_cols[cov_order,]
-vp_cols <- vp_cols[cov_order,]
-vp_cols
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols,#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[length(vp_cols):1])
-vp_cols
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)
-rm(list = ls(all = TRUE))#
-gc()
-# define working directory#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)#
-library("trap17")
-dirs <- set_dirs(working_dir = working_dir)
-dat <- trapdata
-foc_study <- "trap17_totsamp2e"#
-foldname <- "trap17_totsamp2e+05"
-sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
-pss <- list()#
-for (i in 1:2) {#
-    filename <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
-    names(pss)[i] <- filename #
-}
-pss <- list()#
-for (i in 1:3) {#
-    filename <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
-    names(pss)[i] <- filename #
-}
-eval_exp <- list()#
-preds_realz <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE)#
-}
-eval_exp_arr <- lapply(eval_exp, simplify2array)#
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means
-whichPs <- 2#
-ps <- pss[[whichPs]]
-vp_cols <- c("#ffa500", "#004d00", "#ff7b00", "#ffcf76", "#ff4d4d")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)
-file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    )
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "white", #
-    width = 7, #
-    height = 5)#
-    par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)#
-dev.off()
-vp_cols <- c("#ffa500", "#004d00", "#ff7b00", "#ffcf76", "#b10000")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)#
-#
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]#
-#
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "white", #
-    width = 7, #
-    height = 5)#
-    par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)#
-dev.off()
-vp_cols <- c("#ffa500", "#004d00", "#ffbf00", "#ffcf76", "#b10000")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]#
-#
-#b10000 nice red -> host plant level latent variable#
-#004d00 green -> local environmental context#
-#ffbf00 dark yellow -> host genotype#
-#ffa500 orange -> host plant size#
-#ffcf76 light orange -> signs of herbivory#
-# 3.3.1 variance partitioning#
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)#
-#
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)
-vp_cols <- c("#ffa500", "#004d00", "#ffbf00", "#ffe59a", "#b10000")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]#
-#
-#b10000 nice red -> host plant level latent variable#
-#004d00 green -> local environmental context#
-#ffbf00 dark yellow -> host genotype#
-#ffa500 orange -> host plant size#
-#ffe59a light orange -> signs of herbivory#
-# 3.3.1 variance partitioning#
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)#
-#
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)
-#library(wesanderson)#
-#wesandcols <- wes_palette("Cavalcanti1")[c(1, 5, 2, 4)]#
-#wesandcols_vp <- c(wesandcols, "grey50")#
-vp_cols <- c("#cc9900", "#004d00", "#ffbf00", "#ffe59a", "#b10000")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]#
-#
-#b10000 nice red -> host plant level latent variable#
-#004d00 green -> local environmental context#
-#ffbf00 dark yellow -> host genotype#
-#cc9900 orange -> host plant size#
-#ffe59a light orange -> signs of herbivory#
-# 3.3.1 variance partitioning#
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)#
-#
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]
-par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "white", #
-    width = 7, #
-    height = 5)#
-    par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)#
-dev.off()
-round(rowMeans(toPlot*100), 2)
-?computePredictedValues
-#library(wesanderson)#
-#wesandcols <- wes_palette("Cavalcanti1")[c(1, 5, 2, 4)]#
-#wesandcols_vp <- c(wesandcols, "grey50")#
 vp_cols <- c("#cc9900", "#004D40", "#ffbf00", "#ffe59a", "#D81B60")#
 vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
 rownames(vp_cols) <- vp_cols[, 2]#
-#
 #D81B60 nice red -> host plant level latent variable#
 #004D40 green -> local environmental context#
 #ffbf00 dark yellow -> host genotype#
 #cc9900 orange -> host plant size#
 #ffe59a light orange -> signs of herbivory#
+#
 # 3.3.1 variance partitioning#
 sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
 selnames <- c("Intercept", #
@@ -1123,63 +625,78 @@ selnames <- c("Intercept", #
 if (whichPs == 1) {#
     selnames <- selnames[-which(selnames == "Genotype")]#
     sel <- c(1, 2, rep(3, 3), 4)#
-}#
-#
+}
 vp <- Hmsc::computeVariancePartitioning(ps, #
                                   group = sel, #
-                                  groupnames = selnames)#
+                                  groupnames = selnames,#
+                                  start = sampling$pred_start_iter)
+sampling$pred_start_iter
+warnings()
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                  group = sel, #
+                                  groupnames = selnames)
+ps
+sampling$pred_start_iter
+?computeVariancePartitioning
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                        group = sel, #
+                                        groupnames = selnames,#
+                                        start = 1)
+vp <- Hmsc::computeVariancePartitioning(ps, #
+                                        group = sel, #
+                                        groupnames = selnames,#
+                                        start = 10)
+whichPs <- 2#
+ps <- pss[[whichPs]]
+mpost <- Hmsc:::convertToCodaObject(ps, start = start = sampling$pred_start_iter)
+mpost <- Hmsc:::convertToCodaObject(ps, start = sampling$pred_start_iter)
+par(family = "serif", mfrow = c(1, 1))#
+plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
+evals
+str(evals)
+385+162
+385+1062
+?computePredictedValues
+eval_exp <- list()#
+preds_realz <- list()#
+preds_realz_cors <- list()#
+for (i in 1:length(pss)) {#
+    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]],#
+                                              start = sampling$pred_start_iter)#
+    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
+                                            predY = preds_exp)#
+    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
+                                                     expected = FALSE,#
+                                                     start = sampling$pred_start_iter)#
+    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
+}
+?Hmsc:::getPostEstimate
+ps
+betaPost_ps <- Hmsc:::getPostEstimate(ps, #
+                                      "Beta", #
+                                      q = c(0.05, 0.95),#
+                                      start = sampling$pred_start_iter)
+rownames(betaMeans_ps) <- colnames(ps$X)
+rownames(betaMeans_ps) <- colnames(ps$X)#
+# Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population2")] <- "Pop3302"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population3")] <- "Pop9031"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population4")] <- "Pop433"#
 #
-toPlot <- vp$vals[-1,]#
-toPlot <- toPlot[nrow(toPlot):1,]#
-toPlot <- toPlot[, colnames(ps$Y)[order(colSums(ps$Y), decreasing = TRUE)]]#
-cov_order <- switch(as.character(whichPs), #
-                    "1" = c("Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "2" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"), #
-                    "3" = c("Genotype", #
-                            "Plant.area", #
-                            "Herbivory", #
-                            "Population", #
-                            "Random: Plant"))#
-toPlot <- toPlot[cov_order, ]#
-round(rowMeans(toPlot*100), 2)#
-vp_cols <- vp_cols[cov_order,]#
+# Genotypes: 1 = 511_14, 2 = 609_19, 3 = 2818_6, 4 = 4_13#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype2")] <- "Gen609_19"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype3")] <- "Gen2818_6"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype4")] <- "Gen4_13"
+rownames(betaMeans_ps) <- colnames(ps$X)
+betaMeans_ps <- betaPost_ps$mean
+rownames(betaMeans_ps) <- colnames(ps$X)#
+# Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population2")] <- "Pop3302"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population3")] <- "Pop9031"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population4")] <- "Pop433"#
 #
-pdf(file = file.path(dirs$fits, #
-                     foldname, #
-                     "figs",#
-                     paste0("varpart_", #
-                            whichPs,#
-                            ".pdf")#
-                    ),#
-    bg = "white", #
-    width = 7, #
-    height = 5)#
-    par(family = "serif", mar = c(8,3,2,10), xpd = TRUE)#
-    barplot(toPlot, #
-            col = vp_cols[,1],#
-            xpd = TRUE,#
-            las = 2)#
-    legend(x = 6.25, y = 1, #
-           legend = rownames(toPlot)[nrow(toPlot):1],#
-           fill = vp_cols[nrow(vp_cols):1],1)#
-dev.off()
-file.path(dirs$fits, foldname, #
-                                            paste0("cv_preds_nfolds", #
-                                                   sampling$nfolds, #
-                                                   "_ps_", #
-                                                   whichPs, #
-                                                   ".rds"))
-cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
-                                            paste0("cv_preds_nfolds", #
-                                                   sampling$nfolds, #
-                                                   "_ps_", #
-                                                   whichPs, #
-                                                   ".rds")))
-str(cv_preds_variant)
+# Genotypes: 1 = 511_14, 2 = 609_19, 3 = 2818_6, 4 = 4_13#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype2")] <- "Gen609_19"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype3")] <- "Gen2818_6"#
+rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype4")] <- "Gen4_13"
+betaMeans_ps

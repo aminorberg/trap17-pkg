@@ -12,6 +12,7 @@ model_and_cv <- function(dat,
                          dirs,
                          variants = "ALL",
                          sampling,
+                         start_iter,
                          do_cv = TRUE,
                          saveCVs = TRUE) 
 {
@@ -38,6 +39,7 @@ model_and_cv <- function(dat,
                                        dat = dat,
                                        dirs = dirs,
                                        vars = vars,
+                                       start_iter = start_iter,
                                        save_cv = TRUE,
                                        higher_eval_levels = TRUE)               
         } 

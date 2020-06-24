@@ -4,7 +4,7 @@
 \alias{just_cv}
 \title{Do cross-validation}
 \usage{
-just_cv(dat, dirs, variants = "ALL", sampling, saveCVs = TRUE)
+just_cv(dat, dirs, variants = "ALL", sampling, start_iter, saveCVs = TRUE)
 }
 \arguments{
 \item{dat}{Data}
