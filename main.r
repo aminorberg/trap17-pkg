@@ -69,7 +69,6 @@ foldname <- "trap17_totsamp3e+05"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
-
 # 3.0 just cross validation (models need to be fitted beforehand)
 whichPs <- 2
 cv_realisations <- just_cv(dat = dat, 
