@@ -1,3 +1,199 @@
+citation("mvabund")
+citation("yaImpute")
+paste(FD,set_no,"/gjam_",j,".RData",sep="")
+r
+rm(list = ls())#
+install.packages(c("tidyr","dplyr"))
+system("defaults write org.R-project.R force.LANG en_US.UTF-8")
+sum(is.na(sp_occ_probs[[1]]))
+newIDs
+load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/PREDICTIONS/birds/bc2_PAs_1_150.RData")
+m<-2
+j<-1
+require(BayesComm)
+bc<-bc2
+?predict.bc
+?predict.BC
+?predict
+require(nlme)#
+require(MASS)
+?glmmPQL
+FD2 <- paste(WD,"FITS2/",sep="")
+require(e1071)
+?svm
+library(sppairs)#
+# then import a site by species matrix for example purposes#
+library(cooccur)#
+data(beetles)#
+# remove rare species (<10% sites)#
+dataset <-clean.dataset(beetles, cutoff.min=0.1)
+or.symmetric(dataset[, 1:2]) # Symmetric odds ratio = 28.89#
+or.asymmetric(dataset[, 1:2]) # Asymmetric odds ratio = 11.45#
+mutual.information(dataset[, 1:2]) # MI = 0.235#
+cor(dataset[, 1], dataset[, 2]) # Pearson's correlation (from base R) = 0.62
+# default is to calculate the symmetric odds ratio#
+result <-spaa(dataset)
+# create grouping variable for example purposes ONLY#
+groups <-as.factor(rep(c(1:10), length.out=dim(beetles)[1])) #
+# alternatively, return some raw coefficients from mixed models, rather than odds ratios#
+result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)
+result <-spaa(dataset, method='glmer.coef', random.effect=groups, asymmetric=TRUE)[, 1:3]
+plot.spaa(result)
+graph.data <- graph_from_data_frame(result)
+plot(graph.data) # see ?igraph.plotting for more options
+result
+graph.data
+?graph_from_data_frame
+str(nmds_m)
+for (e in 2:length(ENS)) {#
+	for (p in 1:length(PRV)) {#
+		opts<-list(modelEnsemble=ENS[[e]],prevaleceThreshold=PRV[[p]])		#
+		for (sz in 1:2) {#
+			# modify predictions to probs, sp richness, beta indices	#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"sp_occ_probs.r",sep="/"))#
+			}#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"sp_rich_site.r",sep="/"))#
+			}#
+			for (d in 1:length(Sets)) {#
+				set_no <- Sets[d]#
+				source(readdata)#
+				source(paste(modpredsFolder,"beta_inds.r",sep="/"))#
+			}#
+		}#
+	}#
+}
+require(doParallel)
+require(doMC)
+?doParallel
+filebody<-paste(RDfinal,dataN[sz],"/meta_analysis/PMS",sep="")
+?axis
+load("/Users/anorberg/OneDrive - University of Helsinki/bakeoff/pipeline/RESULTS2/birds/sp_occ_probs_150.RData")
+ls()
+str(sp_occ_probs)
+50*15
+0.7*0.3
+sqrt(0.7*0.3)
+30/75
+5/12
+require(gjam)
+?gjam
+.\Localadmin_anorberg
+(1000/30)*9
+}
+library('MASS')
+a <- 5
+require(Hmsc)
+Hmsc::Hmsc
+?structure
+structure(1:6, dim = 2:3)
+?class
+?Hmsc
+Hmsc::Hmsc
+Hmsc::Hmsc::Hmsc
+Hmsc:::Hmsc
+c <- structure(list("a"=1, "b"=2), class="myclass")
+c
+library(Hmsc)
+?Hmsc
+Hmsc::computeDataParameters
+rLs
+library("sdmCom")
+?sdmCom
+?get_os
+get_os <- function() {#
+  if (.Platform$OS.type == "windows") { #
+    "win"#
+  } else if (Sys.info()["sysname"] == "Darwin") {#
+    "osx" #
+  } else if (.Platform$OS.type == "unix") { #
+    "unix"#
+  } else {#
+    stop("Unknown OS")#
+  }#
+}
+get_os()
+os <- get_os()
+os
+library("sdmCom")
+?get_os
+?sdmCom
+library("sdmCom")
+?sdmCom
+?get_os
+library("sdmCom")
+?get_os
+?sdmCom
+#' Identify your operating system#
+#'#
+#' @return Your operating system, either OSX, Unix or Windows#
+#' @examples#
+#' os <- get_os()#
+#' os#
+#
+get_os <- function() {#
+  if (.Platform$OS.type == "windows") { #
+    "win"#
+  } else if (Sys.info()["sysname"] == "Darwin") {#
+    "osx" #
+  } else if (.Platform$OS.type == "unix") { #
+    "unix"#
+  } else {#
+    stop("Unknown OS")#
+  }#
+}#
+#
+roxygen2::roxygenise()
+?roxygenise
+roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
+?sdmCom
+library("sdmCom")
+?sdmCom
+os <- get_os()#
+os
+?sample
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y
+y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
+common_sp <- function(y, prevalence_threshold = 0.1) {#
+    com_sp <- which((colSums(y)/nrow(y)) >= prevalence_threshold)#
+    return(com_sp)#
+#
+}
+y_subset <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
+y_subset <- y[,y_subset_inds]
+y_subset
+set.seed(7)
+y <- matrix(sample(c(0,1), 100, replace = TRUE), ncol=5)
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.25)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.5)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.6)
+y_subset <- y[,y_subset_inds]
+y_subset
+y_subset_inds
+y_subset_inds <- common_sp(y=y, prevalence_threshold = 0.4)
+y_subset <- y[,y_subset_inds]
+y_subset
+roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/sdmCom")
 library("sdmCom")
 ?sdmCom
 roxygen2::roxygenize(package.dir = "/Users/anorberg/OneDrive - University of Helsinki/bakeoff/r-package/pkg/sdmCom")
@@ -171,532 +367,26 @@ library("trap17")#
 #
 dirs <- set_dirs(working_dir = working_dir)
 dat <- trapdata
-foc_study <- "trap17_totsamp3e"#
-foldname <- "trap17_totsamp3e+05"#
-#
-sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
-pss <- list()#
-for (i in 1:3) {#
-    filename <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
-    names(pss)[i] <- filename #
-}
-eval_exp <- list()#
-preds_realz <- list()#
-preds_realz_cors <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE)#
-    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
-}
-rm(list = ls(all = TRUE)) #
-gc()#
-#install.packages("devtools")#
-#install_github("klutometis/roxygen")#
-#
-library("devtools")#
-library("roxygen2")#
-#
-root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"#
-#
-### create the package#
-#setwd(root_dir)#
-#create("trap17")#
-### document the package#
-setwd(pkg_dir)#
-document()
-setwd(working_dir)#
-install("trap17")
-library("trap17")
-# 1 DATA: importation (and processing)#
-rm(list = ls(all = TRUE))#
-gc()
-# define working directory#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)#
-library("trap17")#
-#
-dirs <- set_dirs(working_dir = working_dir)
-dat <- trapdata
-foc_study <- "trap17_totsamp3e"#
-foldname <- "trap17_totsamp3e+05"#
-#
-sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
-pss <- list()#
-for (i in 1:3) {#
-    filename <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
-    names(pss)[i] <- filename #
-}
-eval_exp <- list()#
-preds_realz <- list()#
-preds_realz_cors <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE)#
-    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
-}
-eval_exp_arr <- lapply(eval_exp, simplify2array)
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means
-names(preds_realz_cors) <- paste0("ps", 1:length(preds_realz_cors))#
-preds_realz_cors_arr <- simplify2array(preds_realz_cors)#
-preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, #
-                                         colMeans,#
-                                         na.rm = TRUE))#
-colMeans(preds_realz_cors_means)
-preds_realz_cors_means
-whichPs <- 2#
-ps <- pss[[whichPs]]
-mpost <- Hmsc:::convertToCodaObject(ps)
-par(family = "serif", mfrow = c(1, 1))#
-plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
-par(family = "serif", mfrow = c(1, 1))#
-plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
-whichPs <- 2#
-ps <- pss[[whichPs]]#
-#
-mpost <- Hmsc:::convertToCodaObject(ps)#
-par(family = "serif", mfrow = c(1, 1))#
-plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
-?Hmsc:::convertToCodaObject
-ps
-mpost <- Hmsc:::convertToCodaObject(ps, start = 501)
-par(family = "serif", mfrow = c(1, 1))#
-plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
-?Hmsc
-?Hmsc
-?computePredictedValues
-sampling
-sampling$totsamp - sampling$trans
-(sampling$totsamp - sampling$trans) / 2
-(sampling$totsamp - sampling$trans) / 100
-((sampling$totsamp - sampling$trans) / 100) / 2
-(((sampling$totsamp - sampling$trans) / 100) / 2) + 1
 sampling <- sampling_settings(totsamp = 300000,#
-                              trans = 100000,#
+                              trans = 200000,#
                               thn = 100,#
                               nchains = 2,#
-                              nfolds = 10)#
-(((sampling$totsamp - sampling$trans) / 100) / 2) + 1
-sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / 100) / 2) + 1)
-sampling
-rm(list = ls(all = TRUE)) #
-gc()#
-#install.packages("devtools")#
-#install_github("klutometis/roxygen")#
-#
-library("devtools")#
-library("roxygen2")#
-#
-root_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg"#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-pkg_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg/trap17"#
-#
-### create the package#
-#setwd(root_dir)#
-#create("trap17")#
-### document the package#
-setwd(pkg_dir)#
-document()
-### install and load#
-setwd(working_dir)#
-install("trap17")
-library("trap17")
-# 1 DATA: importation (and processing)#
-rm(list = ls(all = TRUE))#
-gc()#
-#
-# define working directory#
-working_dir <- "/Users/anorberg/Documents/Zurich/UZH/TRAP/pkg/trap17-pkg"#
-setwd(working_dir)#
-library("trap17")#
-#
-dirs <- set_dirs(working_dir = working_dir)
-dat <- trapdata
-sampling <- sampling_settings(totsamp = 150,#
-                              trans = 50,#
-                              thn = 1,#
-                              nchains = 1,#
-                              nfolds = 2)
-sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / 100) / 2) + 1)
+                              nfolds = 10)
 foldname <- create_name(study = "trap17",#
                         totsamp = sampling$totsamp,#
                         nfolds = sampling$nfolds, #
-                        type = "fold")
+                        type = "fold")#
 create_directories(foldname = foldname, dirs = dirs)
+# save also the sampling settings#
 saveRDS(sampling, #
         file = file.path(dirs$fits, foldname, "sampling.rds"))
 evals <- model_and_cv(dat = dat,#
                       dirs = dirs,#
                       variants = "ALL",#
                       sampling = sampling,#
-                      start_iter = sampling$pred_start_iter,#
                       saveCVs = TRUE)
-start_iter = sampling$pred_start_iter
-saveCVs = TRUE
-saveCVs = TRUE
-do_cv = TRUE
-variants = "ALL"
-if (any(variants == "ALL")) {#
-        fitss <- as.character(1:3)#
-    } else {#
-        fitss <- as.character(variants)#
-    }#
-    res <- list()
-f<-1
-vars <- trap17:::set_vars(study = "trap17",#
-                                  fit = fitss[f],#
-                                  sampling = sampling)#
-#
-        ps <- trap17:::sample_Hmsc(dat = dat,#
-                                   vars = vars,#
-                                   dirs = dirs,#
-                                   return_ps = TRUE)
-res[[f]] <- trap17:::do_cv(ps = ps,#
-                                       dat = dat,#
-                                       dirs = dirs,#
-                                       vars = vars,#
-                                       start_iter = start_iter,#
-                                       save_cv = TRUE,#
-                                       higher_eval_levels = TRUE)
-higher_eval_levels = TRUE
-save_cv = TRUE
-res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
-                     class = "cvresults")
-cv_partition <- Hmsc:::createPartition(hM = ps, #
-                                           nfolds = vars$sampling$nfolds, #
-                                           column = vars$partition)
-if (!is.null(vars$covDepXvars)) {#
-        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
-                                                             partition = cv_partition, #
-                                                             expected = expected,#
-                                                             start = start_iter,#
-                                                             alignPost = FALSE)#
-    } else {#
-        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
-                                                  partition = cv_partition, #
-                                                  expected = expected,#
-                                                  start = start_iter,#
-                                                  alignPost = TRUE)#
-    }
-expected = TRUE
-res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),#
-                     class = "cvresults")#
-    cv_partition <- Hmsc:::createPartition(hM = ps, #
-                                           nfolds = vars$sampling$nfolds, #
-                                           column = vars$partition)#
-#
-    if (!is.null(vars$covDepXvars)) {#
-        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
-                                                             partition = cv_partition, #
-                                                             expected = expected,#
-                                                             start = start_iter,#
-                                                             alignPost = FALSE)#
-    } else {#
-        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
-                                                  partition = cv_partition, #
-                                                  expected = expected,#
-                                                  start = start_iter,#
-                                                  alignPost = TRUE)#
-    }
-foldname <- create_name(study = vars$study,#
-                            totsamp = vars$sampling$totsamp,#
-                            nfolds = vars$sampling$nfolds, #
-                            type = "fold")
-cv_partition <- Hmsc:::createPartition(hM = ps, #
-                                           nfolds = vars$sampling$nfolds, #
-                                           column = vars$partition)
-if (!is.null(vars$covDepXvars)) {#
-        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, #
-                                                             partition = cv_partition, #
-                                                             expected = expected,#
-                                                             start = start_iter,#
-                                                             alignPost = FALSE)#
-    } else {#
-        cv_preds <- Hmsc:::computePredictedValues(hM = ps, #
-                                                  partition = cv_partition, #
-                                                  expected = expected,#
-                                                  start = start_iter,#
-                                                  alignPost = TRUE)#
-    }
-(!is.null(vars$covDepXvars))
-start_iter
-sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
-sampling$pred_start_iter
-saveRDS(sampling, #
-        file = file.path(dirs$fits, foldname, "sampling.rds"))
-sampling$pred_start_iter
-evals <- model_and_cv(dat = dat,#
-                      dirs = dirs,#
-                      variants = "ALL",#
-                      sampling = sampling,#
-                      start_iter = sampling$pred_start_iter,#
-                      saveCVs = TRUE)
-foldname
+load("/Users/anorberg/Documents/Zurich/UZH/META/co_occ_analysis/tp_vir.rds")
+str(evals)
+file.path(dirs$fits, foldname, "evals.rds")
 saveRDS(evals, #
         file = file.path(dirs$fits, foldname, "evals.rds"))
-foc_study <- "trap17_totsamp150"#
-foldname <- "trap17_totsamp150"
-pss <- list()#
-for (i in 1:3) {#
-    filename <- paste0("ps_", i, ".rds")#
-    pss[[i]] <- readRDS(file = file.path(dirs$fits, foldname, filename))#
-    names(pss)[i] <- filename #
-}
-eval_exp <- list()#
-preds_realz <- list()#
-preds_realz_cors <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]])#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE)#
-    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
-}#
-eval_exp_arr <- lapply(eval_exp, simplify2array)#
-names(eval_exp_arr) <- paste0("ps", 1:length(eval_exp_arr))#
-eval_exp_means <- simplify2array(lapply(eval_exp, lapply, mean))#
-colnames(eval_exp_means) <- paste0("ps", 1:ncol(eval_exp_means))#
-eval_exp_means#
-names(preds_realz_cors) <- paste0("ps", 1:length(preds_realz_cors))#
-preds_realz_cors_arr <- simplify2array(preds_realz_cors)#
-preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, #
-                                         colMeans,#
-                                         na.rm = TRUE))#
-colMeans(preds_realz_cors_means)
-evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))#
-tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)#
-cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)#
-str(evals)#
-lapply(tjurs, mean)#
-lapply(cors, mean)
-whichPs <- 2#
-preds_realz_variant <- preds_realz[[whichPs]]
-cv_preds_variant <- readRDS(file = file.path(dirs$fits, foldname, #
-                                            paste0("cv_preds_nfolds", #
-                                                   sampling$nfolds, #
-                                                   "_ps_", #
-                                                   whichPs, #
-                                                   ".rds")))
-dimnames(preds_realz_variant) <- list(1:dim(preds_realz_variant)[1],#
-                                  colnames(dat$Y_pooled),#
-                                  1:dim(preds_realz_variant)[3])
-modelled_combs <- co_occ_combs(partition = dat$X_pooled[,c("Genotype",#
-                                                           "Population")],#
-                               Y_arr = preds_realz_variant)
-foldname
-saveRDS(modelled_combs, #
-       file = file.path(dirs$fits, #
-                        foldname, #
-                        paste0("modelled_combs_ps_", whichPs, ".rds")))#
-modelled_combs <- readRDS(file = file.path(dirs$fits, #
-                          foldname, #
-                          paste0("modelled_combs_ps_", whichPs, ".rds")))#
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
-                                         decreasing = TRUE)]#
-all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])
-all_virus_combs
-virus_names <- colnames(pss[[whichPs]]$Y)#
-prev_ord_genot <- c(2, 4, 1, 3)#
-prev_ord_pop <- c(2, 3, 1, 4)#
-#
-all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])#
-#
-colrs <- load_colour_palette()#
-colmat <- cbind(all_virus_combs, colrs[[2]])#
-rownames(colmat) <- colmat[,1]#
-colmat_legend <- colmat
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
-                                         decreasing = TRUE)]#
-all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])#
-#
-# 3.2.3 Plot original co-occurrence combinations (Fig 4)#
-#
-# genotypes and populations are ordered by prevalence in the figures#
-virus_names <- colnames(pss[[whichPs]]$Y)#
-prev_ord_genot <- c(2, 4, 1, 3)#
-prev_ord_pop <- c(2, 3, 1, 4)#
-#
-all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])#
-#
-colrs <- load_colour_palette()#
-colmat <- cbind(all_virus_combs, colrs[[2]])#
-rownames(colmat) <- colmat[,1]#
-colmat_legend <- colmat
-all_virus_combs <- as.character(unique(dimnames(modelled_combs)[[1]]))#
-all_virus_combs <- all_virus_combs[order(sapply(all_virus_combs, nchar), #
-                                         decreasing = TRUE)]#
-all_virus_combs <- c("Empty", all_virus_combs[-which(all_virus_combs == "Empty")])#
-#
-# 3.2.3 Plot original co-occurrence combinations (Fig 4)#
-#
-# genotypes and populations are ordered by prevalence in the figures#
-virus_names <- colnames(pss[[whichPs]]$Y)#
-prev_ord_genot <- c(2, 4, 1, 3)#
-prev_ord_pop <- c(2, 3, 1, 4)
-all_virus_combs
-c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])
-all_virus_combs <- c(all_virus_combs[-c(length(all_virus_combs):(length(all_virus_combs)-4))], #
-                     virus_names[length(virus_names):1])
-colrs <- load_colour_palette()
-colrs
-colmat <- cbind(all_virus_combs, colrs[[2]])
-colrs[[2]]
-all_virus_combs
-colmat <- cbind(all_virus_combs, colrs[[2]][c(1:length(all_virus_combs))])
-rownames(colmat) <- colmat[,1]#
-colmat_legend <- colmat
-par(family = "serif", mfrow = c(1,4))#
-    for (g in prev_ord_genot) {#
-        tmp11 <- c()#
-        for (p in prev_ord_pop) {#
-            tmp12 <- orig_combs[, g, p][rownames(colmat)]#
-            tmp11 <- cbind(tmp11, tmp12)#
-        }#
-    if (any(is.na(tmp11))) { #
-        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
-    }#
-    colrs1 <- colmat[rownames(tmp11), 2]#
-    colrs1 <- colrs1[nrow(tmp11):1]#
-    barplot(tmp11[nrow(tmp11):1,],#
-            col = colrs1,#
-            xaxt = "n")#
-    }
-orig_combs <- readRDS(file = file.path(dirs$raw_data_figs, "orig_combs.rds"))
-par(family = "serif", mfrow = c(1, 4))#
-for (g in prev_ord_genot) {#
-    tmp12 <- NULL#
-    tmp11 <- c()#
-    for (p in prev_ord_pop) {#
-            tmp12 <- modelled_combs[, g, p][rownames(colmat)]#
-            tmp11 <- cbind(tmp11, tmp12)#
-    }#
-    if (any(is.na(tmp11))) { #
-        tmp11 <- tmp11[-which(is.na(tmp11), arr.ind = TRUE)[,1],]#
-    }#
-    colrs1 <- colmat[rownames(tmp11), 2]#
-    colrs1 <- colrs1[nrow(tmp11):1]#
-    barplot(tmp11[nrow(tmp11):1,],#
-            col = colrs1,#
-            xaxt = "n")#
-            #legend.text = rownames(tmp11)[nrow(tmp11):1])#
-}
-?computeVariancePartitioning
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames,#
-                                  start = sampling$pred_start_iter)
-whichPs <- 2#
-ps <- pss[[whichPs]]#
-#
-vp_cols <- c("#cc9900", "#004D40", "#ffbf00", "#ffe59a", "#D81B60")#
-vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))#
-rownames(vp_cols) <- vp_cols[, 2]#
-#D81B60 nice red -> host plant level latent variable#
-#004D40 green -> local environmental context#
-#ffbf00 dark yellow -> host genotype#
-#cc9900 orange -> host plant size#
-#ffe59a light orange -> signs of herbivory#
-#
-# 3.3.1 variance partitioning#
-sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) #
-selnames <- c("Intercept", #
-              "Plant.area", #
-              "Population", #
-              "Genotype", #
-              "Herbivory")#
-if (whichPs == 1) {#
-    selnames <- selnames[-which(selnames == "Genotype")]#
-    sel <- c(1, 2, rep(3, 3), 4)#
-}
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames,#
-                                  start = sampling$pred_start_iter)
-sampling$pred_start_iter
-warnings()
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                  group = sel, #
-                                  groupnames = selnames)
-ps
-sampling$pred_start_iter
-?computeVariancePartitioning
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                        group = sel, #
-                                        groupnames = selnames,#
-                                        start = 1)
-vp <- Hmsc::computeVariancePartitioning(ps, #
-                                        group = sel, #
-                                        groupnames = selnames,#
-                                        start = 10)
-whichPs <- 2#
-ps <- pss[[whichPs]]
-mpost <- Hmsc:::convertToCodaObject(ps, start = start = sampling$pred_start_iter)
-mpost <- Hmsc:::convertToCodaObject(ps, start = sampling$pred_start_iter)
-par(family = "serif", mfrow = c(1, 1))#
-plot(mpost$Beta, auto.layout = FALSE, density = FALSE, ask = TRUE)
-evals
-str(evals)
-385+162
-385+1062
-?computePredictedValues
-eval_exp <- list()#
-preds_realz <- list()#
-preds_realz_cors <- list()#
-for (i in 1:length(pss)) {#
-    preds_exp <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                              start = sampling$pred_start_iter)#
-    eval_exp[[i]] <- Hmsc::evaluateModelFit(hM = pss[[i]], #
-                                            predY = preds_exp)#
-    preds_realz[[i]] <- Hmsc::computePredictedValues(hM = pss[[i]],#
-                                                     expected = FALSE,#
-                                                     start = sampling$pred_start_iter)#
-    preds_realz_cors[[i]] <- higher_cors(dat = dat, preds = preds_realz[[i]])#
-}
-?Hmsc:::getPostEstimate
-ps
-betaPost_ps <- Hmsc:::getPostEstimate(ps, #
-                                      "Beta", #
-                                      q = c(0.05, 0.95),#
-                                      start = sampling$pred_start_iter)
-rownames(betaMeans_ps) <- colnames(ps$X)
-rownames(betaMeans_ps) <- colnames(ps$X)#
-# Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population2")] <- "Pop3302"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population3")] <- "Pop9031"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population4")] <- "Pop433"#
-#
-# Genotypes: 1 = 511_14, 2 = 609_19, 3 = 2818_6, 4 = 4_13#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype2")] <- "Gen609_19"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype3")] <- "Gen2818_6"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype4")] <- "Gen4_13"
-rownames(betaMeans_ps) <- colnames(ps$X)
-betaMeans_ps <- betaPost_ps$mean
-rownames(betaMeans_ps) <- colnames(ps$X)#
-# Populations: 1 = 877, 2 = 3302, 3 = 9031, 4 = 433#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population2")] <- "Pop3302"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population3")] <- "Pop9031"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Population4")] <- "Pop433"#
-#
-# Genotypes: 1 = 511_14, 2 = 609_19, 3 = 2818_6, 4 = 4_13#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype2")] <- "Gen609_19"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype3")] <- "Gen2818_6"#
-rownames(betaMeans_ps)[which(rownames(betaMeans_ps) == "Genotype4")] <- "Gen4_13"
-betaMeans_ps

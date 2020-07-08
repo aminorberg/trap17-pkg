@@ -12,7 +12,7 @@ do_cv(
   higher_eval_levels = TRUE,
   save_cv = TRUE,
   start_iter,
-  expected = TRUE
+  expect = "both"
 )
 }
 \arguments{

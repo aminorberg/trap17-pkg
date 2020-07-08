@@ -39,6 +39,7 @@ model_and_cv <- function(dat,
                                        dat = dat,
                                        dirs = dirs,
                                        vars = vars,
+                                       expect = "both",
                                        start_iter = start_iter,
                                        save_cv = TRUE,
                                        higher_eval_levels = TRUE)               

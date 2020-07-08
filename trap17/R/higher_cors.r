@@ -30,3 +30,4 @@ higher_cors <- function(dat,
     }
     return(corrs)
 }
+

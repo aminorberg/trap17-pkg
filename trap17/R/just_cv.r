@@ -13,11 +13,12 @@ just_cv <- function(dat,
                     variants = "ALL",
                     sampling,
                     start_iter,
+                    expect = "both",
                     saveCVs = TRUE) 
 {
 
     if (any(variants == "ALL")) {
-        fitss <- as.character(1:6)
+        fitss <- as.character(1:3)
     } else {
         fitss <- as.character(variants)
     }
@@ -28,10 +29,9 @@ just_cv <- function(dat,
         vars <- trap17:::set_vars(study = "trap17",
                                   fit = fitss[f],
                                   sampling = sampling)
-
         foldname <- create_name(study = vars$study,
-                                totsamp = vars$totsamp,
-                                nfolds = vars$nfolds, 
+                                totsamp = vars$sampling$totsamp,
+                                nfolds = vars$sampling$nfolds, 
                                 type = "fold")
         output_dir <- file.path(dirs$fits, foldname)
         filename <- paste("ps", vars$fit, sep = "_")
@@ -43,20 +43,10 @@ just_cv <- function(dat,
                                    dirs = dirs,
                                    vars = vars,
                                    start_iter = start_iter,
+                                   expect = expect,
                                    save_cv = TRUE,
                                    higher_eval_levels = TRUE)               
     }                     
     names(res) <- paste0("ps", fitss)
-
-    if (saveCVs) {
-        foldname <- create_name(study = vars$study,
-                                totsamp = vars$totsamp,
-                                nfolds = vars$nfolds, 
-                                type = "fold")
-        output_dir <- file.path(dirs$fits, foldname)
-        filename <- "cv_res_all.rds"
-        saveRDS(res, file = file.path(output_dir, filename))
-    }
-
     return(res)
 }

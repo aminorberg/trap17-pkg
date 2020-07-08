@@ -10,28 +10,63 @@ do_cv <- function(ps,
                   higher_eval_levels = TRUE, 
                   save_cv = TRUE,
                   start_iter,
-                  expected = TRUE)
+                  expect = "both")
 {
 
-    res <- structure(list(eval_cv = NULL, higher_eval_cv = NULL),
+    eval_cv <- NA
+    pred_corrs <- NA
+    cv_preds <- NA
+    cv_preds_realz <- NA
+
+    if (!is.character(expect)) {
+        stop("The parameter 'expected' has to be a character, 'TRUE'/'FALSE'/'both'")
+    }
+    expectations <- switch(expect,
+                           "TRUE" = c(TRUE, FALSE),
+                           "FALSE" = c(FALSE, TRUE),
+                           "both" = c(TRUE, TRUE))
+
+    res <- structure(list(evaluation_cv = NULL, 
+                          higher_evaluation_cv = NULL, 
+                          cv_predictions = NULL, 
+                          cv_predictions_realisations = NULL),
                      class = "cvresults")
-  
+    
+    set.seed(7)
     cv_partition <- Hmsc:::createPartition(hM = ps, 
                                            nfolds = vars$sampling$nfolds, 
                                            column = vars$partition)
 
-    if (!is.null(vars$covDepXvars)) {
-        cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
-                                                             partition = cv_partition, 
-                                                             expected = expected,
-                                                             start = start_iter,
-                                                             alignPost = FALSE)
+    if (!is.null(vars$covDepXvars)) {    
+        if (expectations[1]) {
+            cv_preds <- trap17:::computePredictedValues_modified(hM = ps, 
+                                                                 partition = cv_partition, 
+                                                                 expected = TRUE,
+                                                                 start = start_iter,
+                                                                 alignPost = FALSE)
+        }
+        if (expectations[2]) {
+            cv_preds_realz <- trap17:::computePredictedValues_modified(hM = ps, 
+                                                                       partition = cv_partition, 
+                                                                       expected = FALSE,
+                                                                       start = start_iter,
+                                                                       alignPost = FALSE)
+        }
     } else {
-        cv_preds <- Hmsc:::computePredictedValues(hM = ps, 
-                                                  partition = cv_partition, 
-                                                  expected = expected,
-                                                  start = start_iter,
-                                                  alignPost = TRUE)
+        if (expectations[1]) {
+            cv_preds <- Hmsc:::computePredictedValues(hM = ps, 
+                                                      partition = cv_partition, 
+                                                      expected = TRUE,
+                                                      start = start_iter,
+                                                      alignPost = TRUE)
+        }
+        if (expectations[2]) {
+            cv_preds_realz <- Hmsc:::computePredictedValues(hM = ps, 
+                                                            partition = cv_partition, 
+                                                            expected = FALSE,
+                                                            start = start_iter,
+                                                            alignPost = TRUE)
+        }
     }
 
     if (save_cv) {
@@ -49,50 +84,48 @@ do_cv <- function(ps,
                                    nfolds = vars$sampling$nfolds, 
                                    type = "cv")
         cv_filename <- paste(cv_filename, "ps", vars$fit, sep = "_")
-        saveRDS(cv_preds, file = file.path(output_dir, paste0(cv_filename, ".rds")))
+        if (expectations[1]) {
+            saveRDS(cv_preds, 
+                    file = file.path(output_dir, paste0(cv_filename, ".rds")))
+        }
+        if (expectations[2]) {
+            saveRDS(cv_preds_realz, 
+                    file = file.path(output_dir, paste0(cv_filename, "_realz.rds")))
+        }
     }
-    eval_cv <- Hmsc:::evaluateModelFit(hM = ps, predY = cv_preds)
+    if (expectations[1]) {
+        eval_cv <- Hmsc:::evaluateModelFit(hM = ps, predY = cv_preds)
+    }
 
     if (higher_eval_levels) {
-        form <- formula(cbind(Clo, 
-                              Be, 
-                              Cap, 
-                              Cau, 
-                              En) ~ Population + Genotype)
-
-        pooled_occ_true <- as.matrix(aggregate(formula = form, 
-                                               data = cbind(dat$X_pooled, dat$Y_pooled), 
-                                               FUN = sum))[, -c(1:2)]
-        corrs <- matrix(NA, 
-                        nrow = dim(cv_preds)[3],
-                        ncol = ncol(ps$Y))
-        for (j in 1:dim(cv_preds)[3]) {
-            tmp <- cv_preds[, , j]
-            colnames(tmp) <- colnames(ps$Y)
-            tmp <- cbind(tmp, dat$X_pooled)
-            preds <- as.matrix(aggregate(formula = form, 
-                                         data = tmp, 
-                                         FUN = sum))[, -c(1:2)]
-            corrs[j,] <- diag(apply(preds, 2, cor, pooled_occ_true, method = "spearman"))
-        }
+        if (expectations[2]) {
+            cv_preds_for_high <- cv_preds_realz
+            print("Higher level performance is calculated for realisations")
+        } else {
+            cv_preds_for_high <- cv_preds    
+            print("Higher level performance is calculated for expected values")
+        }    
+        pred_corrs <- trap17:::higher_cors(dat = dat,
+                                           preds = cv_preds_for_high)
     }
 
     if (save_cv) {
-        cv_eval_filename <- create_name(nfolds = vars$nfolds, 
+        cv_eval_filename <- create_name(nfolds = vars$sampling$nfolds, 
                                         type = "eval_cv")
         cv_eval_filename <- paste(cv_eval_filename, "ps", vars$fit, sep = "_")
         saveRDS(eval_cv, 
                 file = file.path(output_dir, paste0(cv_eval_filename, ".rds")))
         if (!is.null(higher_eval_levels)) {
-            saveRDS(corrs, 
+            saveRDS(pred_corrs, 
                     file = file.path(output_dir, paste0("higher_",
                                                                cv_eval_filename,
                                                                ".rds")))
         }
     }
     res$cv_predictions <- cv_preds
-    res$higher_eval_cv <- corrs
-    res$eval_cv <- eval_cv
+    res$cv_predictions_realisations <- cv_preds_realz
+    res$higher_evaluation_cv <- pred_corrs
+    res$evaluation_cv <- eval_cv
     
     return(res)
 
