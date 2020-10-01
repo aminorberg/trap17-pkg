@@ -33,6 +33,9 @@ just_cv <- function(dat,
                                 totsamp = vars$sampling$totsamp,
                                 nfolds = vars$sampling$nfolds, 
                                 type = "fold")
+        if (sampling$mod_rl_priors) {
+            foldname <- paste0(foldname, "_mod_rl_priors")
+        }
         output_dir <- file.path(dirs$fits, foldname)
         filename <- paste("ps", vars$fit, sep = "_")
         filename <- paste0(filename, ".rds")

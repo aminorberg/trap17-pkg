@@ -29,11 +29,19 @@ dat <- trapdata
 #                              nchains = 1,
 #                              nfolds = 2)
 # settings used in the study
-sampling <- sampling_settings(totsamp = 300000,
-                              trans = 200000,
-                              thn = 100,
+#sampling <- sampling_settings(totsamp = 300000,
+#                              trans = 200000,
+#                              thn = 100,
+#                              nchains = 2,
+#                              nfolds = 10,
+#                              mod_rl_priors = TRUE)
+
+sampling <- sampling_settings(totsamp = 3000,
+                              trans = 2000,
+                              thn = 1,
                               nchains = 2,
-                              nfolds = 10)
+                              nfolds = 10,
+                              mod_rl_priors = FALSE)
 
 sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
 
@@ -42,6 +50,9 @@ foldname <- create_name(study = "trap17",
                         totsamp = sampling$totsamp,
                         nfolds = sampling$nfolds, 
                         type = "fold")
+if (sampling$mod_rl_priors) {
+    foldname <- paste0(foldname, "_mod_rl_priors")
+}
 create_directories(foldname = foldname, dirs = dirs)
 
 # save also the sampling settings
@@ -51,7 +62,7 @@ saveRDS(sampling,
 # 2.3 model fitting and cross-validation
 evals <- model_and_cv(dat = dat,
                       dirs = dirs,
-                      variants = "ALL",
+                      variants = 1:3,
                       sampling = sampling,
                       start_iter = sampling$pred_start_iter,
                       do_cv = TRUE,
@@ -61,29 +72,41 @@ saveRDS(evals,
 
 
 # 3 RESULTS
-foc_study <- "trap17_totsamp3e"
-foldname <- "trap17_totsamp3e+05"
-
 #foc_study <- "trap17_totsamp150"
 #foldname <- "trap17_totsamp150"
+
+#foc_study <- "trap17_totsamp3e"
+#foldname <- "trap17_totsamp3e+05"
+
+foc_study <- "trap17_totsamp3e+05_rev1"
+foldname <- "trap17_totsamp3e+05_rev1"
+
+#foc_study <- "trap17_totsamp3e+05_mod_rl_priors"
+#foldname <- "trap17_totsamp3e+05_mod_rl_priors"
+
+#foc_study <- "trap17_totsamp3000_mod_rl_priors"
+#foldname <- "trap17_totsamp3000_mod_rl_priors"
+
+#foc_study <- "trap17_totsamp3000"
+#foldname <- "trap17_totsamp3000"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
 # 3.0 just cross validation (models need to be fitted beforehand)
-whichPs <- 2
-cv_realisations <- just_cv(dat = dat, 
-                           dirs = dirs,
-                           variants = whichPs,
-                           sampling = sampling,
-                           start_iter = sampling$pred_start_iter,
-                           expect = "FALSE",
-                           saveCVs = TRUE) 
-saveRDS(cv_realisations, 
-        file = file.path(dirs$fits, 
-                         foldname, 
-                         paste0("cv_realisations_ps_",
-                                whichPs,
-                                ".rds")))
+#whichPs <- 3
+#cv_realisations <- just_cv(dat = dat, 
+#                           dirs = dirs,
+#                           variants = whichPs,
+#                           sampling = sampling,
+#                           start_iter = sampling$pred_start_iter,
+#                           expect = "FALSE",
+#                           saveCVs = TRUE) 
+#saveRDS(cv_realisations, 
+#        file = file.path(dirs$fits, 
+#                         foldname, 
+#                         paste0("cv_realisations_ps_",
+#                                whichPs,
+#                                ".rds")))
 
 # load model variants
 pss <- list()
@@ -93,7 +116,12 @@ for (i in 1:3) {
     names(pss)[i] <- filename 
 }
 
-# 3.1.1 explanatory power and predicted realisations
+# 3.1.1 WAIC, explanatory power and predicted realisations
+
+for (i in 1:length(pss)) {
+    print(computeWAIC(pss[[i]]))
+}
+
 eval_exp <- list()
 preds_realz <- list()
 preds_realz_cors <- list()
@@ -117,11 +145,22 @@ preds_realz_cors_arr <- simplify2array(preds_realz_cors)
 preds_realz_cors_means <- simplify2array(lapply(preds_realz_cors, 
                                          colMeans,
                                          na.rm = TRUE))
+
 colMeans(preds_realz_cors_means)
 
 
 # 3.1.3 cv-based R2s
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
+
+#evals <- list("ps1" = list("eval_cv" = NA), 
+#              "ps2" = list("eval_cv" = NA), 
+#              "ps3" = list("eval_cv" = NA))
+#for (i in 1:3) {
+#    evals[[i]]$eval_cv <- readRDS(file = file.path(file.path(dirs$fits, foldname), 
+#                                    paste0("eval_cv_nfolds10_ps_", i, ".rds")))
+#    evals[[i]]$higher_eval_cv <- readRDS(file = file.path(file.path(dirs$fits, foldname), 
+#                                    paste0("higher_eval_cv_nfolds10_ps_", i, ".rds")))
+#}
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
 lapply(tjurs, mean)
@@ -333,13 +372,13 @@ dev.off()
 # 3.3.2 residual correlations (not presented in the manuscript)
 library(circleplot)
 
-whichPs <- 2
+whichPs <- 3
 ps <- pss[[whichPs]]
 
 if (whichPs == 3) {
     omgcors <- trap17:::computeAssociations_modified(ps)
     lev <- 1
-    supportLevel <- 0
+    supportLevel <- 0.9
     toPlot <- ((omgcors[[lev]]$support > supportLevel)
               + (omgcors[[lev]]$support < (1-supportLevel)) > 0) * omgcors[[lev]]$mean
     toPlotDist <- list()
@@ -350,7 +389,7 @@ if (whichPs == 3) {
 } else {
     OmegaCor <- Hmsc:::computeAssociations(ps)
     lev <- 1
-    supportLevel <- 0
+    supportLevel <- 0.9
     toPlot <- ((OmegaCor[[lev]]$support > supportLevel)
               + (OmegaCor[[lev]]$support < (1-supportLevel)) > 0) * OmegaCor[[lev]]$mean
     toPlotDist <- as.dist(toPlot)
@@ -473,6 +512,7 @@ cooc_test <- cooccur(mat = t(dat$Y_pooled),
                      type = "spp_site",
                      spp_names = TRUE,
                      thresh = TRUE)
+cooc_test$results
 
 # 3.4.2 cooccurrence by genotype test
 cooc_test_genot <- list()

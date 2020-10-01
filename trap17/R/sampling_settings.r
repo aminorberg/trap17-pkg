@@ -12,7 +12,8 @@ sampling_settings <- function (totsamp = 100,
                                trans = 50,
                                thn = 1,
                                nfolds = 2,
-                               nchains = 2)
+                               nchains = 2,
+                               mod_rl_priors = NA)
 {
     res <- structure(list(totsamp = NULL, 
                           trans = NULL, 
@@ -25,6 +26,8 @@ sampling_settings <- function (totsamp = 100,
     res$thn <- thn
     res$nchains <- nchains
     res$nfolds <- nfolds
+    res$mod_rl_priors <- mod_rl_priors
+    
     return(res)
 }
 

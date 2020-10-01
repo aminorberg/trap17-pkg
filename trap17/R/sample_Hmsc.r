@@ -15,6 +15,9 @@ sample_Hmsc <- function(dat = dat,
                             totsamp = vars$sampling$totsamp,
                             nfolds = vars$nfolds, 
                             type = "fold")
+    if (vars$sampling$mod_rl_priors) {
+        foldname <- paste0(foldname, "_mod_rl_priors")
+    }
     output_dir <- file.path(dirs$fits, foldname)
     if (!dir.exists(output_dir)) {
         dir.create(output_dir)
@@ -48,6 +51,10 @@ sample_Hmsc <- function(dat = dat,
                             alignPost = post_align)
 
     filename <- paste0("ps_", vars$fit, ".rds")
+#    if (vars$sampling$mod_rl_priors) {
+#        filename <- paste0(filename, "_mod_rl_priors")
+#    }
+#    filename <- paste0(filename, ".rds")
     saveRDS(ps, file = file.path(output_dir, filename)) 
     if (return_ps) {
         return(ps)

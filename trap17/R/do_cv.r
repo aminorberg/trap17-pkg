@@ -75,6 +75,9 @@ do_cv <- function(ps,
                             nfolds = vars$sampling$nfolds, 
                             type = "fold")
 
+        if (vars$sampling$mod_rl_priors) {
+            foldname <- paste0(foldname, "_mod_rl_priors")
+        }
         output_dir <- file.path(dirs$fits, foldname)
         if (!dir.exists(output_dir)) {
             dir.create(output_dir)
@@ -83,6 +86,10 @@ do_cv <- function(ps,
         cv_filename <- create_name(totsamp = vars$sampling$totsamp,
                                    nfolds = vars$sampling$nfolds, 
                                    type = "cv")
+#        if (vars$sampling$mod_rl_priors) {
+#            cv_filename <- paste0(cv_filename, "_mod_rl_priors")
+#        }
+
         cv_filename <- paste(cv_filename, "ps", vars$fit, sep = "_")
         if (expectations[1]) {
             saveRDS(cv_preds, 
@@ -113,6 +120,10 @@ do_cv <- function(ps,
         cv_eval_filename <- create_name(nfolds = vars$sampling$nfolds, 
                                         type = "eval_cv")
         cv_eval_filename <- paste(cv_eval_filename, "ps", vars$fit, sep = "_")
+#        if (vars$sampling$mod_rl_priors) {
+#            cv_eval_filename <- paste0(cv_eval_filename, "_mod_rl_priors")
+#        }
+
         saveRDS(eval_cv, 
                 file = file.path(output_dir, paste0(cv_eval_filename, ".rds")))
         if (!is.null(higher_eval_levels)) {

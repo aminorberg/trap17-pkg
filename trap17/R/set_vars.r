@@ -33,6 +33,7 @@ set_vars <- function(study = "trap17",
     vars$fit <- fit
     vars$sampling <- sampling
     vars$sampling$samps <- (sampling$totsamp-sampling$trans)/sampling$thn
+    vars$sampling$mod_rl_priors <- sampling$mod_rl_priors
 
     vars$yvars <- c("Clo",
                     "Be", 

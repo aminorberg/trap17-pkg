@@ -67,6 +67,9 @@ prepare_m <- function(vars,
             colnames(xData) <- c("(Intercept)", colnames(X[, grep("Genotype", colnames(X))]))
             rLs[[vars$covDepLevel]] <- Hmsc:::HmscRandomLevel(xData = xData)        
         }        
+        if (vars$sampling$mod_rl_priors) {
+            rLs[[1]] <- setPriors(rLs[[1]], a1 = 3, a2 = 3)            
+        }    
     }
     X <- as.data.frame(X)
 

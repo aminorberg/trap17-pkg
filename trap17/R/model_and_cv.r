@@ -52,6 +52,9 @@ model_and_cv <- function(dat,
                                     totsamp = vars$sampling$totsamp,
                                     nfolds = vars$sampling$nfolds, 
                                     type = "fold")
+            if (vars$sampling$mod_rl_priors) {
+                foldname <- paste0(foldname, "_mod_rl_priors")
+            }
             output_dir <- file.path(dirs$fits, foldname)
             filename <- "cv_res_all.rds"
             saveRDS(res, file = file.path(output_dir, filename))
