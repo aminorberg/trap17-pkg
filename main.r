@@ -23,11 +23,11 @@ dat <- trapdata
 
 # 2.1 sampling settings
 # settings good for testing
-#sampling <- sampling_settings(totsamp = 150,
-#                              trans = 50,
-#                              thn = 1,
-#                              nchains = 1,
-#                              nfolds = 2)
+sampling <- sampling_settings(totsamp = 150,
+                             trans = 50,
+                             thn = 1,
+                             nchains = 1,
+                             nfolds = 2)
 # settings used in the study
 #sampling <- sampling_settings(totsamp = 300000,
 #                              trans = 200000,
@@ -35,13 +35,6 @@ dat <- trapdata
 #                              nchains = 2,
 #                              nfolds = 10,
 #                              mod_rl_priors = TRUE)
-
-sampling <- sampling_settings(totsamp = 3000,
-                              trans = 2000,
-                              thn = 1,
-                              nchains = 2,
-                              nfolds = 10,
-                              mod_rl_priors = FALSE)
 
 sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
 
@@ -72,23 +65,13 @@ saveRDS(evals,
 
 
 # 3 RESULTS
-#foc_study <- "trap17_totsamp150"
-#foldname <- "trap17_totsamp150"
+foc_study <- "trap17_totsamp150"
+foldname <- "trap17_totsamp150"
 
-#foc_study <- "trap17_totsamp3e"
-#foldname <- "trap17_totsamp3e+05"
-
-foc_study <- "trap17_totsamp3e+05_rev1"
-foldname <- "trap17_totsamp3e+05_rev1"
-
+#foc_study <- "trap17_totsamp3e+05_rev1"
+#foldname <- "trap17_totsamp3e+05_rev1"
 #foc_study <- "trap17_totsamp3e+05_mod_rl_priors"
 #foldname <- "trap17_totsamp3e+05_mod_rl_priors"
-
-#foc_study <- "trap17_totsamp3000_mod_rl_priors"
-#foldname <- "trap17_totsamp3000_mod_rl_priors"
-
-#foc_study <- "trap17_totsamp3000"
-#foldname <- "trap17_totsamp3000"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
@@ -151,16 +134,6 @@ colMeans(preds_realz_cors_means)
 
 # 3.1.3 cv-based R2s
 evals <- readRDS(file = file.path(file.path(dirs$fits, foldname), "evals.rds"))
-
-#evals <- list("ps1" = list("eval_cv" = NA), 
-#              "ps2" = list("eval_cv" = NA), 
-#              "ps3" = list("eval_cv" = NA))
-#for (i in 1:3) {
-#    evals[[i]]$eval_cv <- readRDS(file = file.path(file.path(dirs$fits, foldname), 
-#                                    paste0("eval_cv_nfolds10_ps_", i, ".rds")))
-#    evals[[i]]$higher_eval_cv <- readRDS(file = file.path(file.path(dirs$fits, foldname), 
-#                                    paste0("higher_eval_cv_nfolds10_ps_", i, ".rds")))
-#}
 tjurs <- lapply(lapply(evals, '[[', 1), '[[', 3)
 cors <- lapply(lapply(evals, '[[', 2), colMeans, na.rm = TRUE)
 lapply(tjurs, mean)
