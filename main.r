@@ -10,13 +10,9 @@ library("trap17")
 
 dirs <- set_dirs(working_dir = working_dir)
                  #raw_data = TRUE)
-#saveRDS(dirs, file = file.path(working_dir, "dirs.rds"))
+saveRDS(dirs, file = file.path(working_dir, "dirs.rds"))
 
-# 1.1a process...
-#dat <- process_data(filename = "TRAP17.csv",
-#                    dirs = dirs)
-
-# 1.1b ...or load the processed data
+# 1.1 Load the processed data
 dat <- trapdata
 
 # 2 MODEL FITTING
@@ -67,11 +63,6 @@ saveRDS(evals,
 # 3 RESULTS
 foc_study <- "trap17_totsamp150"
 foldname <- "trap17_totsamp150"
-
-#foc_study <- "trap17_totsamp3e+05_rev1"
-#foldname <- "trap17_totsamp3e+05_rev1"
-#foc_study <- "trap17_totsamp3e+05_mod_rl_priors"
-#foldname <- "trap17_totsamp3e+05_mod_rl_priors"
 
 sampling <- readRDS(file = file.path(dirs$fits, foldname, "sampling.rds"))
 
@@ -162,9 +153,6 @@ cv_realisations <- readRDS(file = file.path(dirs$fits,
                                             paste0("cv_realisations_ps_",
                                                     whichPs,
                                                     ".rds")))
-str(cv_realisations)
-cv_pred_realz <- cv_realisations[[1]]$cv_predictions_realisations
-str(cv_pred_realz)
 
 dimnames(cv_pred_realz) <- list(1:dim(cv_pred_realz)[1],
                                 colnames(dat$Y_pooled),
@@ -277,11 +265,6 @@ ps <- pss[[whichPs]]
 vp_cols <- c("#cc9900", "#004D40", "#ffbf00", "#ffe59a", "#D81B60")
 vp_cols <- cbind(vp_cols, c("Plant.area", "Population", "Genotype",  "Herbivory", "Random: Plant"))
 rownames(vp_cols) <- vp_cols[, 2]
-#D81B60 nice red -> host plant level latent variable
-#004D40 green -> local environmental context
-#ffbf00 dark yellow -> host genotype
-#cc9900 orange -> host plant size
-#ffe59a light orange -> signs of herbivory
 
 # 3.3.1 variance partitioning
 sel <-  c(1, 2, rep(3, 3), rep(4, 3), 5) 
@@ -559,7 +542,11 @@ pdf(file = file.path(dirs$raw_data_figs,
             ylim = c(0, 200),
             xaxt = "n",
             yaxt = "n")
-    axis(2, at = c(0, 50, 100, 200), labels = c("0", "50", "100", "320"), tick = TRUE, las = 2)
+    axis(2, 
+         at = c(0, 50, 100, 200), 
+         labels = c("0", "50", "100", "320"), 
+         tick = TRUE, 
+         las = 2)
 dev.off()
 
 pdf(file = file.path(dirs$raw_data_figs, 

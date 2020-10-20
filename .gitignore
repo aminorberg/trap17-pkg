@@ -1,2 +1,5 @@
 .Rapp.history
 fits/
+mod_data/
+raw_data_figs/
+create_pkg.r
