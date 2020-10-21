@@ -30,6 +30,12 @@ sampling <- sampling_settings(totsamp = 150,
 #                              thn = 100,
 #                              nchains = 2,
 #                              nfolds = 10,
+#                              mod_rl_priors = FALSE)
+#sampling <- sampling_settings(totsamp = 300000,
+#                              trans = 200000,
+#                              thn = 100,
+#                              nchains = 2,
+#                              nfolds = 10,
 #                              mod_rl_priors = TRUE)
 
 sampling$pred_start_iter <- ((((sampling$totsamp - sampling$trans) / sampling$thn) / 2) + 1)
